@@ -25,7 +25,7 @@ Status: Accepted
 
 ## Summary
 
-This session built uc-portage 0.1.0 and uc-automa 0.1.0 from the foundation brief <a id="cite-steel-2026b"></a>[(Steel, 2026b)](#ref-steel-2026b). osat-manager-restic 0.1.0, the pilot, follows, and this record is extended when it is done. It was carried out by Claude Opus 5.5 in Claude Code, with Christopher Steel answering every question the brief left open. Each repository was stopped at for review before the next began. Nothing was pushed, tagged or archived, and no existing repository was changed.
+This session built uc-portage 0.1.0, uc-automa 0.1.0 and osat-manager-restic 0.1.0 from the foundation brief <a id="cite-steel-2026b"></a>[(Steel, 2026b)](#ref-steel-2026b). It was carried out by Claude Opus 5.5 in Claude Code, with Christopher Steel answering every question the brief left open. Each repository was stopped at for review before the next began. Nothing was pushed, tagged or archived, and no existing repository was changed.
 
 ## Inputs
 
@@ -76,6 +76,10 @@ The engine from file-fairy 0.7.0 with every one of its tests ported, behind a fr
 
 The four layouts and their words; eleven directives, each with a check and pass and fail fixtures; `uc-automa init`, `check`, `offerings`, `docs index` and `translations`; nine offerings; two schemas; decision records 0001 to 0023; five templates; the directory guide; the OSAT manager process; and this record. uc-automa subscribes to its own offerings with `automa_version: self`. 36 tests, of which two build real installs.
 
+### osat-manager-restic 0.1.0
+
+The pilot, built by following the revised OSAT manager process stage by stage. `manage-restic` meets the manager contract. Every download is verified in two steps before it is unpacked: the OpenPGP signature on restic's `SHA256SUMS` against restic's signing key, pinned by fingerprint in `manager.yaml` and checked with the standard library, then the download's SHA-256 against the signed list. The repository subscribed through `uc-automa init` with `layout: osat-manager`, and the layout needed no change. A radar entry for restic was written as a draft at `drafts/uc-radar/uc-radar--restic--backup-tool-v0.1.0.md` in the hand-off folder, for Christopher Steel to place in uc-radar. osat-fluent-restic-tool was read for lessons only: install that did not activate, raw 404 errors, and signature checking deferred for want of `gpg`.
+
 ## Verification
 
 | Check | Result |
@@ -89,8 +93,11 @@ The four layouts and their words; eleven directives, each with a check and pass 
 | Every directive with a check has pass and fail fixtures | Yes; each fail case fails for its intended reason |
 | Hyphenated version form in any filename | None |
 | `reuse lint` | Compliant in both repositories |
-| Python versions | 3.12 on the development machine, 3.8 in an AlmaLinux 8 container |
-| macOS and Windows | Not yet verified. The Windows 11 virtual machine has no Incus agent and no remote access enabled, so tests could not run there without changing its setup |
+| Python versions | 3.12 on the development machine, 3.8 in an AlmaLinux 8 container, for all three repositories |
+| `uc-automa check` on uc-portage and osat-manager-restic | Passes, as `python-tool` and `osat-manager` |
+| restic's real 0.19.1 signature | Verifies with the pure-Python verifier and with GnuPG; a changed checksum file or signature is refused |
+| The OSAT end-to-end scenario on Linux amd64 | Passes, all seven steps including the offline restore, as an ordinary user in the Incus container mint223 restored to its clean snapshot before and after; the account is left exactly as it was |
+| macOS and Windows | Not yet verified. No Apple hardware was available. The Windows 11 virtual machine has no Incus agent and no remote access enabled, so nothing could run there without changing its setup |
 
 ## What the brief and the process got wrong
 
@@ -108,6 +115,14 @@ The four layouts and their words; eleven directives, each with a check and pass 
 - **The licensing decision, placed as it stood,** still names `schemas/automa-config.schema.yaml` and a licence-block offering that do not exist; a later version should correct them.
 - **The OSAT manager process** still carried AGPL-3.0-or-later in its sidecar example, `.automa.yaml`, a pre-commit offering that was never in the brief, an interim file-fairy route, and a release ceremony that does not exist yet. Its subscribe-stage gate required `automa check` to pass before the README, roadmap and index exist, which no new repository can meet; the gate is now the plan alone.
 - **A Python 3.8 machine** was assumed but not available; an AlmaLinux 8 container stood in.
+- **The process pairs a YAML manifest with standard-library-only code.** The Python manage-python installs has no PyYAML, so manage-restic reads `manager.yaml` with a strict subset reader of its own.
+- **The process asks for signature verification but forbids shell commands,** and gives no way to verify OpenPGP in the standard library. manage-restic implements the RSA verification it needs; osat-fluent-restic-tool had deferred it for this reason.
+- **One resolver cannot reach a standard-library-only manager.** uc-portage is not standard-library-only, so manage-restic carries its own copy of the uc-automa 0019 lookup until a shared manager package exists.
+- **Recording the decision comes before creating the repository** in the process, but the record lives in the repository; it was written after the repository existed.
+- **"Nothing left behind" needs more than the contract says:** the manager has to remember the directories it creates outside its install root, such as `~/.local/bin` in a new account, to remove them when empty.
+- **Upstream file names break the naming directives** when kept as test data, such as `SHA256SUMS` and `restic_0.19.1_linux_amd64.bz2`; they are kept inside zip files.
+- **"A fresh Incus container"** depended on launching from the remote image server, which hung several times; restoring a container to a clean snapshot, as Christopher Steel suggested, gave the same fresh account reliably.
+- **The radar entry template** still carries AGPL-3.0-or-later and the hyphenated version form, and L2 is open, so the restic entry's licence is left for placement.
 
 ## Left open
 
@@ -118,6 +133,8 @@ The four layouts and their words; eleven directives, each with a check and pass 
 - [ ] Should a future `harvest` write a branch in the automa checkout, a patch file, or both?
 - [ ] How should the Windows 11 virtual machine be reached for testing: the Incus agent, OpenSSH, or another way?
 - [ ] Publishing uc-portage and uc-automa somewhere pip can install them from, so the pre-commit hook can install itself.
+- [ ] Placing the restic radar entry in uc-radar, adding manage-restic to the list of OSAT managers, and archiving osat-fluent-restic-tool and file-fairy with notices naming their successors: Christopher Steel's actions.
+- [ ] Tagging uc-portage, uc-automa and osat-manager-restic 0.1.0, by hand, with Christopher Steel's approval.
 
 ## References
 
