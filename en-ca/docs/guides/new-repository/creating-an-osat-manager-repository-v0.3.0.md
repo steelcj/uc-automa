@@ -12,13 +12,13 @@ dc:identifier: "urn:uuid:b18e2ed3-b364-4880-b3c7-5676961f0174"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/osat-manager--creating-a-new-repository-v0.1.0.md, not under version control"
 dc:language: "en-CA"
 dc:rights: "CC-BY-SA-4.0"
-sat:version: "0.2.0"
+sat:version: "0.3.0"
 sat:status: "Accepted"
 ---
 
 # Creating an OSAT Manager Repository
 
-Version: 0.2.0
+Version: 0.3.0
 Status: Accepted
 
 ## Summary
@@ -36,7 +36,8 @@ An OSAT manager is a governed tool that installs another tool into user space an
 | Switching | One command makes a chosen version the active one |
 | Aliases | A generic alias, such as `restic`, beside versioned ones, such as `restic-0.18`; any alias can be renamed |
 | Protection | Installed versions are guarded against accidental modification |
-| Verified archive | Every download is verified before it is unpacked, and kept, so a version can be restored offline |
+| Nothing left behind | Uninstalling removes everything the manager owns, and a parent directory such as `~/.local/bin` only if the manager created it and it is now empty; a directory that holds anything else is never removed |
+| Verified archive | Every download is verified before it is unpacked, and kept with the checksums and signature that verified it, so a version can be restored offline and re-checked |
 | Self-install | The manager installs itself, so it works from any directory |
 | Three platforms | Linux, macOS and Windows, with each platform's status stated honestly |
 
@@ -126,9 +127,9 @@ Gate: the tool is in the `trial` or `adopt` ring, or the entry explains why a ma
 
 ## Record the decision
 
-Record the decision to build the manager as the repository's first decision record, `en-ca/docs/decisions/0001--<slug>-v0.1.0.md`, numbered within the repository. It names the managed tool, the radar entry, the platforms targeted first, and anything this manager does differently from the contract.
+Draft the decision to build the manager before the repository exists, outside any repository, such as in the hand-off folder for the work. It becomes `en-ca/docs/decisions/0001--<slug>-v0.1.0.md`, numbered within the repository, in the repository's first commit. It names the managed tool, the radar entry, the platforms targeted first, and anything this manager does differently from the contract.
 
-Gate: the decision record exists.
+Gate: the decision record is drafted.
 
 ## Create the repository
 
@@ -137,6 +138,7 @@ Create the repository fresh and empty, with no forge-generated files, so its fir
 1. Create the local repository with `git init`. Creating it on a forge and pushing are Christopher Steel's decisions, taken separately.
 2. Generate the repository's identifier with `uuidgen -r`.
 3. Write `.osat-manager-<tool>.assets/archive.yaml` and `dc.yaml`.
+4. Place the drafted decision record at `en-ca/docs/decisions/0001--<slug>-v0.1.0.md`, and commit it with the sidecar as the repository's first commit.
 
 ```yaml
 # .osat-manager-<tool>.assets/archive.yaml
@@ -147,7 +149,7 @@ dc:language: "en-CA"
 dc:rights: "CC-BY-SA-4.0"
 ```
 
-Gate: the repository exists with only the sidecar in it.
+Gate: the first commit holds the sidecar and the decision record, and nothing else.
 
 ## Subscribe to uc-automa
 
@@ -192,13 +194,17 @@ platforms:
   windows: {arch: ["x86_64"],            status: "planned"}
 ```
 
+If upstream signs its checksums, pin its signing key by fingerprint, and confirm the fingerprint from two independent sources, such as upstream's documentation and the key server it names.
+
 Gate: every source and verification field is filled from the radar entry, with no placeholders left.
 
 ## Implement the manager
 
 Implement the contract in `lib/osat_manager_<tool>/`, reading `manager.yaml` for everything tool-specific, and expose it as a console-script entry point, which gives a native launcher on Windows and a script on Linux and macOS from one definition <a id="cite-pypa-nd"></a>[(Python Packaging Authority, n.d.)](#ref-pypa-nd).
 
-- Standard library and `pathlib`, with no shell commands, so behaviour is the same on every platform.
+- Standard library and `pathlib`, with no shell commands at runtime, so behaviour is the same on every platform. Tests may call other tools, such as `gpg`, to cross-check results.
+- Shared behaviour comes from the shared manager package (uc-automa 0024): reading `manager.yaml` without PyYAML, finding it in an install or a checkout, and verifying OpenPGP signatures. Until that package exists, a manager carries its own copies, listed as known debt.
+- A signature verifier is reviewed independently, by a reviewer who did not see it written, before any manager relying on it is tagged.
 - Platform differences, such as install locations and alias launchers, are resolved in one module.
 - Every download is verified with SHA-256 before it is unpacked, and against upstream's signature if upstream signs its checksums. The verified archive is kept.
 - `manager.yaml` is read from the repository root through the shared data resolver, so the installed package carries it (uc-automa 0019).
@@ -211,8 +217,8 @@ Each platform has its own end-to-end run, and each run updates the platform stat
 
 | Platform | Where it runs | Record |
 | --- | --- | --- |
-| Linux | A fresh Incus container | `tests/e2e/linux/` |
-| Windows | The Windows 11 virtual machine | `tests/e2e/windows/` |
+| Linux | An Incus container restored to a clean snapshot before and after the run, as an ordinary user | `tests/e2e/linux/` |
+| Windows | The Windows 11 virtual machine, reached through its built-in OpenSSH Server with key authentication, as an ordinary user, restored to a snapshot before each run | `tests/e2e/windows/` |
 | macOS | Apple hardware, the only legitimate place to run macOS | `tests/e2e/macos/` |
 
 ```yaml
@@ -226,6 +232,8 @@ scenario:
   - "Remove a version, disconnect the network, and restore it from the verified archive"
   - "Uninstall the manager and confirm nothing is left behind"
 ```
+
+A scenario run writes a record of every step beside its driver. Upstream files kept as test data, such as `SHA256SUMS`, keep their upstream names inside a zip file, because those names do not follow the naming directives.
 
 Gate: every platform in `manager.yaml` is `verified` or has a stated reason it is not.
 
@@ -243,7 +251,7 @@ Gate: `uc-automa check` passes.
 
 ## Release
 
-The first release is 0.1.0. Until uc-automa provides the release ceremony, planned for uc-automa 0.2.0, a release is tagged by hand, and only with Christopher Steel's approval. A manager reaches 1.0.0 when every platform in `manager.yaml` is verified and the full scenario passes on each (uc-automa 0011); its documents then drop the version from their filenames (uc-automa 0002).
+The first release is 0.1.0. Until uc-automa provides the release ceremony, planned for uc-automa 0.2.0, a release is tagged by hand, and only with Christopher Steel's approval: a surgical commit that only rolls `CHANGELOG.md` to `## [0.1.0] - <date>`, then an annotated tag `v0.1.0` whose message names the repository and the version, as the directive `release/annotated-version-tags` requires. A manager reaches 1.0.0 when every platform in `manager.yaml` is verified and the full scenario passes on each (uc-automa 0011); its documents then drop the version from their filenames (uc-automa 0002).
 
 Gate: the tag exists, approved.
 
@@ -253,15 +261,15 @@ Make the new manager findable, and retire what it replaces.
 
 1. Update the tool's radar entry to link to the manager.
 2. Add the manager to the list of OSAT managers, wherever that list is kept (see open questions).
-3. If the manager replaces an older `osat-fluent-<tool>-tool` repository, Christopher Steel adds a README notice naming the successor and archives the old repository. It is not deleted or renamed, so every existing link and clone still works.
+3. If the manager replaces an older `osat-fluent-<tool>-tool` repository, Christopher Steel adds a README notice naming the successor and archives the old repository, once the new repository is pushed, so the notice links to a real successor. It is not deleted or renamed, so every existing link and clone still works.
 
 Gate: a person starting from the radar entry, the OSAT list or the old repository arrives at the new manager.
 
 ## Checklist
 
 - [ ] Radar entry written for the tool, ring `trial` or `adopt`
-- [ ] Decision record written
-- [ ] Repository created empty, sidecar written with a new identifier
+- [ ] Decision record drafted outside the repository
+- [ ] Repository created, first commit holding the sidecar and the decision record
 - [ ] `uc-automa init` run, offerings applied and committed
 - [ ] `manager.yaml` complete, with no placeholders
 - [ ] Manager implemented; unit tests pass offline
@@ -272,7 +280,6 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 
 ## Open questions
 
-- [ ] Should shared manager behaviour (versions, aliases, protection, verified archive) live in one installed package that every manager depends on? This guide assumes it eventually does.
 - [ ] Where is the list of OSAT managers kept: in uc-automa, in uc-radar, or in its own repository?
 - [ ] Is `osat` the right directory name inside each platform's per-user data location?
 
@@ -290,6 +297,7 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
+| 0.3.0 | 2026-10-09 | Accepted | Findings from building osat-manager-restic: the decision drafted before the repository and placed in its first commit, nothing left behind, the shared manager package, pinned keys confirmed twice, independent review of a verifier, snapshot-based Linux runs and the Windows route, upstream names inside zips, the release tag rule, archiving after push |
 | 0.2.0 | 2026-10-09 | Accepted | Revised to the foundation brief: uc-automa init and offerings instead of .automa.yaml and the interim file-fairy route, en-ca, the osat-manager layout, the three licences, by-hand tagging until the release ceremony, D11 settled; relicensed CC-BY-SA-4.0 |
 | 0.1.0 | 2026-10-09 | Draft | Initial process: manager contract, naming, layout, ten stages with gates, interim route, checklist |
 

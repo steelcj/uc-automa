@@ -6,7 +6,11 @@ need uc-portage importable, installed or editable.
 
 from __future__ import annotations
 
+import contextlib
+import shutil
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -33,3 +37,23 @@ def fixture_repository(case: Path) -> Repository:
         conf, texts = REPO / "conf", text_dirs_in(REPO)
     layout = load_layout(conf, config.layout) if config else None
     return Repository(case, list_files(case), config, layout, conf, texts)
+
+
+@contextlib.contextmanager
+def materialised(case: Path):
+    """A fixture case ready to check. A case holding repo.bundle is a git
+    repository, kept as a bundle so that no nested repository is
+    committed; it is cloned into a scratch directory first."""
+    bundle = case / "repo.bundle"
+    if not bundle.is_file():
+        yield case
+        return
+    with tempfile.TemporaryDirectory() as tmp:
+        clone = Path(tmp) / case.name
+        subprocess.run([shutil.which("git") or "git", "clone", "-q",
+                        str(bundle), str(clone)], check=True,
+                       capture_output=True)
+        subprocess.run([shutil.which("git") or "git", "-C", str(clone),
+                        "fetch", "-q", "--tags", str(bundle)],
+                       check=True, capture_output=True)
+        yield clone

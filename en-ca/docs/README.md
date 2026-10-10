@@ -19,12 +19,13 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Naming: Portable Names](directives/naming/portable-names-v0.1.0.md) | 0.1.0 | In force |
 | [Naming: SPDX Slugs](directives/naming/spdx-slugs-v0.1.0.md) | 0.1.0 | In force |
 | [Naming: Versions in Filenames](directives/naming/versions-in-filenames-v0.1.0.md) | 0.1.0 | In force |
+| [Release: Annotated Version Tags](directives/release/annotated-version-tags-v0.1.0.md) | 0.1.0 | In force |
 
 ## Guides
 
 | Document | Version | Status |
 | --- | --- | --- |
-| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.2.0.md) | 0.2.0 | Accepted |
+| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.3.0.md) | 0.3.0 | Accepted |
 | [Directory Guide](guides/repository/directory-guide-v0.2.0.md) | 0.2.0 | Accepted |
 
 ## Decisions
@@ -54,6 +55,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: Root Licence File](decisions/0021--root-licence-file-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Sidecar Named for the Repository](decisions/0022--sidecar-named-for-the-repository-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: init Writes the Repository Configuration](decisions/0023--init-writes-the-repository-configuration-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Shared Manager Package](decisions/0024--shared-manager-package-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 

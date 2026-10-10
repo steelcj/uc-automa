@@ -124,17 +124,21 @@ The pilot, built by following the revised OSAT manager process stage by stage. `
 - **"A fresh Incus container"** depended on launching from the remote image server, which hung several times; restoring a container to a clean snapshot, as Christopher Steel suggested, gave the same fresh account reliably.
 - **The radar entry template** still carries AGPL-3.0-or-later and the hyphenated version form, and L2 is open, so the restic entry's licence is left for placement.
 
+## Known debt
+
+- **A second copy of the data lookup.** osat-manager-restic finds its `manager.yaml` with its own copy of the uc-automa 0019 rule, because uc-portage's resolver is not standard-library-only. It moves into the shared manager package in osat-manager-restic 0.2.0 (uc-automa 0024), with the YAML subset reader and the OpenPGP verifier.
+
 ## Left open
 
 - [ ] L2: are uc-radar entries content or documentation, and is the metrics document documentation?
-- [ ] Should shared manager behaviour live in one installed package that every manager depends on?
 - [ ] Where is the list of OSAT managers kept?
 - [ ] Is `osat` the right directory name inside each platform's per-user data location?
 - [ ] Should a future `harvest` write a branch in the automa checkout, a patch file, or both?
 - [ ] How should the Windows 11 virtual machine be reached for testing: the Incus agent, OpenSSH, or another way?
 - [ ] Publishing uc-portage and uc-automa somewhere pip can install them from, so the pre-commit hook can install itself.
 - [ ] Placing the restic radar entry in uc-radar, adding manage-restic to the list of OSAT managers, and archiving osat-fluent-restic-tool and file-fairy with notices naming their successors: Christopher Steel's actions.
-- [ ] Tagging uc-portage, uc-automa and osat-manager-restic 0.1.0, by hand, with Christopher Steel's approval.
+- [ ] Tagging osat-manager-restic 0.1.0, once its OpenPGP verifier has been reviewed independently. uc-portage and uc-automa were tagged v0.1.0 on 2026-10-09, with Christopher Steel's approval.
+- [ ] Naming the shared manager package and its repository (uc-automa 0024).
 
 ## References
 

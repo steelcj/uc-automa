@@ -3,7 +3,7 @@ case passes, and every fail case fails that directive's check."""
 
 import unittest
 
-from support import FIXTURES, fixture_repository
+from support import FIXTURES, fixture_repository, materialised
 
 from uc_automa.conformance import all_checks
 
@@ -27,7 +27,8 @@ class Fixtures(unittest.TestCase):
                 for case in sorted(p for p in cases.iterdir() if p.is_dir()):
                     with self.subTest(directive=registered.directive,
                                       case=f"{verdict}/{case.name}"):
-                        findings = registered.run(fixture_repository(case))
+                        with materialised(case) as root:
+                            findings = registered.run(fixture_repository(root))
                         if verdict == "pass":
                             self.assertEqual(findings, [])
                         else:

@@ -114,7 +114,7 @@ def check(check_id: str, directive: str):
 def all_checks() -> List[Registered]:
     # Importing the modules registers their checks.
     from . import (docs, layout, licensing, markdown, metadata,  # noqa: F401
-                   naming, translations)
+                   naming, release, translations)
     return list(REGISTRY)
 
 
