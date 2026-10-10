@@ -4,6 +4,10 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ## [Unreleased]
 
+### Changed
+
+- The foundation session record covers osat-manager-restic's release: the three independent reviews of its OpenPGP verifier, the tested offline step, and what is left open.
+
 ## [0.1.0] - 2026-10-09
 
 ### Added

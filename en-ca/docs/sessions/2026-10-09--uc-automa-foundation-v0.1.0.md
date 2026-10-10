@@ -80,6 +80,20 @@ The four layouts and their words; eleven directives, each with a check and pass 
 
 The pilot, built by following the revised OSAT manager process stage by stage. `manage-restic` meets the manager contract. Every download is verified in two steps before it is unpacked: the OpenPGP signature on restic's `SHA256SUMS` against restic's signing key, pinned by fingerprint in `manager.yaml` and checked with the standard library, then the download's SHA-256 against the signed list. The repository subscribed through `uc-automa init` with `layout: osat-manager`, and the layout needed no change. A radar entry for restic was written as a draft at `drafts/uc-radar/uc-radar--restic--backup-tool-v0.1.0.md` in the hand-off folder, for Christopher Steel to place in uc-radar. osat-fluent-restic-tool was read for lessons only: install that did not activate, raw 404 errors, and signature checking deferred for want of `gpg`.
 
+### Review of the OpenPGP verifier
+
+Before osat-manager-restic was tagged, its verifier was reviewed independently three times, each time by a reviewer that had not seen it written or reviewed:
+
+- **First review:** no way to forge a signature, but SHA-224 and signatures without an issuer were accepted, and malformed input raised other exception types. The verifier was rewritten to parse strictly and fail closed.
+- **Second review, of the rewrite:** no forgery path. A fingerprint that is not text and oversized input were fixed, text signatures and duplicate time subpackets refused, and its test gaps closed.
+- **Third review, of that change:** no violation of the five required properties. Its findings are 0.1.1 items in osat-manager-restic's roadmap, by the stop rule Christopher Steel set.
+
+Every hand-crafted test vector is confirmed with `gpg --verify`. The verifier differs from gpg only under named policies, and gpg corrected several of the expected verdicts written for it. restic's real 0.19.1 signature is a regression vector.
+
+### The offline step
+
+`tests/incus_acl.py` in osat-manager-restic cuts an Incus instance off the network, except the host's SSH, for the scenario's offline step on machines reached over SSH. It is undone by four independent layers: a finally block, a user systemd dead-man's switch, start-up recovery and a snapshot restore. A kill test showed the dead-man's switch and start-up recovery each restore the clean state on their own. Its self-test proves the cut with probes that work before, fail during and work after. On this host, DNS to the bridge stays reachable during the cut, as Incus exempts it, and is accepted as a known channel. The cut drops rather than rejects. The IPv6 internet path is not testable, because the host has no IPv6 route.
+
 ## Verification
 
 | Check | Result |
@@ -137,7 +151,8 @@ The pilot, built by following the revised OSAT manager process stage by stage. `
 - [ ] How should the Windows 11 virtual machine be reached for testing: the Incus agent, OpenSSH, or another way?
 - [ ] Publishing uc-portage and uc-automa somewhere pip can install them from, so the pre-commit hook can install itself.
 - [ ] Placing the restic radar entry in uc-radar, adding manage-restic to the list of OSAT managers, and archiving osat-fluent-restic-tool and file-fairy with notices naming their successors: Christopher Steel's actions.
-- [ ] Tagging osat-manager-restic 0.1.0, once its OpenPGP verifier has been reviewed independently. uc-portage and uc-automa were tagged v0.1.0 on 2026-10-09, with Christopher Steel's approval.
+- [ ] Pushing the three repositories, after which file-fairy and osat-fluent-restic-tool are archived with notices naming their successors. uc-portage and uc-automa were tagged v0.1.0 on 2026-10-09, and osat-manager-restic on 2026-10-10, after three independent reviews of its verifier.
+- [ ] Verifying Windows: Christopher Steel prepares the virtual machine's OpenSSH access from the plan in the hand-off folder, then the scenario runs there; the IPv6 cut is to be re-proven on a network with IPv6 first.
 - [ ] Naming the shared manager package and its repository (uc-automa 0024).
 
 ## References
