@@ -25,7 +25,7 @@ Status: Accepted
 
 ## Summary
 
-This session built uc-portage 0.1.0 and uc-automa 0.1.0 from the foundation brief <a id="cite-steel-2026b"></a>[(Steel, 2026b)](#ref-steel-2026b), and then osat-manager-restic 0.1.0 as the pilot. It was carried out by Claude Opus 5.5 in Claude Code, with Christopher Steel answering every question the brief left open. Each repository was stopped at for review before the next began. Nothing was pushed, tagged or archived, and no existing repository was changed.
+This session built uc-portage 0.1.0 and uc-automa 0.1.0 from the foundation brief <a id="cite-steel-2026b"></a>[(Steel, 2026b)](#ref-steel-2026b). osat-manager-restic 0.1.0, the pilot, follows, and this record is extended when it is done. It was carried out by Claude Opus 5.5 in Claude Code, with Christopher Steel answering every question the brief left open. Each repository was stopped at for review before the next began. Nothing was pushed, tagged or archived, and no existing repository was changed.
 
 ## Inputs
 
