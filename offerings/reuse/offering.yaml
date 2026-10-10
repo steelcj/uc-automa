@@ -1,0 +1,9 @@
+format: 1
+id: "reuse"
+title: "REUSE.toml"
+description: "A starting REUSE.toml with the default licence for each category's usual paths; planted once, then the repository's own record."
+sync_mode: seed_if_missing
+implements: ["licensing/rights-match-reuse"]
+items:
+  - source: "files/REUSE.toml"
+    dest: "REUSE.toml"

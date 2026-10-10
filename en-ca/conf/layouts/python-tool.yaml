@@ -1,0 +1,24 @@
+language: "en-ca"
+translates: "conf/layouts/python-tool.yaml"
+title: "Python tool repository layout"
+purpose: >
+  A repository whose product is a Python tool: an installable package under
+  lib/, its tests, and the package definition. It adds these to the base
+  layout; uc-automa and every OSAT manager extend it.
+
+placeholders:
+  package: "The Python package name, with underscores, such as uc_portage"
+
+paths:
+  "pyproject.toml":
+    holds: "Package definition: name, dependencies, the console-script entry point, the version read from VERSION, and any data mapped into the package"
+  "lib/":
+    holds: "Root for installable code"
+  "lib/{package}/":
+    holds: "The package"
+  "lib/{package}/__init__.py":
+    holds: "Package marker and version lookup"
+  "tests/":
+    holds: "Offline tests, run before every commit"
+  "schemas/":
+    holds: "JSON Schema documents written in YAML: the contracts the tool reads and offers, mapped into the package"

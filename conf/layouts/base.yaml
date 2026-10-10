@@ -1,0 +1,148 @@
+format: 1
+describes: "base"
+source_language: "en-ca"
+text: "{language}/conf/layouts/base.yaml"
+
+placeholders:
+  language: '^[a-z]{2}(-[a-z]{2})?$'
+  repository: '^[a-z0-9]+(-[a-z0-9]+)*$'
+  spdx-id: '^[A-Za-z0-9][A-Za-z0-9.+-]*$'
+  topic: '^[a-z0-9]+(-[a-z0-9]+)*$'
+  slug: '^[a-z0-9]+(-[a-z0-9]+)*$'
+  number: '^[0-9]{4}$'
+  date: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+  version: '^(-v[0-9]+\.[0-9]+\.[0-9]+)?$'
+
+tree:
+  - path: "README.md"
+    type: file
+    required: true
+  - path: "LICENSE"
+    type: file
+    required: true
+    from_offering: "license-gpl-3-0-or-later"
+  - path: "LICENSES/"
+    type: directory
+    required: true
+    closed: true
+    children:
+      - path: "GPL-3.0-or-later.txt"
+        type: file
+        required: true
+        from_offering: "license-gpl-3-0-or-later"
+      - path: "CC-BY-SA-4.0.txt"
+        type: file
+        required: true
+        from_offering: "license-cc-by-sa-4-0"
+      - path: "CC-BY-4.0.txt"
+        type: file
+        required: false
+        from_offering: "license-cc-by-4-0"
+      - path: "{spdx-id}.txt"
+        type: file
+        required: false
+  - path: "REUSE.toml"
+    type: file
+    required: true
+    from_offering: "reuse"
+  - path: "CHANGELOG.md"
+    type: file
+    required: true
+    from_offering: "changelog"
+  - path: "VERSION"
+    type: file
+    required: true
+    from_offering: "version-file"
+  - path: "ROADMAP.md"
+    type: file
+    required: true
+  - path: "CONTRIBUTING.md"
+    type: file
+    required: true
+  - path: "CLAUDE.md"
+    type: file
+    required: true
+    from_offering: "claude-signpost"
+  - path: ".uc-automa.yaml"
+    type: file
+    required: true
+  - path: ".uc-portage-state.yaml"
+    type: file
+    required: true
+  - path: ".{repository}.assets/"
+    type: directory
+    required: true
+    closed: true
+    children:
+      - path: "archive.yaml"
+        type: file
+        required: true
+      - path: "dc.yaml"
+        type: file
+        required: true
+  - path: ".gitattributes"
+    type: file
+    required: true
+    from_offering: "line-endings"
+  - path: ".editorconfig"
+    type: file
+    required: true
+    from_offering: "editorconfig"
+  - path: ".gitignore"
+    type: file
+    required: true
+  - path: ".pre-commit-config.yaml"
+    type: file
+    required: false
+
+  - path: "{language}/"
+    type: directory
+    required: source-language
+    closed: true
+    children:
+      - path: "docs/"
+        type: directory
+        required: true
+        closed: true
+        children:
+          - path: "README.md"
+            type: file
+            required: true
+            generated: true
+          - path: "guides/"
+            type: directory
+            required: false
+            closed: true
+            children:
+              - path: "{topic}/"
+                type: directory
+                required: false
+                closed: true
+                children:
+                  - path: "{slug}{version}.md"
+                    type: file
+                    required: false
+          - path: "decisions/"
+            type: directory
+            required: false
+            closed: true
+            children:
+              - path: "{number}--{slug}{version}.md"
+                type: file
+                required: false
+          - path: "references/"
+            type: directory
+            required: false
+            closed: true
+            children:
+              - path: "{slug}{version}.md"
+                type: file
+                required: false
+          - path: "sessions/"
+            type: directory
+            required: false
+            closed: true
+            children:
+              - path: "{date}--{slug}{version}.md"
+                type: file
+                required: false

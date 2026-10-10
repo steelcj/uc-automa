@@ -1,0 +1,10 @@
+language: "fr-ca"
+translates: "conf/layouts/base.yaml"
+placeholders:
+  slug:
+    text: "Mots joints par des traits d'union"
+    source_hash: "9753cf447bcc"
+paths:
+  "README.md":
+    holds: "Ce qu'est le dépôt"
+    source_hash: "000000000000"

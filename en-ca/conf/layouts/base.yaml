@@ -1,0 +1,99 @@
+language: "en-ca"
+translates: "conf/layouts/base.yaml"
+title: "Base repository layout"
+purpose: >
+  What every Vishpala repository contains, whatever its type: the files that
+  describe it, its licences, its link to uc-automa, its SAT sidecar, and its
+  documentation in each language. Every other layout extends this one.
+
+values:
+  required:
+    "true": "Must be present; inside a language root, in every language root that is present"
+    "false": "May be present; if present, follows this layout"
+    "source-language": "Must be present in the source language's root; optional in other languages"
+  generated:
+    "true": "Produced by a command and never edited by hand"
+  closed:
+    "true": "Holds only entries the layout describes"
+  from_offering:
+    "any": "Arrives from the named uc-automa offering, so the repository must subscribe to it"
+
+placeholders:
+  language: "A lowercase language tag, such as en-ca or fr-ca"
+  repository: "The repository's name, as declared in .uc-automa.yaml"
+  spdx-id: "An SPDX licence identifier, such as GPL-3.0-or-later"
+  topic: "A guide topic, such as usage or release"
+  slug: "Words joined by single hyphens, naming one document"
+  number: "A four-digit decision number"
+  date: "An ISO 8601 date, such as 2026-10-09"
+  version: "The -vX.Y.Z suffix before 1.0.0, or nothing from 1.0.0"
+
+paths:
+  "README.md":
+    holds: "What the repository is, how to install or use it, and where its documentation is"
+  "LICENSE":
+    holds: "The code licence text for forges that look for a root LICENSE file, byte-identical to LICENSES/GPL-3.0-or-later.txt"
+  "LICENSES/":
+    holds: "Full text of every licence used in the repository, one file per SPDX identifier, as REUSE requires"
+  "LICENSES/GPL-3.0-or-later.txt":
+    holds: "The code licence, copied verbatim"
+  "LICENSES/CC-BY-SA-4.0.txt":
+    holds: "The documentation licence, copied verbatim"
+  "LICENSES/CC-BY-4.0.txt":
+    holds: "The content licence, copied verbatim, present only when the repository holds content"
+  "LICENSES/{spdx-id}.txt":
+    holds: "Any other licence text, for third-party material, copied verbatim"
+  "REUSE.toml":
+    holds: "The canonical record of which licence covers which paths; seeded once, then the repository's own"
+  "CHANGELOG.md":
+    holds: "The repository's changelog in Keep a Changelog form, one entry per tagged release"
+  "VERSION":
+    holds: "The single source of the repository's version"
+  "ROADMAP.md":
+    holds: "Forward plan only; completed items move to CHANGELOG.md"
+  "CONTRIBUTING.md":
+    holds: "How changes arrive and are reviewed"
+  "CLAUDE.md":
+    holds: "Instructions for AI collaborators, ending with the signpost block from uc-automa"
+  ".uc-automa.yaml":
+    holds: "The repository's name, layout type, uc-automa pin, language and subscriptions; written once by uc-automa init and owned by the repository"
+  ".uc-portage-state.yaml":
+    holds: "What uc-portage last delivered, with checksums; written by uc-automa offerings apply and committed"
+  ".{repository}.assets/":
+    holds: "The SAT sidecar for the repository as an archive, named for the repository; provisional until the SAT configuration cascade specification is written"
+  ".{repository}.assets/archive.yaml":
+    holds: "Role, urn:uuid identifier, title, default language and default rights"
+  ".{repository}.assets/dc.yaml":
+    holds: "Dublin Core defaults every document inherits unless it overrides them"
+  ".gitattributes":
+    holds: "Line ending policy, LF everywhere"
+  ".editorconfig":
+    holds: "Editor defaults: UTF-8, LF and a final newline"
+  ".gitignore":
+    holds: "Build output, virtual environments, caches and release artefacts"
+  ".pre-commit-config.yaml":
+    holds: "The pre-commit hooks the repository runs on itself"
+  "{language}/":
+    holds: "A language root: everything in the repository written in one language"
+  "{language}/docs/":
+    holds: "All reading material in this language"
+  "{language}/docs/README.md":
+    holds: "Generated index of every document, with its version and status"
+  "{language}/docs/guides/":
+    holds: "Explanation and procedure, by topic"
+  "{language}/docs/guides/{topic}/":
+    holds: "The guides on one topic"
+  "{language}/docs/guides/{topic}/{slug}{version}.md":
+    holds: "One guide"
+  "{language}/docs/decisions/":
+    holds: "Decision records for this repository, numbered within it; across repositories a record is known by its urn:uuid, and in prose by repository and number, such as uc-portage 0002"
+  "{language}/docs/decisions/{number}--{slug}{version}.md":
+    holds: "One decision record"
+  "{language}/docs/references/":
+    holds: "Standing reference material from outside sources"
+  "{language}/docs/references/{slug}{version}.md":
+    holds: "One reference"
+  "{language}/docs/sessions/":
+    holds: "Dated records of how the repository was built or changed, one per working session"
+  "{language}/docs/sessions/{date}--{slug}{version}.md":
+    holds: "One session record: what was decided, what was made, and what was left open"

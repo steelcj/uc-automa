@@ -1,0 +1,8 @@
+format: 1
+id: "editorconfig"
+title: "Editor defaults"
+description: "UTF-8, LF line endings and a final newline in every editor that reads .editorconfig."
+sync_mode: overwrite
+items:
+  - source: "files/.editorconfig"
+    dest: ".editorconfig"

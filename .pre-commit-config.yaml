@@ -1,0 +1,16 @@
+# uc-automa checking itself with its own hook, and running its tests.
+repos:
+  - repo: local
+    hooks:
+      - id: uc-automa-check
+        name: uc-automa check
+        entry: uc-automa check
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: unit-tests
+        name: unit tests
+        entry: python3 -m unittest discover -s tests
+        language: system
+        pass_filenames: false
+        always_run: true

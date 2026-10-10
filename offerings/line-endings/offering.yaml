@@ -1,0 +1,8 @@
+format: 1
+id: "line-endings"
+title: "Line endings"
+description: "LF line endings in the repository and the working tree, on every platform."
+sync_mode: overwrite
+items:
+  - source: "files/.gitattributes"
+    dest: ".gitattributes"

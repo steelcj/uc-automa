@@ -1,0 +1,9 @@
+format: 1
+id: "changelog"
+title: "Changelog"
+description: "A CHANGELOG.md in Keep a Changelog form, planted once and owned by the repository afterwards."
+source_language: "en-ca"
+sync_mode: seed_if_missing
+items:
+  - source: "{language}/CHANGELOG.md"
+    dest: "CHANGELOG.md"

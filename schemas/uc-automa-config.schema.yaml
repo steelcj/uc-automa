@@ -1,0 +1,36 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:uuid:2c9edb68-d759-430a-b08e-5dfeaf53a7a1"
+title: ".uc-automa.yaml"
+description: >
+  A repository's declaration of what it is and what it takes from
+  uc-automa: its name, its layout type, the uc-automa version it is pinned
+  to, its language, and the offerings it subscribes to. Written once by
+  uc-automa init and owned by the repository afterwards.
+type: object
+required: [format, repository, layout, automa_version, language, subscribe]
+additionalProperties: false
+properties:
+  format:
+    const: 1
+  repository:
+    description: "The repository's name; its SAT sidecar is .<repository>.assets/"
+    type: string
+    pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+  layout:
+    description: "The layout type under conf/layouts/, such as python-tool"
+    type: string
+    pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+  automa_version:
+    description: "The uc-automa release this repository is pinned to; self only in uc-automa itself"
+    type: string
+    pattern: '^(self|[0-9]+\.[0-9]+\.[0-9]+)$'
+  language:
+    description: "The repository's language, a lowercase tag such as en-ca"
+    type: string
+    pattern: '^[a-z]{2}(-[a-z]{2})?$'
+  subscribe:
+    description: "Identifiers of the offerings this repository takes"
+    type: array
+    items:
+      type: string
+      pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'

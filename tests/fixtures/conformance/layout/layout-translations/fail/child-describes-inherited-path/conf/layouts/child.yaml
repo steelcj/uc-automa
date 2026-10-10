@@ -1,0 +1,9 @@
+format: 1
+describes: "child"
+extends: "base"
+source_language: "en-ca"
+placeholders: {}
+tree:
+  - path: "notes/"
+    type: directory
+    required: false

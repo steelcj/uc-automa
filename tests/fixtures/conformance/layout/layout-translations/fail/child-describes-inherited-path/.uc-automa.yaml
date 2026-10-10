@@ -1,0 +1,6 @@
+format: 1
+repository: words
+layout: child
+automa_version: self
+language: en-ca
+subscribe: []

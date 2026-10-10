@@ -1,0 +1,5 @@
+format: 1
+id: "license-gpl-3-0-or-later"
+items:
+  - source: "files/LICENSES/GPL-3.0-or-later.txt"
+    dest: "LICENSES/GPL-3.0-or-later.txt"

@@ -1,0 +1,9 @@
+# Hooks uc-automa offers to other repositories. They run the uc-automa
+# installed in the repository's environment, at the version it pins.
+- id: uc-automa-check
+  name: uc-automa check
+  description: "Check the repository against uc-automa's directives."
+  entry: uc-automa check
+  language: system
+  pass_filenames: false
+  always_run: true

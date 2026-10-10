@@ -1,0 +1,31 @@
+format: 1
+describes: "python-tool"
+extends: "base"
+source_language: "en-ca"
+text: "{language}/conf/layouts/python-tool.yaml"
+
+placeholders:
+  package: '^[a-z][a-z0-9_]*$'
+
+tree:
+  - path: "pyproject.toml"
+    type: file
+    required: true
+  - path: "lib/"
+    type: directory
+    required: true
+    closed: true
+    children:
+      - path: "{package}/"
+        type: directory
+        required: true
+        children:
+          - path: "__init__.py"
+            type: file
+            required: true
+  - path: "tests/"
+    type: directory
+    required: true
+  - path: "schemas/"
+    type: directory
+    required: false

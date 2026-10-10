@@ -1,0 +1,82 @@
+language: "en-ca"
+translates: "conf/layouts/uc-automa.yaml"
+title: "uc-automa repository layout"
+purpose: >
+  uc-automa is the station every Vishpala repository passes through: it defines
+  the rules once, publishes what repositories may take from it, and keeps each
+  of those things in exactly one place. uc-portage carries offerings between the
+  station and each repository, in both directions.
+
+values:
+  kind:
+    meta: "Describes or configures uc-automa itself; not delivered to other repositories"
+    runs: "Things a tool runs; delivered as the installed uc-automa package, pinned per repository"
+    read: "Things people and AI read; referenced from a versioned checkout, not copied"
+    lives: "Things that must live in each receiving repository; carried there by uc-portage"
+
+placeholders:
+  layout-id: "The repository type a layout describes, such as python-tool or osat-manager"
+  offering-id: "An offering's identifier, which is also its directory name"
+  domain: "A directive domain, such as naming, markdown or licensing"
+
+paths:
+  "lib/{package}/cli.py":
+    holds: "The uc-automa command and its subcommands"
+  "tests/fixtures/":
+    holds: "Sample files the tests run against"
+  "tests/fixtures/conformance/":
+    holds: "Samples for each directive's check, filed by directive identifier"
+  "tests/fixtures/conformance/{domain}/":
+    holds: "Samples for one directive domain"
+  "tests/fixtures/conformance/{domain}/{slug}/":
+    holds: "Samples for one directive"
+  "tests/fixtures/conformance/{domain}/{slug}/pass/":
+    holds: "Cases the directive's check must accept, one directory each"
+  "tests/fixtures/conformance/{domain}/{slug}/fail/":
+    holds: "Cases the directive's check must reject, one directory each"
+  "schemas/uc-automa-config.schema.yaml":
+    holds: "Schema for a repository's .uc-automa.yaml"
+  "schemas/front-matter.schema.yaml":
+    holds: "Front matter for each document type: directive, guide, decision, reference and session"
+  "{language}/conf/":
+    holds: "The words for the language-neutral configuration in conf/"
+  "{language}/conf/layouts/":
+    holds: "The words for each layout"
+  "{language}/conf/layouts/{layout-id}.yaml":
+    holds: "Titles and descriptions for one layout, keyed by path; only for the paths and placeholders that layout adds"
+  "{language}/docs/directives/":
+    holds: "Rules in force, one rule per file: the automa proper"
+  "{language}/docs/directives/{domain}/":
+    holds: "The directives of one domain"
+  "{language}/docs/directives/{domain}/{slug}{version}.md":
+    holds: "One directive; its identifier is {domain}/{slug}, and it names the check that enforces it"
+  "{language}/templates/":
+    holds: "Authoring skeletons, one per document type, carrying every front matter key its type requires, with placeholders to replace"
+  "{language}/templates/directive.md":
+    holds: "Skeleton for a new directive"
+  "{language}/templates/guide.md":
+    holds: "Skeleton for a new guide"
+  "{language}/templates/decision.md":
+    holds: "Skeleton for a new decision record"
+  "{language}/templates/reference.md":
+    holds: "Skeleton for a new reference"
+  "{language}/templates/session.md":
+    holds: "Skeleton for a new session record"
+  ".pre-commit-hooks.yaml":
+    holds: "Hooks uc-automa offers to other repositories; pre-commit requires this file at the root"
+  "conf/":
+    holds: "Language-neutral configuration: structure only, with no prose"
+  "conf/layouts/":
+    holds: "One layout per repository type, each extending its parent"
+  "conf/layouts/{layout-id}.yaml":
+    holds: "The structure of one repository type; its words live at the same relative path under each language root"
+  "offerings/":
+    holds: "One self-contained directory per offering; the directory list is the catalogue"
+  "offerings/{offering-id}/":
+    holds: "One offering"
+  "offerings/{offering-id}/offering.yaml":
+    holds: "What the offering delivers: each file or managed block, its destination, sync mode, and the directives it implements"
+  "offerings/{offering-id}/files/":
+    holds: "Language-neutral payload files, laid out as they land in the receiving repository"
+  "offerings/{offering-id}/{language}/":
+    holds: "Language-specific payload text, such as signpost wording"

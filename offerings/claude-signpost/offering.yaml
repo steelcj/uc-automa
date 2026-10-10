@@ -1,0 +1,11 @@
+format: 1
+id: "claude-signpost"
+title: "Signpost for AI collaborators"
+description: "A block at the end of CLAUDE.md pointing AI collaborators at uc-automa's directives and checks; the rest of CLAUDE.md is the repository's own."
+source_language: "en-ca"
+sync_mode: mirror
+items:
+  - block: "uc-automa-signpost"
+    source: "{language}/signpost.md"
+    dest: "CLAUDE.md"
+    anchor: "EOF"

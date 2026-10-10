@@ -1,0 +1,21 @@
+language: "en-ca"
+translates: "conf/layouts/osat-manager.yaml"
+title: "OSAT manager repository layout"
+purpose: >
+  An OSAT manager installs one tool into user space and manages its versions
+  there. Its repository is a Python tool with a declarative description of the
+  managed tool, unit tests that run offline, and an end-to-end run per platform.
+
+paths:
+  "manager.yaml":
+    holds: "Declarative description of the managed tool: sources, verification, platforms, aliases and install roots"
+  "tests/unit/":
+    holds: "Offline tests, run on every platform and before every commit"
+  "tests/e2e/":
+    holds: "End-to-end runs of the manager contract's scenario, one directory per platform"
+  "tests/e2e/linux/":
+    holds: "The scenario as run on Linux, in a fresh Incus container"
+  "tests/e2e/windows/":
+    holds: "The scenario as run on Windows"
+  "tests/e2e/macos/":
+    holds: "The scenario as run on macOS, on Apple hardware"

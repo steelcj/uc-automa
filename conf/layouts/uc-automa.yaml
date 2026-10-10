@@ -1,0 +1,215 @@
+format: 1
+describes: "uc-automa"
+extends: "python-tool"
+source_language: "en-ca"
+text: "{language}/conf/layouts/uc-automa.yaml"
+
+placeholders:
+  layout-id: '^[a-z0-9]+(-[a-z0-9]+)*$'
+  offering-id: '^[a-z0-9]+(-[a-z0-9]+)*$'
+  domain: '^[a-z0-9]+(-[a-z0-9]+)*$'
+
+tree:
+  # Inherited top-level paths: uc-automa sets the kind each one has here.
+  - path: "README.md"
+    type: file
+    kind: meta
+  - path: "LICENSE"
+    type: file
+    kind: meta
+  - path: "LICENSES/"
+    type: directory
+    kind: meta
+  - path: "REUSE.toml"
+    type: file
+    kind: meta
+  - path: "CHANGELOG.md"
+    type: file
+    kind: meta
+  - path: "VERSION"
+    type: file
+    kind: meta
+  - path: "ROADMAP.md"
+    type: file
+    kind: meta
+  - path: "CONTRIBUTING.md"
+    type: file
+    kind: meta
+  - path: "CLAUDE.md"
+    type: file
+    kind: meta
+  - path: ".uc-automa.yaml"
+    type: file
+    kind: meta
+  - path: ".uc-portage-state.yaml"
+    type: file
+    kind: meta
+  - path: ".{repository}.assets/"
+    type: directory
+    kind: meta
+  - path: ".gitattributes"
+    type: file
+    kind: meta
+  - path: ".editorconfig"
+    type: file
+    kind: meta
+  - path: ".gitignore"
+    type: file
+    kind: meta
+  - path: ".pre-commit-config.yaml"
+    type: file
+    kind: meta
+    required: true
+  - path: "pyproject.toml"
+    type: file
+    kind: runs
+  - path: "lib/"
+    type: directory
+    kind: runs
+    children:
+      - path: "{package}/"
+        type: directory
+        children:
+          - path: "cli.py"
+            type: file
+            required: true
+  - path: "tests/"
+    type: directory
+    kind: runs
+    children:
+      - path: "fixtures/"
+        type: directory
+        required: true
+        children:
+          - path: "conformance/"
+            type: directory
+            required: true
+            closed: true
+            children:
+              - path: "{domain}/"
+                type: directory
+                required: true
+                closed: true
+                children:
+                  - path: "{slug}/"
+                    type: directory
+                    required: true
+                    closed: true
+                    children:
+                      - path: "pass/"
+                        type: directory
+                        required: true
+                      - path: "fail/"
+                        type: directory
+                        required: true
+  - path: "schemas/"
+    type: directory
+    kind: runs
+    required: true
+    closed: true
+    children:
+      - path: "uc-automa-config.schema.yaml"
+        type: file
+        required: true
+      - path: "front-matter.schema.yaml"
+        type: file
+        required: true
+  - path: "{language}/"
+    type: directory
+    kind: read
+    children:
+      - path: "conf/"
+        type: directory
+        required: true
+        closed: true
+        children:
+          - path: "layouts/"
+            type: directory
+            required: true
+            closed: true
+            children:
+              - path: "{layout-id}.yaml"
+                type: file
+                required: true
+      - path: "docs/"
+        type: directory
+        children:
+          - path: "directives/"
+            type: directory
+            required: true
+            closed: true
+            children:
+              - path: "{domain}/"
+                type: directory
+                required: true
+                closed: true
+                children:
+                  - path: "{slug}{version}.md"
+                    type: file
+                    required: true
+          - path: "guides/"
+            type: directory
+            required: true
+          - path: "decisions/"
+            type: directory
+            required: true
+      - path: "templates/"
+        type: directory
+        required: true
+        closed: true
+        children:
+          - path: "directive.md"
+            type: file
+            required: true
+          - path: "guide.md"
+            type: file
+            required: true
+          - path: "decision.md"
+            type: file
+            required: true
+          - path: "reference.md"
+            type: file
+            required: true
+          - path: "session.md"
+            type: file
+            required: true
+
+  # Paths only uc-automa has.
+  - path: ".pre-commit-hooks.yaml"
+    type: file
+    kind: runs
+    required: true
+  - path: "conf/"
+    type: directory
+    kind: runs
+    required: true
+    closed: true
+    children:
+      - path: "layouts/"
+        type: directory
+        required: true
+        closed: true
+        children:
+          - path: "{layout-id}.yaml"
+            type: file
+            required: true
+  - path: "offerings/"
+    type: directory
+    kind: lives
+    required: true
+    closed: true
+    children:
+      - path: "{offering-id}/"
+        type: directory
+        required: true
+        closed: true
+        children:
+          - path: "offering.yaml"
+            type: file
+            required: true
+          - path: "files/"
+            type: directory
+            required: false
+          - path: "{language}/"
+            type: directory
+            required: false

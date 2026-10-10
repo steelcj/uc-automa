@@ -1,0 +1,5 @@
+language: "en-ca"
+translates: "conf/layouts/child.yaml"
+paths:
+  "notes/":
+    holds: "Working notes"

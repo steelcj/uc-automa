@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uc-automa"
+dynamic = ["version"]
+description = "The station: Vishpala's rules and offerings, and the tool that checks repositories against them."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "Christopher Steel" }]
+dependencies = ["PyYAML>=6.0", "uc-portage>=0.1.0,<0.2.0"]
+
+[project.scripts]
+uc-automa = "uc_automa.cli:main"
+
+[tool.setuptools]
+# conf/, each language's conf/, schemas/ and offerings/ live once, in the
+# repository; these mappings carry them in every install (uc-automa 0019).
+packages = [
+    "uc_automa",
+    "uc_automa.conformance",
+    "uc_automa.data.conf",
+    "uc_automa.data.text.en_ca",
+    "uc_automa.data.schemas",
+    "uc_automa.data.offerings",
+]
+
+[tool.setuptools.package-dir]
+"" = "lib"
+"uc_automa.data.conf" = "conf"
+"uc_automa.data.text.en_ca" = "en-ca/conf"
+"uc_automa.data.schemas" = "schemas"
+"uc_automa.data.offerings" = "offerings"
+
+[tool.setuptools.package-data]
+"uc_automa.data.conf" = ["**/*.yaml"]
+"uc_automa.data.text.en_ca" = ["**/*.yaml"]
+"uc_automa.data.schemas" = ["*.yaml"]
+"uc_automa.data.offerings" = ["**/*", "**/.*"]
+
+[tool.setuptools.dynamic]
+# VERSION is the single source of the version.
+version = { file = "VERSION" }

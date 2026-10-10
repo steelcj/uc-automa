@@ -1,0 +1,7 @@
+language: "en-ca"
+translates: "conf/layouts/base.yaml"
+placeholders:
+  slug: "Words joined by hyphens"
+paths:
+  "README.md":
+    holds: "What the repository is"

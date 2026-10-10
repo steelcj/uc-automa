@@ -1,0 +1,41 @@
+format: 1
+describes: "osat-manager"
+extends: "python-tool"
+source_language: "en-ca"
+text: "{language}/conf/layouts/osat-manager.yaml"
+
+placeholders: {}
+
+tree:
+  - path: "manager.yaml"
+    type: file
+    required: true
+  - path: "tests/"
+    type: directory
+    children:
+      - path: "unit/"
+        type: directory
+        required: true
+      - path: "e2e/"
+        type: directory
+        required: true
+        closed: true
+        children:
+          - path: "linux/"
+            type: directory
+            required: true
+          - path: "windows/"
+            type: directory
+            required: false
+          - path: "macos/"
+            type: directory
+            required: false
+  - path: "{language}/"
+    type: directory
+    children:
+      - path: "docs/"
+        type: directory
+        children:
+          - path: "guides/"
+            type: directory
+            required: true

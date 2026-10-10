@@ -1,0 +1,8 @@
+format: 1
+id: "version-file"
+title: "VERSION file"
+description: "The single source of a repository's version, planted at 0.1.0 and owned by the repository afterwards."
+sync_mode: seed_if_missing
+items:
+  - source: "files/VERSION"
+    dest: "VERSION"
