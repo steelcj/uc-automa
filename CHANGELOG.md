@@ -4,6 +4,8 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-09
+
 ### Added
 
 - Layouts split by repository type: `base`, `python-tool`, `uc-automa` and `osat-manager`, with the extends rules, and their en-ca words.
