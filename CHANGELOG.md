@@ -4,6 +4,10 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ## [Unreleased]
 
+### Added
+
+- Decision record 0026, the release ceremony: `uc-automa release bump`, `cut` and `publish`, to replace the copied scripts in 0.2.0.
+
 ### Changed
 
 - The README installs a release from its tag, with uc-portage, and keeps installing from checkouts for development.

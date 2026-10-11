@@ -57,6 +57,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: init Writes the Repository Configuration](decisions/0023--init-writes-the-repository-configuration-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Shared Manager Package](decisions/0024--shared-manager-package-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: MIT for Code, CC BY 4.0 for Documentation](decisions/0025--mit-for-code-cc-by-for-documentation-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Release Ceremony](decisions/0026--release-ceremony-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 
