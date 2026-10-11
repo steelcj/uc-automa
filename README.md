@@ -18,12 +18,22 @@ Python 3.8 or later, PyYAML, uc-portage 0.1.x and git.
 
 ## Install
 
-uc-portage is not published to a package index, so install it first, from its checkout:
+Install a release from its tag, together with uc-portage, which uc-automa depends on:
 
 ```sh
-python3 -m pip install ../uc-portage
-python3 -m pip install .
+python3 -m pip install "git+https://github.com/steelcj/uc-portage@v0.1.0" \
+                       "git+https://github.com/steelcj/uc-automa@v0.1.0"
 uc-automa --version
+```
+
+uc-portage is not published to a package index, so name both in the same command; installing uc-automa alone fails to find uc-portage.
+
+The installed version is the one `uc-automa init` pins in a repository's `.uc-automa.yaml`, and every later command requires the installed version to match the pin (uc-automa 0020). Everyone working in a repository installs the same tag. The pre-commit hook runs the `uc-automa` installed in your environment.
+
+To work on uc-automa itself, install both from checkouts instead:
+
+```sh
+python3 -m pip install -e ../uc-portage -e .
 ```
 
 ## Use

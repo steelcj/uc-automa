@@ -6,6 +6,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ### Changed
 
+- The README installs a release from its tag, with uc-portage, and keeps installing from checkouts for development.
 - The OSAT manager process, 0.4.0: its subscribe stage installs uc-automa and uc-portage from their release tags, and removes blocks file-fairy managed, which uc-portage never takes over.
 
 ## [0.1.0] - 2026-10-11
