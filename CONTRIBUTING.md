@@ -10,10 +10,14 @@ Changes arrive as commits on a branch and are reviewed by Christopher Steel befo
 - Changing a layout under `conf/layouts/` changes its words under `en-ca/conf/layouts/` in the same commit; `uc-automa translations` reports nothing untranslated or stale.
 - Regenerate the documentation index with `uc-automa docs index`; never edit it by hand.
 
+## Licences
+
+Contributions are accepted under the licences the repository uses, inbound equals outbound: MIT for code, and CC BY 4.0 for documentation and content (uc-automa 0025).
+
 ## Harvested changes
 
 When a receiving repository improves a file that came from an offering, `uc-automa offerings harvest` reports it there. The change is proposed here as an ordinary commit to the offering's payload, reviewed like any other.
 
 ## License
 
-This document, *Contributing*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Contributing*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

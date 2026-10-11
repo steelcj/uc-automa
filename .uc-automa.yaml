@@ -4,8 +4,8 @@ layout: uc-automa
 automa_version: self
 language: en-ca
 subscribe:
-- license-gpl-3-0-or-later
-- license-cc-by-sa-4-0
+- license-mit
+- license-cc-by-4-0
 - reuse
 - changelog
 - version-file

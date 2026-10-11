@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:5e2fcdd7-2a46-4f0f-ba6f-92b6a0ec18e0"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "Accepted"
 ---
@@ -44,4 +44,4 @@ A repository pins `automa_version` in its `.uc-automa.yaml`. `uc-automa offering
 
 ## License
 
-This document, *Decision: Offerings for Pinned Repositories*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Decision: Offerings for Pinned Repositories*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

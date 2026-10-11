@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:567781eb-1709-4cb7-9c2c-21c6c9f962ed"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "Accepted"
 sat:decision: "D10"
@@ -46,4 +46,4 @@ Names such as 2026-10-09--uc-automa-foundation combine parts of different kinds.
 
 ## License
 
-This document, *Decision: Part Separator*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Decision: Part Separator*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

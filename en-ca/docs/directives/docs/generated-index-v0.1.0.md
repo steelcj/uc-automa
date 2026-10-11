@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:18889bbf-2676-4c0e-846f-baa49dd88757"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "In force"
 sat:directive: "docs/generated-index"
@@ -43,4 +43,4 @@ This is decision D9, recorded as uc-automa 0009. A hand-kept index drifts from t
 
 ## License
 
-This document, *Docs: Generated Index*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Docs: Generated Index*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

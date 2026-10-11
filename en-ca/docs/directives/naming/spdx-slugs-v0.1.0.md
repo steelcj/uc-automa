@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:427f6f92-63e1-48ba-a80a-815257467f0a"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "In force"
 sat:directive: "naming/spdx-slugs"
@@ -38,8 +38,9 @@ Written down so that it is never inferred again: the offering names had no rule 
 
 | SPDX identifier | Offering |
 | --- | --- |
-| `GPL-3.0-or-later` | `license-gpl-3-0-or-later` |
-| `CC-BY-SA-4.0` | `license-cc-by-sa-4-0` |
+| `MIT` | `license-mit` |
+| `CC-BY-4.0` | `license-cc-by-4-0` |
+| `GPL-3.0-or-later`, were it offered | `license-gpl-3-0-or-later` |
 | `CC-BY-4.0` | `license-cc-by-4-0` |
 
 ## Check
@@ -54,4 +55,4 @@ Written down so that it is never inferred again: the offering names had no rule 
 
 ## License
 
-This document, *Naming: SPDX Slugs*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Naming: SPDX Slugs*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

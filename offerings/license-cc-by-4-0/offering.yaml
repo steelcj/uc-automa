@@ -1,7 +1,7 @@
 format: 1
 id: "license-cc-by-4-0"
 title: "Creative Commons Attribution 4.0 International"
-description: "The content licence text, delivered to LICENSES/; for repositories that hold content."
+description: "The documentation and content licence text, delivered to LICENSES/."
 sync_mode: overwrite
 implements: ["naming/spdx-slugs"]
 items:

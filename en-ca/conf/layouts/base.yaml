@@ -21,7 +21,7 @@ values:
 placeholders:
   language: "A lowercase language tag, such as en-ca or fr-ca"
   repository: "The repository's name, as declared in .uc-automa.yaml"
-  spdx-id: "An SPDX licence identifier, such as GPL-3.0-or-later"
+  spdx-id: "An SPDX licence identifier, such as MIT"
   topic: "A guide topic, such as usage or release"
   slug: "Words joined by single hyphens, naming one document"
   number: "A four-digit decision number"
@@ -32,15 +32,13 @@ paths:
   "README.md":
     holds: "What the repository is, how to install or use it, and where its documentation is"
   "LICENSE":
-    holds: "The code licence text for forges that look for a root LICENSE file, byte-identical to LICENSES/GPL-3.0-or-later.txt"
+    holds: "The code licence text for forges that look for a root LICENSE file, byte-identical to LICENSES/MIT.txt"
   "LICENSES/":
     holds: "Full text of every licence used in the repository, one file per SPDX identifier, as REUSE requires"
-  "LICENSES/GPL-3.0-or-later.txt":
-    holds: "The code licence, copied verbatim"
-  "LICENSES/CC-BY-SA-4.0.txt":
-    holds: "The documentation licence, copied verbatim"
+  "LICENSES/MIT.txt":
+    holds: "The code licence, with the copyright holder and year filled in"
   "LICENSES/CC-BY-4.0.txt":
-    holds: "The content licence, copied verbatim, present only when the repository holds content"
+    holds: "The documentation and content licence, copied verbatim"
   "LICENSES/{spdx-id}.txt":
     holds: "Any other licence text, for third-party material, copied verbatim"
   "REUSE.toml":

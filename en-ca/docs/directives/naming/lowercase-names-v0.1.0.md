@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:66c97c8d-e1cb-4652-91a8-25279a1dacdd"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "In force"
 sat:directive: "naming/lowercase-names"
@@ -31,7 +31,7 @@ The written exceptions:
 
 - the conventional uppercase repository files, wherever they appear: `README.md`, `LICENSE`, `CHANGELOG.md`, `VERSION`, `ROADMAP.md`, `CONTRIBUTING.md` and `CLAUDE.md`;
 - names a tool requires, such as `REUSE.toml`;
-- licence texts in a `LICENSES/` directory, which keep their SPDX identifiers, such as `GPL-3.0-or-later.txt`;
+- licence texts in a `LICENSES/` directory, which keep their SPDX identifiers, such as `CC-BY-4.0.txt`;
 - Python modules and packages under `lib/` and `tests/`, which use underscores because Python cannot import hyphens.
 
 ## Rationale
@@ -60,4 +60,4 @@ Lowercase names behave the same on file systems that ignore case and on those th
 
 ## License
 
-This document, *Naming: Lowercase Names*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Naming: Lowercase Names*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

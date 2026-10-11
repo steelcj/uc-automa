@@ -11,16 +11,18 @@ dc:format: "text/markdown"
 dc:identifier: "urn:uuid:5b82dabb-3e67-4f11-a944-4018ae4e1dcf"
 dc:relation: "urn:uuid:14f3cf06-ab5d-454e-8c00-d81c36a21d08"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
-sat:status: "Accepted"
+sat:status: "Superseded"
 sat:decision: "L1"
 ---
 
 # Decision: Root Licence File
 
 Version: 0.1.0
-Status: Accepted
+Status: Superseded
+
+Superseded by uc-automa 0025, which keeps the root `LICENSE` rule for the MIT text.
 
 ## Context
 
@@ -39,8 +41,8 @@ Keep a root `LICENSE` file, holding the code licence, GPL-3.0-or-later. It is by
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
-| 0.1.0 | 2026-10-09 | Accepted | Initial version |
+| 0.1.0 | 2026-10-09 | Superseded | Initial version |
 
 ## License
 
-This document, *Decision: Root Licence File*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Decision: Root Licence File*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

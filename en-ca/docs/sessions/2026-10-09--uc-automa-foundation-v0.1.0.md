@@ -13,7 +13,7 @@ dc:relation:
   - "urn:uuid:965f6290-3d72-4631-ad66-9b4c6f63db96"
   - "urn:uuid:cd696843-52b7-4406-a096-fc73df3bba05"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "Accepted"
 ---
@@ -51,10 +51,11 @@ The brief's settled decisions D1 to D18 became uc-automa 0001 to 0018, with D6 a
 
 | Question | Ruling | Recorded in |
 | --- | --- | --- |
-| Where the repositories go | Beside the existing ones, in `~/areas/development/` | This record |
+| Where the repositories go | Beside the existing repositories | This record |
 | A layout for uc-portage | `python-tool`, extended by both uc-automa and osat-manager, taken from what uc-portage holds | uc-automa 0013 |
 | The extends rules, kind, from_offering and closed directories | Add or tighten, never take away; root always closed; check only the repository's files | uc-automa 0013 |
-| L1, a root LICENSE | Kept, byte-identical to `LICENSES/GPL-3.0-or-later.txt`, one payload | uc-automa 0021 |
+| L1, a root LICENSE | Kept, byte-identical to its `LICENSES/` copy, one payload; first GPL-3.0-or-later, MIT since uc-automa 0025 | uc-automa 0021, 0025 |
+| Licences before the first publication | MIT for code, CC BY 4.0 for documentation and content, carrying out LIC-0001 | uc-automa 0025 |
 | Decision record names | `{number}--{slug}{version}.md`; numbered within each repository, globally only in uc-automa | uc-automa 0010, the base layout words |
 | Migrating file-fairy's decisions without identifiers | New `urn:uuid`, old identifier in `dc:source`, revised as 0.2.0 | uc-portage 0001 and 0002 |
 | Destination containment | Reverses file-fairy's design note | uc-portage 0003 |
@@ -110,7 +111,7 @@ Every hand-crafted test vector is confirmed with `gpg --verify`. The verifier di
 | Python versions | 3.12 on the development machine, 3.8 in an AlmaLinux 8 container, for all three repositories |
 | `uc-automa check` on uc-portage and osat-manager-restic | Passes, as `python-tool` and `osat-manager` |
 | restic's real 0.19.1 signature | Verifies with the pure-Python verifier and with GnuPG; a changed checksum file or signature is refused |
-| The OSAT end-to-end scenario on Linux amd64 | Passes, all seven steps including the offline restore, as an ordinary user in the Incus container mint223 restored to its clean snapshot before and after; the account is left exactly as it was |
+| The OSAT end-to-end scenario on Linux amd64 | Passes, all seven steps including the offline restore, as an ordinary user in a Linux Mint 22.3 Incus container restored to a clean snapshot before and after; the account is left exactly as it was |
 | macOS and Windows | Not yet verified. No Apple hardware was available. The Windows 11 virtual machine has no Incus agent and no remote access enabled, so nothing could run there without changing its setup |
 
 ## What the brief and the process got wrong
@@ -169,4 +170,4 @@ Every hand-crafted test vector is confirmed with `gpg --verify`. The verifier di
 
 ## License
 
-This document, *Session: uc-automa Foundation*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Session: uc-automa Foundation*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

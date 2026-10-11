@@ -67,6 +67,6 @@ uc-automa subscribes to its own offerings with `automa_version: self`, so every 
 
 ## License
 
-uc-automa follows the REUSE convention: [`REUSE.toml`](REUSE.toml) records which licence covers which paths, and [`LICENSES/`](LICENSES/) holds their texts. Code, including configuration, schemas and offering payloads, is licensed under the GNU General Public License v3.0 or later, whose text is also in [`LICENSE`](LICENSE). Documentation is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
+uc-automa follows the REUSE convention: [`REUSE.toml`](REUSE.toml) records which licence covers which paths, and [`LICENSES/`](LICENSES/) holds their texts. Code, including configuration, schemas and offering payloads, is licensed under the MIT License, whose text is also in [`LICENSE`](LICENSE). Documentation is licensed under the Creative Commons Attribution 4.0 International License. Releases are MIT and CC BY 4.0 from 0.1.0, the first public release (uc-automa 0025).
 
-This document, *uc-automa*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *uc-automa*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

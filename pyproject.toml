@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "The station: Vishpala's rules and offerings, and the tool that checks repositories against them."
 readme = "README.md"
 requires-python = ">=3.8"
-license = { text = "GPL-3.0-or-later" }
+license = { text = "MIT" }
 authors = [{ name = "Christopher Steel" }]
 dependencies = ["PyYAML>=6.0", "uc-portage>=0.1.0,<0.2.0"]
 

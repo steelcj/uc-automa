@@ -1,9 +1,0 @@
-format: 1
-id: "license-cc-by-sa-4-0"
-title: "Creative Commons Attribution-ShareAlike 4.0 International"
-description: "The documentation licence text, delivered to LICENSES/."
-sync_mode: overwrite
-implements: ["naming/spdx-slugs"]
-items:
-  - source: "files/LICENSES/CC-BY-SA-4.0.txt"
-    dest: "LICENSES/CC-BY-SA-4.0.txt"

@@ -11,7 +11,7 @@ dc:format: "text/markdown"
 dc:identifier: "urn:uuid:b18e2ed3-b364-4880-b3c7-5676961f0174"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/osat-manager--creating-a-new-repository-v0.1.0.md, not under version control"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.3.0"
 sat:status: "Accepted"
 ---
@@ -61,7 +61,7 @@ The `osat-manager` layout extends `python-tool`, which extends `base`. `uc-autom
 ```text
 osat-manager-<tool>/
 ├── README.md                     what it manages, install, platform status table
-├── LICENSE                       from license-gpl-3-0-or-later
+├── LICENSE                       from license-mit
 ├── LICENSES/                     from the licence offerings
 ├── REUSE.toml                    seeded by reuse
 ├── CHANGELOG.md                  seeded by changelog
@@ -146,7 +146,7 @@ sat:role: "archive"
 dc:identifier: "urn:uuid:<generated in step 2>"
 dc:title: "osat-manager-<tool>"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 ```
 
 Gate: the first commit holds the sidecar and the decision record, and nothing else.
@@ -303,4 +303,4 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 
 ## License
 
-This document, *Creating an OSAT Manager Repository*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Creating an OSAT Manager Repository*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

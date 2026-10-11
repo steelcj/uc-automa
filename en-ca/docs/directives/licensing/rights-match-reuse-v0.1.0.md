@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:436a2aa2-2cad-4973-a359-f93f3a737c8a"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "In force"
 sat:directive: "licensing/rights-match-reuse"
@@ -29,14 +29,14 @@ Status: In force
 
 ## Rationale
 
-Licences are set by category: code GPL-3.0-or-later, documentation CC-BY-SA-4.0, content CC-BY-4.0 (uc-automa 0001). Front matter that disagrees with the licence record misleads anyone who reuses the document.
+Licences are set by category: code MIT, documentation and content CC-BY-4.0 (uc-automa 0025). Front matter that disagrees with the licence record misleads anyone who reuses the document.
 
 ## Examples
 
 | Path | REUSE.toml | dc:rights | Verdict |
 | --- | --- | --- | --- |
-| `en-ca/docs/guides/x/y-v0.1.0.md` | `en-ca/**` is CC-BY-SA-4.0 | `CC-BY-SA-4.0` | Conforms |
-| the same | the same | `AGPL-3.0-or-later` | Does not match |
+| `en-ca/docs/guides/x/y-v0.1.0.md` | `en-ca/**` is CC-BY-4.0 | `CC-BY-4.0` | Conforms |
+| the same | the same | `MIT` | Does not match |
 
 ## Check
 
@@ -50,4 +50,4 @@ Licences are set by category: code GPL-3.0-or-later, documentation CC-BY-SA-4.0,
 
 ## License
 
-This document, *Licensing: Rights Match REUSE*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Licensing: Rights Match REUSE*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).

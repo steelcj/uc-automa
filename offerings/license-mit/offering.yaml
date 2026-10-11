@@ -1,0 +1,11 @@
+format: 1
+id: "license-mit"
+title: "MIT License"
+description: "The code licence text, with the copyright holder and year filled in, delivered from one payload to LICENSES/ and to a root LICENSE, byte-identical."
+sync_mode: overwrite
+implements: ["naming/spdx-slugs"]
+items:
+  - source: "files/LICENSES/MIT.txt"
+    dest: "LICENSES/MIT.txt"
+  - source: "files/LICENSES/MIT.txt"
+    dest: "LICENSE"

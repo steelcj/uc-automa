@@ -20,23 +20,19 @@ tree:
   - path: "LICENSE"
     type: file
     required: true
-    from_offering: "license-gpl-3-0-or-later"
+    from_offering: "license-mit"
   - path: "LICENSES/"
     type: directory
     required: true
     closed: true
     children:
-      - path: "GPL-3.0-or-later.txt"
+      - path: "MIT.txt"
         type: file
         required: true
-        from_offering: "license-gpl-3-0-or-later"
-      - path: "CC-BY-SA-4.0.txt"
-        type: file
-        required: true
-        from_offering: "license-cc-by-sa-4-0"
+        from_offering: "license-mit"
       - path: "CC-BY-4.0.txt"
         type: file
-        required: false
+        required: true
         from_offering: "license-cc-by-4-0"
       - path: "{spdx-id}.txt"
         type: file

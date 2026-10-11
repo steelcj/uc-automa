@@ -4,10 +4,6 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ## [Unreleased]
 
-### Changed
-
-- The foundation session record covers osat-manager-restic's release: the three independent reviews of its OpenPGP verifier, the tested offline step, and what is left open.
-
 ## [0.1.0] - 2026-10-09
 
 ### Added
@@ -17,6 +13,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - `uc-automa init`, which writes `.uc-automa.yaml` once.
 - `uc-automa offerings plan`, `status`, `apply` and `harvest`, handing off to uc-portage.
 - `uc-automa docs index` and `uc-automa translations`.
-- Nine offerings: line-endings, editorconfig, version-file, changelog, claude-signpost, reuse, and one per licence category.
+- Eight offerings: line-endings, editorconfig, version-file, changelog, claude-signpost, reuse, license-mit and license-cc-by-4-0.
 - `schemas/uc-automa-config.schema.yaml` and `schemas/front-matter.schema.yaml`.
-- Decision records 0001 to 0024, directives, templates, the directory guide, the OSAT manager process at 0.3.0, and the session record of the foundation build.
+- Decision records 0001 to 0025, directives, templates, the directory guide, the OSAT manager process at 0.3.0, and the session record of the foundation build, covering the three independent reviews of osat-manager-restic's verifier and the tested offline step.
+- Licensed MIT for code and CC BY 4.0 for documentation and content (uc-automa 0025).

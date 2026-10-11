@@ -46,9 +46,8 @@ class Init(Scratch):
         config = self.config()
         self.assertEqual(config["automa_version"], __version__)
         self.assertEqual(config["language"], "en-ca")
-        self.assertIn("license-gpl-3-0-or-later", config["subscribe"])
-        self.assertNotIn("license-cc-by-4-0", config["subscribe"],
-                         "optional paths are not subscribed")
+        self.assertIn("license-mit", config["subscribe"])
+        self.assertIn("license-cc-by-4-0", config["subscribe"])
         code, out, err = run("init", "--target", str(self.root),
                              "--repository", "sample-tool",
                              "--layout", "python-tool")
@@ -96,7 +95,7 @@ class Offerings(Scratch):
         self.assertTrue((self.root / "LICENSE").is_file())
         self.assertEqual((self.root / "LICENSE").read_bytes(),
                          (self.root / "LICENSES" /
-                          "GPL-3.0-or-later.txt").read_bytes())
+                          "MIT.txt").read_bytes())
         self.assertIn("uc-portage:begin uc-automa-signpost",
                       (self.root / "CLAUDE.md").read_text())
         code, out, err = run("offerings", "plan", "--target", str(self.root))

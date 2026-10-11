@@ -11,7 +11,7 @@ dc:format: "text/markdown"
 dc:identifier: "urn:uuid:c73e134d-11d2-44f9-a0ef-a0d446a896a3"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/automa--directory-guide-v0.1.0.md, not under version control"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 sat:version: "0.2.0"
 sat:status: "Accepted"
 ---
@@ -51,7 +51,7 @@ The root holds only files that describe the repository and files tools require a
 | Path | What it holds |
 | --- | --- |
 | `README.md` | What the repository is, how to install or use it, and where its documentation is |
-| `LICENSE` | The code licence text for forges that look for a root LICENSE file, byte-identical to LICENSES/GPL-3.0-or-later.txt |
+| `LICENSE` | The code licence text for forges that look for a root LICENSE file, byte-identical to LICENSES/MIT.txt |
 | `LICENSES/` | Full text of every licence used in the repository, one file per SPDX identifier, as REUSE requires |
 | `REUSE.toml` | The canonical record of which licence covers which paths; seeded once, then the repository's own |
 | `CHANGELOG.md` | The repository's changelog in Keep a Changelog form, one entry per tagged release |
@@ -75,8 +75,8 @@ layout: "osat-manager"
 automa_version: "0.1.0"        # the installed uc-automa must match exactly
 language: "en-ca"
 subscribe:
-  - license-gpl-3-0-or-later
-  - license-cc-by-sa-4-0
+  - license-mit
+  - license-cc-by-4-0
   - reuse
   - changelog
   - version-file
@@ -87,13 +87,12 @@ subscribe:
 
 ## LICENSES
 
-Full text of every licence used in the repository, one file per SPDX identifier, as REUSE requires. Licences follow the REUSE convention: `REUSE.toml` sets a licence per path, and a file that differs carries its own SPDX line (uc-automa 0001). The root `LICENSE` is byte-identical to `LICENSES/GPL-3.0-or-later.txt` and comes from the same offering payload (uc-automa 0021).
+Full text of every licence used in the repository, one file per SPDX identifier, as REUSE requires. Licences follow the REUSE convention: `REUSE.toml` sets a licence per path, and a file that differs carries its own SPDX line. Code is licensed MIT, and documentation and content CC BY 4.0 (uc-automa 0025). The root `LICENSE` is byte-identical to `LICENSES/MIT.txt` and comes from the same offering payload.
 
 | Path | What it holds |
 | --- | --- |
-| `LICENSES/GPL-3.0-or-later.txt` | The code licence, copied verbatim |
-| `LICENSES/CC-BY-SA-4.0.txt` | The documentation licence, copied verbatim |
-| `LICENSES/CC-BY-4.0.txt` | The content licence, copied verbatim, present only when the repository holds content |
+| `LICENSES/MIT.txt` | The code licence, with the copyright holder and year filled in |
+| `LICENSES/CC-BY-4.0.txt` | The documentation and content licence, copied verbatim |
 | `LICENSES/{spdx-id}.txt` | Any other licence text, for third-party material, copied verbatim |
 
 ## The SAT sidecar
@@ -111,7 +110,7 @@ sat:role: "archive"
 dc:identifier: "urn:uuid:<generated with uuidgen -r>"
 dc:title: "uc-automa"
 dc:language: "en-CA"
-dc:rights: "CC-BY-SA-4.0"
+dc:rights: "CC-BY-4.0"
 ```
 
 ## Python tools
@@ -241,4 +240,4 @@ Each directive names the check that enforces it in `sat:enforced_by`, and each c
 
 ## License
 
-This document, *Directory Guide*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This document, *Directory Guide*, by **Christopher Steel**, with AI assistance from **Claude Opus 5.5 (Anthropic)**, is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
