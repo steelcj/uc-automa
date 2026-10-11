@@ -8,8 +8,11 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 - Decision record 0026, the release ceremony: `uc-automa release bump`, `cut` and `publish`, to replace the copied scripts in 0.2.0.
 
+- The README states what verifies Windows: the unit tests, `uc-automa check` on itself, and an install from wheels with `pip install --no-index` inside a network cut.
+
 ### Changed
 
+- The README installs PyYAML as pure Python, with `--no-binary pyyaml` and `PYYAML_FORCE_LIBYAML=0`, so no platform needs a C compiler, and records that this costs uc-automa and uc-portage no speed.
 - The README installs a release from its tag, with uc-portage, and keeps installing from checkouts for development.
 - The OSAT manager process, 0.4.0: its subscribe stage installs uc-automa and uc-portage from their release tags, and removes blocks file-fairy managed, which uc-portage never takes over.
 
