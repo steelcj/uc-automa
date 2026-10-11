@@ -25,7 +25,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 
 | Document | Version | Status |
 | --- | --- | --- |
-| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.3.0.md) | 0.3.0 | Accepted |
+| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.4.0.md) | 0.4.0 | Accepted |
 | [Directory Guide](guides/repository/directory-guide-v0.2.0.md) | 0.2.0 | Accepted |
 
 ## Decisions

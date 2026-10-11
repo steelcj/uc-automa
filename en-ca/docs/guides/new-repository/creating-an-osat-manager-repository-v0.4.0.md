@@ -5,20 +5,20 @@ dc:creator: "Christopher Steel"
 dc:contributor: "Claude Opus 5.5 (Anthropic), AI assistance"
 dc:subject: "OSAT managers, repository creation, uc-automa, offerings, cross-platform testing, release"
 dc:description: "The process for creating a new osat-manager repository with uc-automa, from radar assessment to first release, in ten stages with gates."
-dc:date: "2026-10-09"
+dc:date: "2026-10-11"
 dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:b18e2ed3-b364-4880-b3c7-5676961f0174"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/osat-manager--creating-a-new-repository-v0.1.0.md, not under version control"
 dc:language: "en-CA"
 dc:rights: "CC-BY-4.0"
-sat:version: "0.3.0"
+sat:version: "0.4.0"
 sat:status: "Accepted"
 ---
 
 # Creating an OSAT Manager Repository
 
-Version: 0.3.0
+Version: 0.4.0
 Status: Accepted
 
 ## Summary
@@ -153,7 +153,19 @@ Gate: the first commit holds the sidecar and the decision record, and nothing el
 
 ## Subscribe to uc-automa
 
-Everything shared arrives from uc-automa by subscription; nothing is copied by hand. `init` writes `.uc-automa.yaml` once, with the subscriptions the osat-manager layout requires (uc-automa 0023); the repository owns the file from then on.
+Everything shared arrives from uc-automa by subscription; nothing is copied by hand.
+
+Install uc-automa from its release tag into the environment you work in, together with uc-portage, which it depends on. uc-portage is not on a package index, so both are named in the same command; installing uc-automa alone fails to find it.
+
+```sh
+python3 -m pip install "git+https://github.com/steelcj/uc-portage@v0.1.0" \
+                       "git+https://github.com/steelcj/uc-automa@v0.1.0"
+uc-automa --version
+```
+
+The installed version is the one `init` pins, and every later `uc-automa` command requires the pin and the installed version to match (uc-automa 0020).
+
+`init` writes `.uc-automa.yaml` once, with the subscriptions the osat-manager layout requires (uc-automa 0023); the repository owns the file from then on.
 
 ```sh
 uc-automa init --repository osat-manager-<tool> --layout osat-manager
@@ -163,7 +175,9 @@ git add -A
 git commit -m "Receive uc-automa offerings"
 ```
 
-Gate: `uc-automa offerings plan` reports nothing to do.
+A repository that file-fairy served before, such as an existing manager moving to this process, still holds the blocks file-fairy managed, marked `<!-- fairy:begin NAME -->` and `<!-- fairy:end NAME -->`, usually `claude-md-signpost` in `CLAUDE.md`. uc-portage takes over only blocks marked `<!-- uc-portage:begin NAME -->` with a name its offerings deliver, and uc-automa delivers its signpost as `uc-automa-signpost`, so an old block is never taken over, and renaming its markers does not help. Delete each old `fairy:` block, markers and contents, by hand, in the same commit as the first apply; otherwise its stale text stays beside the new block. A licence that file-fairy delivered as a block now arrives as `LICENSE` and `LICENSES/` files instead.
+
+Gate: `uc-automa offerings plan` reports nothing to do, and no `fairy:begin` marker is left in the repository.
 
 ## Describe the managed tool
 
@@ -270,7 +284,7 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 - [ ] Radar entry written for the tool, ring `trial` or `adopt`
 - [ ] Decision record drafted outside the repository
 - [ ] Repository created, first commit holding the sidecar and the decision record
-- [ ] `uc-automa init` run, offerings applied and committed
+- [ ] uc-automa installed from its release tag, `uc-automa init` run, offerings applied and committed, old `fairy:` blocks removed
 - [ ] `manager.yaml` complete, with no placeholders
 - [ ] Manager implemented; unit tests pass offline
 - [ ] Linux, Windows and macOS each verified or stated as not yet verified
@@ -297,6 +311,7 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
+| 0.4.0 | 2026-10-11 | Accepted | Subscribe stage: installing uc-automa and uc-portage from their release tags, and removing blocks file-fairy managed, which uc-portage never takes over |
 | 0.3.0 | 2026-10-09 | Accepted | Findings from building osat-manager-restic: the decision drafted before the repository and placed in its first commit, nothing left behind, the shared manager package, pinned keys confirmed twice, independent review of a verifier, snapshot-based Linux runs and the Windows route, upstream names inside zips, the release tag rule, archiving after push |
 | 0.2.0 | 2026-10-09 | Accepted | Revised to the foundation brief: uc-automa init and offerings instead of .automa.yaml and the interim file-fairy route, en-ca, the osat-manager layout, the three licences, by-hand tagging until the release ceremony, D11 settled; relicensed CC-BY-SA-4.0 |
 | 0.1.0 | 2026-10-09 | Draft | Initial process: manager contract, naming, layout, ten stages with gates, interim route, checklist |
