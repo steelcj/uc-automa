@@ -61,6 +61,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: Release Ceremony](decisions/0026--release-ceremony-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Verification Without an End-to-End Scenario](decisions/0027--verification-without-an-end-to-end-scenario-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Wheels With Each Release](decisions/0028--wheels-with-each-release-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Version Bumps for Rule Changes](decisions/0029--version-bumps-for-rule-changes-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 

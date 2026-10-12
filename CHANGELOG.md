@@ -9,6 +9,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - Decision record 0026, the release ceremony: `uc-automa release bump`, `cut` and `publish`, to replace the copied scripts in 0.2.0.
 - Decision record 0027, verification without an end-to-end scenario: what verifies a platform for uc-portage and uc-automa.
 - Decision record 0028, wheels with each release: each release carries its wheels, matched against the verification record, with SSH signatures that Windows can check without gpg.
+- Decision record 0029, version bumps for rule changes: before 1.0.0 a directive's minor version changes when its meaning changes, its patch version for wording only.
 - The directive `release/readme-install-tag` and its check: `uc-automa check` fails when `README.md` installs the repository at any tag but `v` and its `VERSION`.
 - The README states what verifies Windows: the unit tests, `uc-automa check` on itself, and an install from wheels with `pip install --no-index` inside a network cut.
 
