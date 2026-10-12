@@ -14,6 +14,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ### Changed
 
+- `release/readme-install-tag` 0.2.0: wherever the README installs a dependency from a git reference, the reference is a release tag the dependency's `pyproject.toml` range allows.
 - `release/annotated-version-tags` 0.2.0: the release commit may also update `README.md`'s install references to the new tag.
 - Decisions 0027 and 0028: the verification run serves the README's online install from local mirrors, so the release tag is pushed only after the run passes, and the cut rewrites the README's install tag.
 - The README installs into a virtual environment, `.venv`, because the Python manage-python installs, like the system Python of several Linux distributions, refuses package installs.

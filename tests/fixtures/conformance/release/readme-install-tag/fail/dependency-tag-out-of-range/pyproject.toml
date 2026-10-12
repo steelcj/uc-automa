@@ -1,0 +1,7 @@
+[project]
+name = "widget"
+dynamic = ["version"]
+dependencies = [
+    "PyYAML>=6.0",
+    "other>=0.1.0,<0.2.0",
+]

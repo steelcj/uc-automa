@@ -9,7 +9,9 @@ the day the tag was made in the tagger's own time zone.
 
 release/readme-install-tag: wherever README.md installs this repository
 from a git reference, such as git+https://github.com/owner/name@v0.1.0,
-the reference is "v" and the contents of VERSION.
+the reference is "v" and the contents of VERSION; wherever it installs a
+dependency named in pyproject.toml that way, the reference is a release
+tag whose version the dependency's range allows.
 """
 
 from __future__ import annotations
@@ -18,12 +20,23 @@ import re
 import shutil
 import subprocess
 from pathlib import Path
+from typing import Dict, List, Optional
+
+from uc_portage.resources import normalise_name
 
 from . import Repository, check
 
 TAG = re.compile(r"^v(\d+\.\d+\.\d+)$")
 # A git reference to a repository in a URL: /name@ref or /name.git@ref.
 INSTALL_REF = re.compile(r"/(?P<name>[A-Za-z0-9._-]+?)(?:\.git)?@(?P<ref>[^\s\"'`<>()\[\]]+)")
+RELEASE_REF = re.compile(r"^v(\d+(?:\.\d+)*)$")
+# pyproject.toml, read only as far as [project] dependencies: Python 3.8
+# has no TOML parser, as uc_portage.resources.project_name explains.
+TABLE = re.compile(r"^\[\[?\s*([^\]]+?)\s*\]\]?\s*(#.*)?$")
+DEPENDENCIES = re.compile(r"^dependencies\s*=\s*\[(.*)$")
+QUOTED = re.compile(r"\"([^\"]*)\"|'([^']*)'")
+REQUIREMENT = re.compile(r"^\s*([A-Za-z0-9][A-Za-z0-9._-]*)\s*(\[[^\]]*\])?\s*([^;]*)")
+CLAUSE = re.compile(r"^(~=|==|!=|<=|>=|<|>)\s*(\d+(?:\.\d+)*(?:\.\*)?)$")
 FIELDS = "%(refname:short)%00%(objecttype)%00%(taggerdate:format:%Y-%m-%d)%00%(contents)%01"
 
 
@@ -84,13 +97,97 @@ def readme_install_tag(repo: Repository):
             or "VERSION" not in repo.files:
         return []
     expected = "v" + repo.path("VERSION").read_text(encoding="utf-8").strip()
+    ranges = dependency_ranges(repo.path("pyproject.toml")) \
+        if "pyproject.toml" in repo.files else {}
     findings = []
     lines = repo.path("README.md").read_text(encoding="utf-8").splitlines()
     for number, line in enumerate(lines, 1):
         for match in INSTALL_REF.finditer(line):
-            if match.group("name") == repository \
-                    and match.group("ref") != expected:
+            name, ref = match.group("name"), match.group("ref")
+            if name == repository:
+                if ref != expected:
+                    findings.append(("README.md", f"line {number} installs "
+                                     f"{name}@{ref}; VERSION makes it "
+                                     f"{name}@{expected}"))
+                continue
+            specifier = ranges.get(normalise_name(name))
+            if specifier is None:
+                continue
+            release = RELEASE_REF.match(ref)
+            verdict = allows(specifier, release.group(1)) if release else False
+            if verdict is None:
+                findings.append(("pyproject.toml", f"the range {name}"
+                                 f"{specifier} uses an operator this check "
+                                 f"cannot evaluate; use ==, !=, <, <=, >, "
+                                 f">= or ~= on release numbers"))
+            elif not verdict:
                 findings.append(("README.md", f"line {number} installs "
-                                 f"{repository}@{match.group('ref')}; "
-                                 f"VERSION makes it {repository}@{expected}"))
-    return findings
+                                 f"{name}@{ref}, which is not a release tag "
+                                 f"in the range {name}{specifier or ' (any)'} "
+                                 f"from pyproject.toml"))
+    return list(dict.fromkeys(findings))
+
+
+def dependency_ranges(pyproject: Path) -> Dict[str, str]:
+    """{normalised name: specifier} for [project] dependencies, read from
+    a dependencies array of quoted strings on one line or several."""
+    ranges: Dict[str, str] = {}
+    in_project = collecting = False
+    text = ""
+    for raw in pyproject.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if collecting:
+            text += " " + line
+            if "]" in line:
+                break
+            continue
+        table = TABLE.match(line)
+        if table:
+            in_project = table.group(1) == "project"
+            continue
+        match = DEPENDENCIES.match(line) if in_project else None
+        if match:
+            text = match.group(1)
+            if "]" in text:
+                break
+            collecting = True
+    for double, single in QUOTED.findall(text):
+        requirement = REQUIREMENT.match(double or single)
+        if requirement:
+            ranges[normalise_name(requirement.group(1))] = \
+                requirement.group(3).strip()
+    return ranges
+
+
+def numbers(version: str) -> List[int]:
+    return [int(part) for part in version.split(".")]
+
+
+def allows(specifier: str, version: str) -> Optional[bool]:
+    """Whether a specifier allows a release version, or None when it uses
+    anything but ==, !=, <, <=, >, >= and ~= on plain release numbers."""
+    have = numbers(version)
+    for clause in filter(None, (c.strip() for c in specifier.split(","))):
+        match = CLAUSE.match(clause)
+        if not match:
+            return None
+        operator, wanted = match.groups()
+        if wanted.endswith(".*"):
+            if operator not in ("==", "!="):
+                return None
+            prefix = numbers(wanted[:-2])
+            same = have[:len(prefix)] == prefix
+            if same != (operator == "=="):
+                return False
+            continue
+        want = numbers(wanted)
+        width = max(len(have), len(want))
+        a = have + [0] * (width - len(have))
+        b = want + [0] * (width - len(want))
+        if operator == "~=":
+            if len(want) < 2 or a < b or a[:len(want) - 1] != want[:-1]:
+                return False
+        elif not {"==": a == b, "!=": a != b, "<": a < b, "<=": a <= b,
+                  ">": a > b, ">=": a >= b}[operator]:
+            return False
+    return True
