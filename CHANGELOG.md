@@ -14,6 +14,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 ### Changed
 
 - The README installs into a virtual environment, `.venv`, because the Python manage-python installs, like the system Python of several Linux distributions, refuses package installs.
+- The README's Develop section creates the virtual environment too, gives the Command Prompt commands, and holds the install from checkouts, which the Install section now points to.
 - The README links to uc-automa 0027 for what verifies a platform, instead of carrying its own Windows criteria.
 - The README's Windows status records the Windows run of 2026-10-11, which met both criteria; Windows is not yet marked verified, pending the network cut's self-test on a network with IPv6.
 - The README installs PyYAML as pure Python, with `--no-binary pyyaml` and `PYYAML_FORCE_LIBYAML=0`, so no platform needs a C compiler, and records that this costs uc-automa and uc-portage no speed.

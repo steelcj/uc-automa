@@ -4,7 +4,7 @@ dc:title: "Decision: Verification Without an End-to-End Scenario"
 dc:creator: "Christopher Steel"
 dc:contributor: "Claude Opus 5.5 (Anthropic), AI assistance"
 dc:subject: "verification, platforms, Linux, macOS, Windows, Python 3.8, wheels, offline install, run records, 1.0.0"
-dc:description: "Extends uc-automa 0011 to tools that have no end-to-end scenario, such as uc-portage and uc-automa: a platform is verified by a verification run of three parts, the unit tests, also on the oldest Python the tool supports, an offline install from the wheels a release of the commit would publish, inside a network cut, by the README's own commands, which must refuse a bad signature, and the installed tool doing its job on a real repository at a recorded commit, recorded in the tool's own repository."
+dc:description: "Extends uc-automa 0011 to tools that have no end-to-end scenario, such as uc-portage and uc-automa: a platform is verified by a verification run of three parts, the unit tests, also on the oldest Python the tool supports, every install block of the README replayed as written, the online install and Develop before a network cut and the offline install from the wheels a release of the commit would publish inside it, refusing a bad signature, and the installed tool doing its job on a real repository at a recorded commit, recorded in the tool's own repository."
 dc:date: "2026-10-11"
 dc:type: "Text"
 dc:format: "text/markdown"
@@ -47,16 +47,28 @@ A tool without an end-to-end scenario is verified on a platform by a verificatio
 - The record names each Python by its full version and build, since an end-of-life line may be installable only as a pinned build: manage-python installs 3.8 as `3.8.20+20241002`, the last python-build-standalone build of 3.8.
 - Testing the 3.8 floor therefore depends on a frozen build. If that build can no longer be installed, the floor can no longer be verified, and the tool raises its `requires-python` to the oldest Python that manage-python can still install.
 
-### An offline install from wheels
+### The README's install commands
+
+The run replays every install block of the tool's README, as written, never retyped, so it installs what a reader following the README installs.
+
+- The install blocks are those of the sections `Install`, `Develop` and `Install offline`. A section runs from its heading to the next heading of any level, and holds exactly one `sh` block and one `bat` block; the run fails if a section holds none or more than one for a shell.
+- The run reads the blocks from the README at the commit under test, and feeds each to its shell one line at a time, as a reader pasting it would: the `sh` block to `/bin/sh` on Linux and macOS, the `bat` block to Command Prompt on Windows. The record holds each block's full output.
+
+#### Before the cut: Install and Develop
+
+- `Install` runs in a fresh clone of the commit under test, and must leave the tool's command installed and printing the version in the commit's `VERSION`. It installs what the README names, from where the README names it: a README that installs a tag from the remote needs that tag pushed before the run.
+- `Develop` runs in a fresh clone of the commit under test, beside a clone of each Vishpala tool it depends on, at the release its dependency range resolves to. The unit tests it runs must pass, and a `uc-automa check` it runs must conform.
+- Both need the network, and run before the cut.
+
+#### Inside the cut: Install offline
 
 - The wheels are those a release of the commit under test would publish, built by the release's wheel step <a id="cite-steel-2026d"></a>[(Steel, 2026d)](#ref-steel-2026d): from the commit's tree, never from a working tree, with `SOURCE_DATE_EPOCH` set to the commit's time and the build tools pinned. They are built once, on the machine that releases the tool, and every platform installs those same files.
 - Each Vishpala tool it depends on comes from that tool's signed release, as in a release.
 - PyYAML is built from its source distribution as pure Python, `py3-none-any`, and the run fails if the wheel carries another tag or any compiled file.
-- The install is the README's own. The run reads the commands from the tool's README at the commit under test, in its `Install offline` section, and runs them as written, never retyped: the `sh` block with `/bin/sh` on Linux and macOS, and the `bat` block in Command Prompt on Windows, each fed to the shell one line at a time, as a reader pasting them would. The section holds exactly one block for each of the two shells, and the run fails if it holds none or more than one.
-- The commands run in a directory laid out as the release will be: the wheels, `requirements-offline.txt`, and, made for the run, its SSH signature and an `allowed-signers` file from a test key under the release key's principal. A run never uses the release key.
-- They run three times, each in a fresh directory. As laid out, they must install the tool from those wheels alone and print its version. With a line added to `requirements-offline.txt` that pip would accept, and again with the signature made by another key, they must report that the signature did not verify and leave the virtual environment holding none of the release's packages. Either bad case installing anything fails the run.
+- The block runs in a directory laid out as the release will be: the wheels, `requirements-offline.txt`, and, made for the run, its SSH signature and an `allowed-signers` file from a test key under the release key's principal. A run never uses the release key.
+- It runs three times, each in a fresh directory. As laid out, it must install the tool from those wheels alone and print its version. With a line added to `requirements-offline.txt` that pip would accept, and again with the signature made by another key, it must report that the signature did not verify and leave the virtual environment holding none of the release's packages. Either bad case installing anything fails the run.
 - The last part runs the command this install produced.
-- The install runs inside a network cut that lets only the host's control connection through, with the same conditions as the end-to-end scenario's offline step: probes that work before the cut, the cut re-proven at the end of the step, and the IPv6 internet path reported as verified, blocked or not testable on that network.
+- The network cut lets only the host's control connection through, with the same conditions as the end-to-end scenario's offline step: probes that work before the cut, the cut re-proven at the end of the step, and the IPv6 internet path reported as verified, blocked or not testable on that network.
 - The record lists each wheel with its SHA-256. A release publishes only wheels whose sums match the record (uc-automa 0028).
 
 ### The installed tool does its job
@@ -103,8 +115,9 @@ This decision adds to uc-automa 0011 and changes nothing in it. Every OSAT manag
 - The READMEs of uc-portage and uc-automa replace their Windows criteria with a link to this decision, and their platform tables report verification runs.
 - The install tests of uc-portage and uc-automa make their virtual environments with symbolic links outside Windows, as `python -m venv` does.
 - The 3.8 floor stays verifiable only while python-build-standalone's last 3.8 build can be downloaded.
-- A tool's README needs the `Install offline` section of uc-automa 0028 before a verification run can pass; it arrives with the release wheels in 0.2.0.
-- The Windows driver changes: it builds wheels on the host by the release's wheel step from the commit under test rather than from the release tag; extracts the README's install commands and runs them with the two bad cases; runs the unit tests a second time on the oldest Python; takes uc-automa's commit for uc-portage's job; writes a `Result:` line; and writes a record into each verified repository. Where the driver lives is decided separately.
+- A tool's README needs the `Install offline` section of uc-automa 0028 before a verification run can pass; it arrives with the release wheels in 0.2.0. Its `Install` and `Develop` sections each give one `sh` and one `bat` block, as uc-portage's and uc-automa's do since 2026-10-11.
+- `uc-automa release cut` changes `VERSION` and `CHANGELOG.md` only, so a README that installs from a tag names the new tag by hand before the cut, or its `Install` block installs the previous release and fails the version check.
+- The Windows driver changes: it builds wheels on the host by the release's wheel step from the commit under test rather than from the release tag; extracts every install block of the README and replays it, `Install` and `Develop` before the cut and `Install offline` inside it with the two bad cases; runs the unit tests a second time on the oldest Python; takes uc-automa's commit for uc-portage's job; writes a `Result:` line; and writes a record into each verified repository. Where the driver lives is decided separately.
 - The Windows run of 2026-10-11 met the Windows criteria the READMEs carried that day, but its record is in osat-manager-restic, built the wheels from the v0.1.0 tags, and has no `Result:` line, so it does not count as a verification run under this decision. The next run does.
 - Linux needs a verification run too: the Linux status of uc-portage and uc-automa today reports unit tests only.
 - macOS needs Apple hardware, as for the end-to-end scenario.

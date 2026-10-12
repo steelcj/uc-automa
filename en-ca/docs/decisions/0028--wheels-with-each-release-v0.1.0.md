@@ -63,6 +63,7 @@ sources = ["PyYAML==6.0.3 --hash=sha256:d76623373421df22fb4cf8817020cbb7ef15c725
 - The verification run of a release therefore takes place between `uc-automa release cut` and `uc-automa release publish`, on the release commit, with wheels built by this step where the release will be published. A run on the commit before the cut cannot match, because the cut changes `VERSION` and the version is inside every wheel.
 - The records are read from the current branch, under `tests/e2e/<platform>/`, since a record written after the tag is not in the tag's tree.
 - A mismatch stops the release. The remedy is a new verification run with wheels built where the release is published, not a change to the record.
+- The verification run replays the README's online install as written (uc-automa 0027), so when that install fetches the release's tag from the remote, the tag is pushed before the run.
 - A release commit that fails verification is never published. If its tag has not been pushed, the tag and the release commit were never public and may be removed and the version cut again; a pushed tag is never reused, and the fix ships as the next version.
 
 ### Publish them with their sums

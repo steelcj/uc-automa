@@ -43,12 +43,7 @@ uc-portage is not published to a package index, so name both in the same command
 
 The installed version is the one `uc-automa init` pins in a repository's `.uc-automa.yaml`, and every later command requires the installed version to match the pin (uc-automa 0020). Everyone working in a repository installs the same tag. The pre-commit hook runs the `uc-automa` installed in your environment.
 
-To work on uc-automa itself, install both from checkouts instead:
-
-```sh
-python3 -m venv .venv
-PYYAML_FORCE_LIBYAML=0 .venv/bin/python -m pip install --no-binary pyyaml -e ../uc-portage -e .
-```
+To work on uc-automa itself, install both from checkouts, as [Develop](#develop) shows.
 
 ### Why PyYAML is built as pure Python
 
@@ -89,10 +84,23 @@ A platform is verified for uc-automa by a verification run: its unit tests, also
 
 ## Develop
 
+From a checkout of uc-automa, with uc-portage's checkout beside it as `../uc-portage`:
+
 ```sh
-PYYAML_FORCE_LIBYAML=0 python3 -m pip install --no-binary pyyaml -e ../uc-portage -e .
-python3 -m unittest discover -s tests
-uc-automa check
+python3 -m venv .venv
+PYYAML_FORCE_LIBYAML=0 .venv/bin/python -m pip install --no-binary pyyaml -e ../uc-portage -e .
+.venv/bin/python -m unittest discover -s tests
+.venv/bin/uc-automa check
+```
+
+On Windows, in Command Prompt, with Git on your `PATH`:
+
+```bat
+python -m venv .venv
+set PYYAML_FORCE_LIBYAML=0
+.venv\Scripts\python -m pip install --no-binary pyyaml -e ..\uc-portage -e .
+.venv\Scripts\python -m unittest discover -s tests
+.venv\Scripts\uc-automa check
 ```
 
 uc-automa subscribes to its own offerings with `automa_version: self`, so every offering is exercised here before any other repository receives it.
