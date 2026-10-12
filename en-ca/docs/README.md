@@ -62,6 +62,9 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: Verification Without an End-to-End Scenario](decisions/0027--verification-without-an-end-to-end-scenario-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Wheels With Each Release](decisions/0028--wheels-with-each-release-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Version Bumps for Rule Changes](decisions/0029--version-bumps-for-rule-changes-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Where the Release Keys Are Published](decisions/0030--where-the-release-keys-are-published-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: A Test Platform Repository](decisions/0031--a-test-platform-repository-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: SSH Signatures Required With Wheels, and SSH-Signed Tags](decisions/0032--ssh-signatures-required-with-wheels-and-ssh-signed-tags-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 

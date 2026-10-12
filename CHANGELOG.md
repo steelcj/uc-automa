@@ -10,6 +10,9 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - Decision record 0027, verification without an end-to-end scenario: what verifies a platform for uc-portage and uc-automa.
 - Decision record 0028, wheels with each release: each release carries its wheels, matched against the verification record, with SSH signatures that Windows can check without gpg.
 - Decision record 0029, version bumps for rule changes: before 1.0.0 a directive's minor version changes when its meaning changes, its patch version for wording only.
+- Decision record 0030, where the release keys are published: `release-keys/` in uc-automa and a page on vishpala.com, with the README fetching the key by `git clone` and the fingerprint compared by hand.
+- Decision record 0031, a test platform repository: `uc-test-platform` holds the drivers, the network cut, the verification run and the instance recipes.
+- Decision record 0032, SSH signatures required with wheels, and SSH-signed tags; tag verification is documented for Linux and macOS only in 0.2.0.
 - The directive `release/readme-install-tag` and its check: `uc-automa check` fails when `README.md` installs the repository at any tag but `v` and its `VERSION`.
 - The README states what verifies Windows: the unit tests, `uc-automa check` on itself, and an install from wheels with `pip install --no-index` inside a network cut.
 
