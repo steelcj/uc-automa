@@ -9,10 +9,13 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - Decision record 0026, the release ceremony: `uc-automa release bump`, `cut` and `publish`, to replace the copied scripts in 0.2.0.
 - Decision record 0027, verification without an end-to-end scenario: what verifies a platform for uc-portage and uc-automa.
 - Decision record 0028, wheels with each release: each release carries its wheels, matched against the verification record, with SSH signatures that Windows can check without gpg.
+- The directive `release/readme-install-tag` and its check: `uc-automa check` fails when `README.md` installs the repository at any tag but `v` and its `VERSION`.
 - The README states what verifies Windows: the unit tests, `uc-automa check` on itself, and an install from wheels with `pip install --no-index` inside a network cut.
 
 ### Changed
 
+- `release/annotated-version-tags` 0.2.0: the release commit may also update `README.md`'s install references to the new tag.
+- Decisions 0027 and 0028: the verification run serves the README's online install from local mirrors, so the release tag is pushed only after the run passes, and the cut rewrites the README's install tag.
 - The README installs into a virtual environment, `.venv`, because the Python manage-python installs, like the system Python of several Linux distributions, refuses package installs.
 - The README's Develop section creates the virtual environment too, gives the Command Prompt commands, and holds the install from checkouts, which the Install section now points to.
 - The README links to uc-automa 0027 for what verifies a platform, instead of carrying its own Windows criteria.

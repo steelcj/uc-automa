@@ -63,8 +63,12 @@ sources = ["PyYAML==6.0.3 --hash=sha256:d76623373421df22fb4cf8817020cbb7ef15c725
 - The verification run of a release therefore takes place between `uc-automa release cut` and `uc-automa release publish`, on the release commit, with wheels built by this step where the release will be published. A run on the commit before the cut cannot match, because the cut changes `VERSION` and the version is inside every wheel.
 - The records are read from the current branch, under `tests/e2e/<platform>/`, since a record written after the tag is not in the tag's tree.
 - A mismatch stops the release. The remedy is a new verification run with wheels built where the release is published, not a change to the record.
-- The verification run replays the README's online install as written (uc-automa 0027), so when that install fetches the release's tag from the remote, the tag is pushed before the run.
-- A release commit that fails verification is never published. If its tag has not been pushed, the tag and the release commit were never public and may be removed and the version cut again; a pushed tag is never reused, and the fix ships as the next version.
+- The release tag stays local until the verification run passes. The run serves the README's online install from local mirrors holding the tag (uc-automa 0027), so nothing is pushed first. Only after the run passes are `main` and the tag pushed, `git push origin main vX.Y.Z`, and the release published.
+- A release commit that fails verification is never pushed or published. Its tag and the release commit were never public, so they are removed and the version cut again once the fault is fixed. A pushed tag is never reused.
+
+### The release commit updates the README's install tag
+
+This changes the cut of uc-automa 0026. The directive `release/readme-install-tag` requires `README.md` to install the repository at `v` and its `VERSION`, so the release commit must change that tag with `VERSION`. After rolling the changelog, `uc-automa release cut` rewrites each reference in `README.md` that installs the repository's own release, `/<repository>@v<old>` or `/<repository>.git@v<old>`, to the new version, and commits `README.md` with `VERSION` and `CHANGELOG.md`, and nothing else. It reads the references exactly as the directive's check does, and after the commit that check must pass. A README with no such reference is left untouched.
 
 ### Publish them with their sums
 
@@ -112,7 +116,7 @@ pip installs only if `ssh-keygen` reports a good signature, which it does only i
 
 ### Tests
 
-Offline, with the `dir` backend: the wheels, `requirements-offline.txt` and both SSH signatures are published, and every file is listed in `SHA256SUMS`; the determinism gate stops a release whose two builds differ; a download that does not match its pin is refused; a PyYAML wheel with another tag or a compiled file is refused; a dependency's wheel whose signature or checksum fails is refused; a release with no verification record for the tag's commit, or with a sum that differs from it, is refused; `ssh-keygen -Y verify` accepts the published signatures; and the README's commands install from the published directory into a fresh virtual environment, and install nothing when the requirements file or its signature has been altered.
+Offline, with the `dir` backend: the wheels, `requirements-offline.txt` and both SSH signatures are published, and every file is listed in `SHA256SUMS`; the determinism gate stops a release whose two builds differ; a download that does not match its pin is refused; a PyYAML wheel with another tag or a compiled file is refused; a dependency's wheel whose signature or checksum fails is refused; a release with no verification record for the tag's commit, or with a sum that differs from it, is refused; the cut rewrites the README's install tag and the release commit passes `release/readme-install-tag`; `ssh-keygen -Y verify` accepts the published signatures; and the README's commands install from the published directory into a fresh virtual environment, and install nothing when the requirements file or its signature has been altered.
 ## Alternatives considered
 
 **Publish to a package index.** Not now, as uc-automa 0026 recorded. A release page can hold wheels without one, and an index is a separate decision.

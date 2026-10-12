@@ -136,7 +136,7 @@ The ceremony's tests run offline: `test_publish_release.py` is ported, publishin
 
 <a id="ref-steel-2026c"></a>Steel, C. (2026c). *Brief: uc-automa foundation* (Version 0.1.0) [Unpublished manuscript]. urn:uuid:965f6290-3d72-4631-ad66-9b4c6f63db96 [↩](#cite-steel-2026c)
 
-<a id="ref-steel-2026d"></a>Steel, C. (2026d). *Release: Annotated version tags* (Version 0.1.0) [Directive]. uc-automa. https://github.com/steelcj/uc-automa/blob/main/en-ca/docs/directives/release/annotated-version-tags-v0.1.0.md [↩](#cite-steel-2026d)
+<a id="ref-steel-2026d"></a>Steel, C. (2026d). *Release: Annotated version tags* (Version 0.1.0) [Directive]. uc-automa. https://github.com/steelcj/uc-automa/blob/aac6f83e8ec325359db050cf3b61c11d7fd14e23/en-ca/docs/directives/release/annotated-version-tags-v0.1.0.md [↩](#cite-steel-2026d)
 
 ## Changelog
 

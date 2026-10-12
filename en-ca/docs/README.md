@@ -19,7 +19,8 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Naming: Portable Names](directives/naming/portable-names-v0.1.0.md) | 0.1.0 | In force |
 | [Naming: SPDX Slugs](directives/naming/spdx-slugs-v0.1.0.md) | 0.1.0 | In force |
 | [Naming: Versions in Filenames](directives/naming/versions-in-filenames-v0.1.0.md) | 0.1.0 | In force |
-| [Release: Annotated Version Tags](directives/release/annotated-version-tags-v0.1.0.md) | 0.1.0 | In force |
+| [Release: Annotated Version Tags](directives/release/annotated-version-tags-v0.2.0.md) | 0.2.0 | In force |
+| [Release: README Install Tag](directives/release/readme-install-tag-v0.1.0.md) | 0.1.0 | In force |
 
 ## Guides
 
