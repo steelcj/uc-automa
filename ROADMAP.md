@@ -18,6 +18,8 @@ Scope approved on 2026-10-11 for 0.2.0:
 
 ## Later
 
+- `uc-automa docs index` lists only files git tracks. Today it also lists untracked files git does not ignore, so a draft left in a checkout lands in the generated index; on 2026-10-11 it picked up two untracked session notes.
+- A decision on how a decision's version changes after it is accepted: uc-automa 0029 covers directives only, and 0030's open question was answered in place on 2026-10-11 with its version left at 0.1.0.
 - In 0.3.0: migrate sat-doc-automa's style rules into directives, one rule per file, each with a check where one is possible: commas rather than em dashes, no horizontal rules, no hard wraps, Citation Anchor Pairs.
 - Verify end to end on macOS and Windows; uc-automa reaches 1.0.0 only when all three platforms are verified.
 - `uc-automa docs fetch`, checking out the pinned version's documentation into the per-user data directory.
