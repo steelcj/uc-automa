@@ -35,7 +35,7 @@ uc-automa 0026 requires the release key's fingerprint to be published in at leas
   - `release-keys/allowed-signers`: one line per SSH release key, `chris.steel@gmail.com namespaces="vishpala-release,git" ssh-ed25519 <key>`, the `git` namespace for signed tags (uc-automa 0032);
   - `release-keys/openpgp-key.asc`: the OpenPGP release key, ASCII-armoured, public part only, once there is one; 0.2.0 is released with the SSH key alone;
   - `release-keys/README.md`: each key's fingerprint, as `ssh-keygen -lf` prints it, or `gpg --fingerprint` for an OpenPGP key, and the date each was added.
-- **vishpala.com**, Vishpala's site, on a page that shows the same allowed-signers line and every fingerprint `release-keys/README.md` lists.
+- **vishpala.com**, Vishpala's site, on the page `https://vishpala.com/release-keys`, which shows the same allowed-signers line and every fingerprint `release-keys/README.md` lists.
 
 One key pair of each kind signs every Vishpala release (uc-automa 0026, 0028), so the keys live once, in uc-automa, and every tool's README points there.
 
@@ -60,7 +60,7 @@ git clone --depth 1 https://github.com/steelcj/uc-automa uc-automa-keys
 ssh-keygen -lf uc-automa-keys\release-keys\allowed-signers
 ~~~
 
-Compare the fingerprint `ssh-keygen` prints with the one on vishpala.com, at <page>. If they differ, stop: do not install.
+Compare the fingerprint `ssh-keygen` prints with the one at https://vishpala.com/release-keys. If they differ, stop: do not install.
 ```
 
 The `Install offline` block then names that file: `ssh-keygen -Y verify -f uc-automa-keys/release-keys/allowed-signers ...`, and `uc-automa-keys\release-keys\allowed-signers` in Command Prompt.
@@ -85,11 +85,7 @@ A new key is added as a new line, and the old line gains `valid-before="<date>"`
 
 - The `uc-automa` layout gains `release-keys/` as meta, which is a change to a layout file and ships with uc-automa 0.2.0.
 - The README gains `Get the release key`, and 0028's `Install offline` block names the cloned file. uc-automa 0027 replays the new section, and its record lists the fingerprint comparison as a manual step not replayed.
-- Christopher Steel creates the SSH release key, and the page on vishpala.com, before uc-portage 0.2.0 is published. There is no OpenPGP key for 0.2.0, so its releases carry no `SHA256SUMS.asc` (uc-automa 0032).
-
-## Open questions
-
-- [ ] The path of the page on vishpala.com, written `<page>` above, once the rebuilt site has it.
+- Christopher Steel creates the SSH release key, and the page `https://vishpala.com/release-keys`, before uc-portage 0.2.0 is published. There is no OpenPGP key for 0.2.0, so its releases carry no `SHA256SUMS.asc` (uc-automa 0032).
 
 ## References
 
