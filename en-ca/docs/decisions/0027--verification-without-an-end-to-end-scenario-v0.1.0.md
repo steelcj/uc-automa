@@ -4,7 +4,7 @@ dc:title: "Decision: Verification Without an End-to-End Scenario"
 dc:creator: "Christopher Steel"
 dc:contributor: "Claude Opus 5.5 (Anthropic), AI assistance"
 dc:subject: "verification, platforms, Linux, macOS, Windows, Python 3.8, wheels, offline install, run records, 1.0.0"
-dc:description: "Extends uc-automa 0011 to tools that have no end-to-end scenario, such as uc-portage and uc-automa: a platform is verified by a verification run of three parts, the unit tests, also on the oldest Python the tool supports, an offline install from the wheels a release of the commit would publish, inside a network cut, and the installed tool doing its job on a real repository at a recorded commit, recorded in the tool's own repository."
+dc:description: "Extends uc-automa 0011 to tools that have no end-to-end scenario, such as uc-portage and uc-automa: a platform is verified by a verification run of three parts, the unit tests, also on the oldest Python the tool supports, an offline install from the wheels a release of the commit would publish, inside a network cut, by the README's own commands, which must refuse a bad signature, and the installed tool doing its job on a real repository at a recorded commit, recorded in the tool's own repository."
 dc:date: "2026-10-11"
 dc:type: "Text"
 dc:format: "text/markdown"
@@ -52,7 +52,10 @@ A tool without an end-to-end scenario is verified on a platform by a verificatio
 - The wheels are those a release of the commit under test would publish, built by the release's wheel step <a id="cite-steel-2026d"></a>[(Steel, 2026d)](#ref-steel-2026d): from the commit's tree, never from a working tree, with `SOURCE_DATE_EPOCH` set to the commit's time and the build tools pinned. They are built once, on the machine that releases the tool, and every platform installs those same files.
 - Each Vishpala tool it depends on comes from that tool's signed release, as in a release.
 - PyYAML is built from its source distribution as pure Python, `py3-none-any`, and the run fails if the wheel carries another tag or any compiled file.
-- In a fresh virtual environment, `pip install --no-index --find-links <wheels> --require-hashes -r requirements-offline.txt` installs the tool from those wheels alone, as the README's offline install does.
+- The install is the README's own. The run reads the commands from the tool's README at the commit under test, in its `Install offline` section, and runs them as written, never retyped: the `sh` block with `/bin/sh` on Linux and macOS, and the `bat` block in Command Prompt on Windows, each fed to the shell one line at a time, as a reader pasting them would. The section holds exactly one block for each of the two shells, and the run fails if it holds none or more than one.
+- The commands run in a directory laid out as the release will be: the wheels, `requirements-offline.txt`, and, made for the run, its SSH signature and an `allowed-signers` file from a test key under the release key's principal. A run never uses the release key.
+- They run three times, each in a fresh directory. As laid out, they must install the tool from those wheels alone and print its version. With a line added to `requirements-offline.txt` that pip would accept, and again with the signature made by another key, they must report that the signature did not verify and leave the virtual environment holding none of the release's packages. Either bad case installing anything fails the run.
+- The last part runs the command this install produced.
 - The install runs inside a network cut that lets only the host's control connection through, with the same conditions as the end-to-end scenario's offline step: probes that work before the cut, the cut re-proven at the end of the step, and the IPv6 internet path reported as verified, blocked or not testable on that network.
 - The record lists each wheel with its SHA-256. A release publishes only wheels whose sums match the record (uc-automa 0028).
 
@@ -87,6 +90,8 @@ This decision adds to uc-automa 0011 and changes nothing in it. Every OSAT manag
 
 **Criteria in each README.** Rejected. Two READMEs carrying the same criteria drift apart, and a README cannot be cited the way a decision is. The READMEs link here instead.
 
+**The driver's own copy of the install commands.** Rejected. On 2026-10-11 the first Command Prompt steps drafted for uc-automa 0028 checked the signature with `if errorlevel 1`, which misses the -1 that `ssh-keygen` sets on Windows, and pip installed after a refused signature. A driver carrying its own corrected copy would have passed while a reader following the README installed unchecked files. Only the README's text shows what a reader gets.
+
 **Installing from the package index during the run.** Rejected. It verifies the index and the network on the day of the run, not what a release carries, and on Windows with Python 3.15 it needs a compiler for PyYAML. The offline install shows that the wheels alone are enough.
 
 **Raising `requires-python` instead of testing the oldest Python.** Not now. 3.8 reached its end of life in October 2024 and 3.9 in October 2025, so a raised floor would be 3.10. Raising it means a change to `requires-python` in each tool and a changelog entry, and removes no code: neither tool branches on the Python version, and only newer syntax, such as `list[str]` for `typing.List`, would become available. Testing 3.8 costs one more run of the unit tests and the pinned build above. Either is cheap; a tool that raises its floor tests the new one.
@@ -98,7 +103,8 @@ This decision adds to uc-automa 0011 and changes nothing in it. Every OSAT manag
 - The READMEs of uc-portage and uc-automa replace their Windows criteria with a link to this decision, and their platform tables report verification runs.
 - The install tests of uc-portage and uc-automa make their virtual environments with symbolic links outside Windows, as `python -m venv` does.
 - The 3.8 floor stays verifiable only while python-build-standalone's last 3.8 build can be downloaded.
-- The Windows driver changes: it builds wheels on the host by the release's wheel step from the commit under test rather than from the release tag; runs the unit tests a second time on the oldest Python; takes uc-automa's commit for uc-portage's job; writes a `Result:` line; and writes a record into each verified repository. Where the driver lives is decided separately.
+- A tool's README needs the `Install offline` section of uc-automa 0028 before a verification run can pass; it arrives with the release wheels in 0.2.0.
+- The Windows driver changes: it builds wheels on the host by the release's wheel step from the commit under test rather than from the release tag; extracts the README's install commands and runs them with the two bad cases; runs the unit tests a second time on the oldest Python; takes uc-automa's commit for uc-portage's job; writes a `Result:` line; and writes a record into each verified repository. Where the driver lives is decided separately.
 - The Windows run of 2026-10-11 met the Windows criteria the READMEs carried that day, but its record is in osat-manager-restic, built the wheels from the v0.1.0 tags, and has no `Result:` line, so it does not count as a verification run under this decision. The next run does.
 - Linux needs a verification run too: the Linux status of uc-portage and uc-automa today reports unit tests only.
 - macOS needs Apple hardware, as for the end-to-end scenario.

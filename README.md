@@ -21,19 +21,23 @@ Python 3.8 or later, PyYAML, uc-portage 0.1.x and git.
 Install a release from its tag, together with uc-portage, which uc-automa depends on:
 
 ```sh
-PYYAML_FORCE_LIBYAML=0 python3 -m pip install --no-binary pyyaml \
+python3 -m venv .venv
+PYYAML_FORCE_LIBYAML=0 .venv/bin/python -m pip install --no-binary pyyaml \
     "git+https://github.com/steelcj/uc-portage@v0.1.0" \
     "git+https://github.com/steelcj/uc-automa@v0.1.0"
-uc-automa --version
+.venv/bin/uc-automa --version
 ```
 
 On Windows, in Command Prompt, with Git on your `PATH`:
 
 ```bat
+python -m venv .venv
 set PYYAML_FORCE_LIBYAML=0
-python -m pip install --no-binary pyyaml "git+https://github.com/steelcj/uc-portage@v0.1.0" "git+https://github.com/steelcj/uc-automa@v0.1.0"
-uc-automa --version
+.venv\Scripts\python -m pip install --no-binary pyyaml "git+https://github.com/steelcj/uc-portage@v0.1.0" "git+https://github.com/steelcj/uc-automa@v0.1.0"
+.venv\Scripts\uc-automa --version
 ```
+
+pip installs into a virtual environment, `.venv` in the current directory, because the Python that manage-python installs refuses package installs, as do the system Pythons of Debian, Ubuntu and other distributions that mark theirs externally managed. Activate it to put `uc-automa` on your `PATH`: `. .venv/bin/activate`, or `.venv\Scripts\activate` in Command Prompt.
 
 uc-portage is not published to a package index, so name both in the same command; installing uc-automa alone fails to find uc-portage.
 
@@ -42,7 +46,8 @@ The installed version is the one `uc-automa init` pins in a repository's `.uc-au
 To work on uc-automa itself, install both from checkouts instead:
 
 ```sh
-PYYAML_FORCE_LIBYAML=0 python3 -m pip install --no-binary pyyaml -e ../uc-portage -e .
+python3 -m venv .venv
+PYYAML_FORCE_LIBYAML=0 .venv/bin/python -m pip install --no-binary pyyaml -e ../uc-portage -e .
 ```
 
 ### Why PyYAML is built as pure Python
