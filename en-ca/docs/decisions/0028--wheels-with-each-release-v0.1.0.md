@@ -29,7 +29,9 @@ Status: Accepted
 
 On 2026-10-11, wheels for uc-portage 0.1.0, uc-automa 0.1.0 and PyYAML 6.0.3 were each built twice from fixed sources on one machine. Without `SOURCE_DATE_EPOCH` every pair differed; with it set, every pair was byte-identical. Built in two separate fresh environments holding only a pinned setuptools, with build isolation off, PyYAML and uc-automa again gave identical bytes, and PyYAML built as pure Python without Cython. Two things in a wheel tie it to its build: the version, which comes from `VERSION`, and the build backend's own version, which setuptools writes into the wheel's `WHEEL` file.
 
-Windows has no gpg. On the same day, the clean Windows test snapshot's own OpenSSH client, `OpenSSH_for_Windows_9.5p2`, ran `ssh-keygen -Y verify` <a id="cite-openbsd-nd"></a>[(OpenBSD, n.d.)](#ref-openbsd-nd) on a file signed on Linux: it accepted the signature, exit status 0, and refused a tampered file, a signature by another key and a signature made for another namespace, exit status 255.
+Windows has no gpg. On the same day, the clean Windows test snapshot's own OpenSSH client, `OpenSSH_for_Windows_9.5p2`, ran `ssh-keygen -Y verify` <a id="cite-openbsd-nd"></a>[(OpenBSD, n.d.)](#ref-openbsd-nd) on a file signed on Linux: it accepted the signature and refused a tampered file, a signature by another key and a signature made for another namespace. A refusal sets `ERRORLEVEL` to -1 in Command Prompt, which `if errorlevel 1` does not catch: a first draft of the steps below used it, and pip installed after a refused signature. Comparing `%ERRORLEVEL%` with 0, on a line of its own after the check, stopped the install in both bad cases on Windows, as `if ... then ... fi` did on Linux.
+
+manage-python marks each Python it installs as externally managed, so pip refuses to install into it, on Linux and on Windows alike, and points to a virtual environment instead.
 
 ## Decision
 
@@ -84,29 +86,32 @@ Each such tool's README gains a section in this form, shown here for uc-automa:
 ```markdown
 ### Install offline
 
-Each release carries uc-automa's wheel and every wheel it needs, uc-portage's and a pure-Python PyYAML, with `requirements-offline.txt` and its signature `requirements-offline.txt.sig`. Download them all from the release page into one directory, and save the release key's allowed-signers line in that directory as `allowed-signers`. Then, on Linux or macOS:
+Each release carries uc-automa's wheel and every wheel it needs, uc-portage's and a pure-Python PyYAML, with `requirements-offline.txt` and its signature `requirements-offline.txt.sig`. Download them all from the release page into one directory, and save the release key's allowed-signers line in that directory as `allowed-signers`. Then, in that directory, on Linux or macOS:
 
 ~~~sh
-ssh-keygen -Y verify -f allowed-signers -I chris.steel@gmail.com -n vishpala-release -s requirements-offline.txt.sig < requirements-offline.txt
-python3 -m pip install --no-index --find-links . --require-hashes -r requirements-offline.txt
-uc-automa --version
+python3 -m venv .venv
+if ssh-keygen -Y verify -f allowed-signers -I chris.steel@gmail.com -n vishpala-release -s requirements-offline.txt.sig < requirements-offline.txt
+then .venv/bin/python -m pip install --no-index --find-links . --require-hashes -r requirements-offline.txt
+else echo "The signature did not verify: nothing was installed."
+fi
+.venv/bin/uc-automa --version
 ~~~
 
-On Windows, in Command Prompt, in that directory:
+On Windows, in Command Prompt:
 
 ~~~bat
+python -m venv .venv
 ssh-keygen -Y verify -f allowed-signers -I chris.steel@gmail.com -n vishpala-release -s requirements-offline.txt.sig < requirements-offline.txt
-python -m pip install --no-index --find-links . --require-hashes -r requirements-offline.txt
-uc-automa --version
+if %ERRORLEVEL% neq 0 (echo The signature did not verify: nothing was installed.) else (.venv\Scripts\python -m pip install --no-index --find-links . --require-hashes -r requirements-offline.txt)
+.venv\Scripts\uc-automa --version
 ~~~
 
-`ssh-keygen` reports a good signature only if the requirements file is the one released. pip then checks every wheel against it, refuses any that differs, and installs nothing from the network. To check every file the release carries, verify `SHA256SUMS.sig` over `SHA256SUMS` the same way and compare the sums, or use `SHA256SUMS.asc` with gpg.
+pip installs only if `ssh-keygen` reports a good signature, which it does only if the requirements file is the one released. pip then checks every wheel against it, refuses any that differs, and installs nothing from the network. uc-automa is installed in the virtual environment `.venv`, because the Python manage-python installs does not accept packages. In Command Prompt the check compares `%ERRORLEVEL%` with 0 on its own line: a refused signature sets it to -1, which `if errorlevel 1` would miss. To check every file the release carries, verify `SHA256SUMS.sig` over `SHA256SUMS` the same way and compare the sums, or use `SHA256SUMS.asc` with gpg.
 ```
 
 ### Tests
 
-Offline, with the `dir` backend: the wheels, `requirements-offline.txt` and both SSH signatures are published, and every file is listed in `SHA256SUMS`; the determinism gate stops a release whose two builds differ; a download that does not match its pin is refused; a PyYAML wheel with another tag or a compiled file is refused; a dependency's wheel whose signature or checksum fails is refused; a release with no verification record for the tag's commit, or with a sum that differs from it, is refused; `ssh-keygen -Y verify` accepts the published signatures; and the README's commands install from the published directory into a fresh virtual environment.
-
+Offline, with the `dir` backend: the wheels, `requirements-offline.txt` and both SSH signatures are published, and every file is listed in `SHA256SUMS`; the determinism gate stops a release whose two builds differ; a download that does not match its pin is refused; a PyYAML wheel with another tag or a compiled file is refused; a dependency's wheel whose signature or checksum fails is refused; a release with no verification record for the tag's commit, or with a sum that differs from it, is refused; `ssh-keygen -Y verify` accepts the published signatures; and the README's commands install from the published directory into a fresh virtual environment, and install nothing when the requirements file or its signature has been altered.
 ## Alternatives considered
 
 **Publish to a package index.** Not now, as uc-automa 0026 recorded. A release page can hold wheels without one, and an index is a separate decision.

@@ -32,7 +32,9 @@ An OSAT manager has an end-to-end scenario, because the manager contract defines
 
 The Windows run of 2026-10-11 showed what unit tests alone miss <a id="cite-steel-2026c"></a>[(Steel, 2026c)](#ref-steel-2026c). The unit tests passed in a virtual environment where PyYAML had been installed by hand, while the install the README described failed: PyYAML 6.0.3 publishes no Windows wheel for Python 3.15, and building its C extension needs a compiler that an ordinary user's machine does not have. What failed was the install a user would follow, not the code.
 
-Both tools declare `requires-python = ">=3.8"`. On 2026-10-11 their unit tests, with install tests, were run on CPython 3.8.20 installed by manage-python, on Linux and on Windows. They passed on Windows. On Linux the install tests failed until they made their virtual environments with symbolic links, as `python -m venv` does: python-build-standalone's 3.8 finds its `libpython` relative to the interpreter, so a copied interpreter cannot start. Nothing in the tools' code needed to change.
+Both tools declare `requires-python = ">=3.8"`. On 2026-10-11 their unit tests, with install tests, were run on CPython 3.8.20 installed by manage-python, on Linux and on Windows. They passed on Windows. On Linux the install tests failed until they made their virtual environments with symbolic links, as `python -m venv` does: python-build-standalone's 3.8 build loads `libpython` from beside the interpreter, so a copied interpreter cannot start. Its 3.13, 3.14 and 3.15 builds carry `libpython` inside the interpreter, and a copy of each started. Nothing in the tools' code needed to change, and no code they ship creates a virtual environment.
+
+python-build-standalone no longer builds 3.8, which reached its end of life in October 2024. `3.8.20+20241002` is its last 3.8 build: it receives no fixes, and manage-python finds it only by that pinned name.
 
 ## Decision
 
@@ -43,6 +45,7 @@ A tool without an end-to-end scenario is verified on a platform by a verificatio
 - The tool's unit tests pass from a checkout of the commit under test, with their install tests switched on, and `uc-automa check` passes on the repository itself.
 - This part runs twice: with manage-python's default Python, and with the oldest Python the tool's `requires-python` allows, also installed by manage-python. Today that is 3.8. The other two parts run with the default Python only.
 - The record names each Python by its full version and build, since an end-of-life line may be installable only as a pinned build: manage-python installs 3.8 as `3.8.20+20241002`, the last python-build-standalone build of 3.8.
+- Testing the 3.8 floor therefore depends on a frozen build. If that build can no longer be installed, the floor can no longer be verified, and the tool raises its `requires-python` to the oldest Python that manage-python can still install.
 
 ### An offline install from wheels
 
@@ -94,6 +97,7 @@ This decision adds to uc-automa 0011 and changes nothing in it. Every OSAT manag
 
 - The READMEs of uc-portage and uc-automa replace their Windows criteria with a link to this decision, and their platform tables report verification runs.
 - The install tests of uc-portage and uc-automa make their virtual environments with symbolic links outside Windows, as `python -m venv` does.
+- The 3.8 floor stays verifiable only while python-build-standalone's last 3.8 build can be downloaded.
 - The Windows driver changes: it builds wheels on the host by the release's wheel step from the commit under test rather than from the release tag; runs the unit tests a second time on the oldest Python; takes uc-automa's commit for uc-portage's job; writes a `Result:` line; and writes a record into each verified repository. Where the driver lives is decided separately.
 - The Windows run of 2026-10-11 met the Windows criteria the READMEs carried that day, but its record is in osat-manager-restic, built the wheels from the v0.1.0 tags, and has no `Result:` line, so it does not count as a verification run under this decision. The next run does.
 - Linux needs a verification run too: the Linux status of uc-portage and uc-automa today reports unit tests only.
