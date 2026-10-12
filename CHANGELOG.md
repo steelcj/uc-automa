@@ -17,6 +17,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - `release/readme-install-tag` 0.2.0: wherever the README installs a dependency from a git reference, the reference is a release tag the dependency's `pyproject.toml` range allows.
 - `release/annotated-version-tags` 0.2.0: the release commit may also update `README.md`'s install references to the new tag.
 - Decisions 0027 and 0028: the verification run serves the README's online install from local mirrors, so the release tag is pushed only after the run passes, and the cut rewrites the README's install tag.
+- The README's Linux and macOS commands run `python`, the command manage-python installs, as the Windows ones do: on Ubuntu `python3` is the system Python, whose `venv` needs `python3-venv`. A note covers other Pythons.
 - The README installs into a virtual environment, `.venv`, because the Python manage-python installs, like the system Python of several Linux distributions, refuses package installs.
 - The README's Develop section creates the virtual environment too, gives the Command Prompt commands, and holds the install from checkouts, which the Install section now points to.
 - The README links to uc-automa 0027 for what verifies a platform, instead of carrying its own Windows criteria.

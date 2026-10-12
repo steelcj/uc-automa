@@ -21,7 +21,7 @@ Python 3.8 or later, PyYAML, uc-portage 0.1.x and git.
 Install a release from its tag, together with uc-portage, which uc-automa depends on:
 
 ```sh
-python3 -m venv .venv
+python -m venv .venv
 PYYAML_FORCE_LIBYAML=0 .venv/bin/python -m pip install --no-binary pyyaml \
     "git+https://github.com/steelcj/uc-portage@v0.1.0" \
     "git+https://github.com/steelcj/uc-automa@v0.1.0"
@@ -38,6 +38,8 @@ set PYYAML_FORCE_LIBYAML=0
 ```
 
 pip installs into a virtual environment, `.venv` in the current directory, because the Python that manage-python installs refuses package installs, as do the system Pythons of Debian, Ubuntu and other distributions that mark theirs externally managed. Activate it to put `uc-automa` on your `PATH`: `. .venv/bin/activate`, or `.venv\Scripts\activate` in Command Prompt.
+
+`python` is the command manage-python installs, on Linux, macOS and Windows alike. With another Python, use its own command instead, such as `python3`. On Debian and Ubuntu the system Python's `venv` module needs the `python3-venv` package first: `sudo apt install python3-venv`.
 
 uc-portage is not published to a package index, so name both in the same command; installing uc-automa alone fails to find uc-portage.
 
@@ -87,7 +89,7 @@ A platform is verified for uc-automa by a verification run: its unit tests, also
 From a checkout of uc-automa, with uc-portage's checkout beside it as `../uc-portage`:
 
 ```sh
-python3 -m venv .venv
+python -m venv .venv
 PYYAML_FORCE_LIBYAML=0 .venv/bin/python -m pip install --no-binary pyyaml -e ../uc-portage -e .
 .venv/bin/python -m unittest discover -s tests
 .venv/bin/uc-automa check
