@@ -1,0 +1,13 @@
+merge them all into main
+
+---
+
+lets push everything
+
+---
+
+delete the merged feature branches
+
+---
+
+commit the entire settings change but allow entire stuff to be pushed
