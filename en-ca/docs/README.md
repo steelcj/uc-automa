@@ -26,7 +26,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 
 | Document | Version | Status |
 | --- | --- | --- |
-| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.5.0.md) | 0.5.0 | Accepted |
+| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.6.0.md) | 0.6.0 | Accepted |
 | [Directory Guide](guides/repository/directory-guide-v0.2.0.md) | 0.2.0 | Accepted |
 
 ## Decisions
@@ -67,6 +67,8 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: SSH Signatures Required With Wheels, and SSH-Signed Tags](decisions/0032--ssh-signatures-required-with-wheels-and-ssh-signed-tags-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Managers Run on a Runtime They Do Not Expose](decisions/0033--managers-run-on-a-runtime-they-do-not-expose-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: OSAT Managers and mise](decisions/0034--osat-managers-and-mise-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: osat-manager-core, the Shared Manager Package](decisions/0035--osat-manager-core-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: A Check Exits 2 When Not Ready](decisions/0036--a-check-exits-2-when-not-ready-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 
