@@ -1,3 +1,19 @@
+---
+title: "Universal Cake Licensing Rationale"
+dc:title: "Universal Cake Licensing Rationale"
+dc:creator: "Christopher Steel"
+dc:subject: "Universal Cake, licensing, AGPL-3.0-or-later, Creative Commons, CC BY-SA 4.0, radar evaluations"
+dc:description: "Records why Universal Cake licenses its tools under AGPL-3.0-or-later and its content under Creative Commons, and weighs whether some content should move to CC BY-SA 4.0."
+dc:date: "2026-10-10"
+dc:type: "Text"
+dc:format: "text/markdown"
+dc:identifier: "urn:uuid:ba50a87f-795b-463d-8bff-702865dd9232"
+dc:language: "en-CA"
+dc:rights: "CC-BY-4.0"
+sat:version: "0.1.0"
+sat:status: "Accepted"
+---
+
 # Universal Cake Licensing Rationale
 
 10 Oct 2026 · @sirhc

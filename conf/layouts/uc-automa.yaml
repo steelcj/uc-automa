@@ -60,6 +60,12 @@ tree:
     type: file
     kind: meta
     required: true
+  - path: ".claude/"
+    type: directory
+    kind: meta
+  - path: ".entire/"
+    type: directory
+    kind: meta
   - path: "pyproject.toml"
     type: file
     kind: runs
@@ -173,6 +179,13 @@ tree:
           - path: "session.md"
             type: file
             required: true
+          - path: "project.md"
+            type: file
+            required: false
+      - path: "projects/"
+        type: directory
+      - path: "policies/"
+        type: directory
 
   # Paths only uc-automa has.
   - path: ".pre-commit-hooks.yaml"
