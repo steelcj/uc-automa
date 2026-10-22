@@ -12,13 +12,13 @@ dc:identifier: "urn:uuid:b18e2ed3-b364-4880-b3c7-5676961f0174"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/osat-manager--creating-a-new-repository-v0.1.0.md, not under version control"
 dc:language: "en-CA"
 dc:rights: "CC-BY-4.0"
-sat:version: "0.5.0"
+sat:version: "0.6.0"
 sat:status: "Accepted"
 ---
 
 # Creating an OSAT Manager Repository
 
-Version: 0.5.0
+Version: 0.6.0
 Status: Accepted
 
 ## Summary
@@ -219,7 +219,8 @@ Gate: every source and verification field is filled from the radar entry, with n
 Implement the contract in `lib/osat_manager_<tool>/`, reading `manager.yaml` for everything tool-specific, and expose it as a console-script entry point, which gives a native launcher on Windows and a script on Linux and macOS from one definition <a id="cite-pypa-nd"></a>[(Python Packaging Authority, n.d.)](#ref-pypa-nd).
 
 - Standard library and `pathlib`, with no shell commands at runtime, so behaviour is the same on every platform. Tests may call other tools, such as `gpg`, to cross-check results.
-- Shared behaviour comes from the shared manager package (uc-automa 0024): reading `manager.yaml` without PyYAML, finding it in an install or a checkout, verifying OpenPGP signatures, and each source kind, such as `github-release` or `conda`, modelled on mise's backends (uc-automa 0034). Until that package exists, a manager carries its own copies, listed as known debt.
+- Shared behaviour comes from osat-manager-core, the shared manager package (uc-automa 0024 and 0035), installed once into the manager runtime: reading `manager.yaml` without PyYAML, finding it in an install or a checkout, verifying OpenPGP signatures, and each source kind, such as `github-release` or `conda`, modelled on mise's backends (uc-automa 0034), launcher rendering with its ownership marker, and gettext message catalogues under `{language}/messages/`. A manager states the range of osat-manager-core versions it accepts. Until the package exists, a manager carries its own copies, listed as known debt.
+- A check exits 0 when ready, 2 when not ready, and 1 when it could not run; every other command exits 0 on success and 1 otherwise (uc-automa 0036).
 - The manager's launcher runs it on the manager runtime, named by path, never on the first `python` on `PATH` (uc-automa 0033).
 - Release tooling, outside the runtime manager, may use more than the standard library. mise, rattler and micromamba are approved for producing and cross-checking lock files; a lock records each file's URL, SHA-256 and size, and the manager refuses an entry without a checksum (uc-automa 0034).
 - A signature verifier is reviewed independently, by a reviewer who did not see it written, before any manager relying on it is tagged.
@@ -315,6 +316,7 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
+| 0.6.0 | 2026-10-21 | Accepted | osat-manager-core named as the shared package, installed into the manager runtime, with launcher rendering and gettext catalogues (uc-automa 0035); exit statuses (uc-automa 0036) |
 | 0.5.0 | 2026-10-21 | Accepted | The independent-runtime capability (uc-automa 0033); source kinds in the shared package and approved release-time tools for lock files (uc-automa 0034) |
 | 0.4.0 | 2026-10-11 | Accepted | Subscribe stage: installing uc-automa and uc-portage from their release tags, and removing blocks file-fairy managed, which uc-portage never takes over |
 | 0.3.0 | 2026-10-09 | Accepted | Findings from building osat-manager-restic: the decision drafted before the repository and placed in its first commit, nothing left behind, the shared manager package, pinned keys confirmed twice, independent review of a verifier, snapshot-based Linux runs and the Windows route, upstream names inside zips, the release tag rule, archiving after push |
