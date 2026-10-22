@@ -43,11 +43,11 @@ Status: Active. Drafted with AI assistance (Claude Opus 5.5, Anthropic) on 2026-
 
 ## Where things stand
 
-- **The earlier scoping.** The checkout at `osat-manager-git/` has no commits. It holds two drafts from 2026-09-30, a process overview and *Universal Cake Requirements: Add Document Slice*. Their baseline contract, the requirement areas (ID, ML, SEC, AL, GIT) and en-ca and fr-ca messages still stand. Their build sequence does not: installing through apt, dnf, Homebrew and winget breaks the manager contract, which allows no system package manager and no elevated privilege.
-- **Windows.** The radar entry *Git on Windows, Options for osat-manager-git* (uc-radar, 2026-10-11) recommends MinGit from Git for Windows releases for Trial. Christopher Steel chose conda-forge instead on 2026-10-21, so the manager has one source kind on every platform; the entry needs updating to match. Its four questions, line endings, Git LFS, inherited system configuration and paths, still apply to the conda-forge package.
+- **The earlier scoping.** Two drafts from 2026-09-30, a process overview and *Universal Cake Requirements: Add Document Slice*, are kept in osat-manager-git under `en-ca/docs/references/` as superseded. Their baseline contract, the requirement areas (ID, ML, SEC, AL, GIT) and en-ca and fr-ca messages still stand. Their build sequence does not: installing through apt, dnf, Homebrew and winget breaks the manager contract, which allows no system package manager and no elevated privilege.
+- **Windows.** The radar entry *Git on Windows, Options for osat-manager-git* (uc-radar, 2026-10-11) recommends MinGit from Git for Windows releases for Trial. Christopher Steel chose conda-forge instead on 2026-10-21, so the manager has one source kind on every platform. Version 0.2.0 of the entry records that choice: conda-forge git in Trial, MinGit in Assess as the fallback, dugite-native in Hold. It restates its four questions, line endings, Git LFS, inherited system configuration and paths, for the conda-forge package.
 - **Linux and macOS.** That entry left dugite-native as the candidate. It needs glibc 2.34, links the system's libcurl, and repackages builds made for GitHub Desktop. conda-forge is used instead.
-- **The repository.** osat-manager-git now has base files from uc-automa's offerings, decision 0001, a `manager.yaml`, and a skeleton in which `manage-git --check` works, on the branch `base-and-skeleton`, under review. Its first commit predates this process and holds the 2026-09-30 drafts; Christopher Steel chose to build on it rather than restart the history, and the drafts are kept under `en-ca/docs/references/` as superseded.
-- **Prior art.** mise's conda backend already installs conda-forge packages without conda, solving, verifying and relocating them through the rattler library. See the radar entry *Universal Cake Evaluation: mise-en-place*, drafted alongside this plan.
+- **The repository.** osat-manager-git has base files from uc-automa's offerings, decision 0001, a `manager.yaml`, and a skeleton in which `manage-git --check` works, merged on 2026-10-21. Its first commit predates this process and holds the 2026-09-30 drafts; Christopher Steel chose to build on it rather than restart the history, and the drafts are kept under `en-ca/docs/references/` as superseded.
+- **Prior art.** mise's conda backend already installs conda-forge packages without conda, solving, verifying and relocating them through the rattler library. See the radar entry *Universal Cake Evaluation: mise-en-place*, drafted alongside this plan. On 2026-10-21 mise 2026.10.17 installed conda-forge git 2.56.0 on Linux: 26 packages, 55 MB downloaded, 255 MB installed, relocated and working. It locked `win-64` with the SHA-256 checked by hand and could not solve `win-arm64`, which its backend does not map.
 
 ## Sources proposed
 
@@ -61,7 +61,7 @@ The principle for later managers: take upstream's own signed binaries when they 
 
 ## What conda-forge publishes for git
 
-Read from the anaconda.org API and from `linux-64/git-2.56.0-pl5440h3795e67_0.conda`, downloaded and unpacked on 2026-10-21. Nothing was run.
+Read from the anaconda.org API and from `linux-64/git-2.56.0-pl5440h3795e67_0.conda`, downloaded and unpacked on 2026-10-21, and from the same package installed by mise on Linux.
 
 - **Version.** 2.56.0, build 0, uploaded 2026-09-29 for `linux-64`, `linux-aarch64`, `linux-ppc64le`, `linux-riscv64`, `osx-64`, `osx-arm64`, `win-64` and `win-arm64`.
 - **Format.** A `.conda` file: a zip holding `pkg-…tar.zst` and `info-…tar.zst`. Recent builds come in this format only. Python's standard library reads zstd only from 3.14, through `compression.zstd`.
@@ -78,13 +78,13 @@ Read from the anaconda.org API and from `linux-64/git-2.56.0-pl5440h3795e67_0.co
 3. **Relocation.** The manager rewrites text and binary prefix placeholders in the standard library, following `info/paths.json`, and refuses any package whose `paths.json` it does not fully understand.
 4. **Re-signing on macOS.** On arm64, the patched Mach-O files need an ad hoc signature. That means either running `/usr/bin/codesign`, which breaks the no-shell-commands rule, or writing a signature in Python. This is the riskiest item in the plan.
 5. **A weaker trust anchor.** restic and Git for Windows give a signed checksum list or a signed tag. conda-forge gives hashes served over HTTPS. The lock file becomes the trust anchor, reviewed when it changes and signed with the release key (uc-automa 0032).
-6. **CA certificates.** conda's `openssl` and `libcurl` look for certificates inside the prefix, so `ca-certificates` must be in the lock. Otherwise HTTPS clones fail.
-7. **System configuration.** The prefix's `etc/gitconfig` belongs to the manager, which writes the baseline settings there: line endings, `safe.directory`, credential helper, and long paths on Windows. It never inherits configuration from another install, the problem the Windows entry found with MinGit.
+6. **CA certificates.** conda's `openssl` and `libcurl` look for certificates inside the prefix, so `ca-certificates` must be in the lock. The Linux package's own `etc/gitconfig`, written by the feedstock, points `http.sslCAInfo` and `http.sslCAPath` at that bundle; without it, HTTPS clones fail.
+7. **System configuration.** The package's own system configuration stays as delivered, because of item 6 on Linux and macOS. For each version the manager writes its own file outside the prefix, which includes the package's file and then sets the baseline: line endings, `safe.directory`, credential helper, and long paths on Windows. git reads it through `GIT_CONFIG_SYSTEM`, set by launchers and reported by `manage-git --check --json` as each installation's `invocation`, so the managed git never reads another installation's system configuration, the problem the Windows entry found with MinGit. Recorded in decision 0001.
 8. **One source kind.** Conda packages on every platform, so `manager.yaml` maps each platform to its subdirs and the location of `git` inside a prefix (`bin/git`, or `Library/cmd/git.exe` on Windows), with platform differences kept in one module.
 
 ## Decisions needed from Christopher Steel
 
-D5 was decided on 2026-10-21. D1 to D4 are recorded as recommended in osat-manager-git decision 0001, accepted when Christopher Steel merges the pull request that introduces it.
+D5 was decided on 2026-10-21. D1 to D4 were accepted as recommended on 2026-10-21, when Christopher Steel had the pull request introducing osat-manager-git decision 0001 merged.
 
 | ID | Question | Recommendation |
 | --- | --- | --- |
@@ -97,7 +97,7 @@ D5 was decided on 2026-10-21. D1 to D4 are recorded as recommended in osat-manag
 ## Before starting
 
 - [x] D5 decided: conda-forge on Windows.
-- [ ] Confirm D1 to D4, by merging decision 0001 in osat-manager-git or recording changed answers.
+- [x] D1 to D4 confirmed, by merging decision 0001 in osat-manager-git.
 - [x] Change this project's status to Active and fill `date_started`.
 
 ## Steps
@@ -107,12 +107,12 @@ The stages are those of the process guide, in order, with the shared package bui
 ### Assess on the radar
 
 - [ ] Write a uc-radar entry for conda-forge as a binary source for OSAT managers, with git as the worked case. It answers the five questions the process asks, from the facts above.
-- [ ] Update *Git on Windows, Options for osat-manager-git*: conda-forge chosen over MinGit, and over dugite-native for Linux and macOS.
-- [ ] Gate: conda-forge git is in Trial, or the entry says why a manager is still wanted.
+- [x] Update *Git on Windows, Options for osat-manager-git*: conda-forge chosen over MinGit, and over dugite-native for Linux and macOS. Version 0.2.0.
+- [x] Gate: conda-forge git is in Trial.
 
 ### Record the decision
 
-- [x] Draft `0001--build-manage-git-v0.1.0.md`. Written directly in the repository, on the review branch, since the repository already existed. It names the tool, the platforms targeted first (Linux x86_64 and aarch64, macOS x86_64 and arm64, Windows x64 and ARM64), and every difference from the contract: D1, D4 and conda-forge on Windows. The radar entries are still to be named once updated.
+- [x] Draft `0001--build-manage-git-v0.1.0.md`. Written directly in the repository, on the review branch, since the repository already existed. It names the tool, the platforms targeted first (Linux x86_64 and aarch64, macOS x86_64 and arm64, Windows x64 and ARM64), and every difference from the contract: D1, D4 and conda-forge on Windows. It names both radar entries.
 - [x] Carry over the baseline contract and the requirement areas from the 2026-09-30 drafts, which are kept in the repository as superseded references.
 - [x] Gate: the decision record is drafted.
 
@@ -128,7 +128,7 @@ The stages are those of the process guide, in order, with the shared package bui
 
 - [x] The repository already had a first commit holding the drafts. Christopher Steel chose to build on it, so the drafts moved to `en-ca/docs/references/` instead of out of the repository.
 - [x] Generate the identifier, write `.osat-manager-git.assets/archive.yaml` and `dc.yaml`, and place the decision record.
-- [ ] Gate, adapted: the sidecar and the decision record arrive before any manager code. Met on the review branch.
+- [x] Gate, adapted: the sidecar and the decision record arrive before any manager code.
 
 ### Subscribe to uc-automa
 
@@ -144,9 +144,9 @@ The stages are those of the process guide, in order, with the shared package bui
 ### Implement the manager
 
 - [ ] The contract: install into user space, versions side by side, switching, aliases, protection, nothing left behind, a verified archive kept with its lock, self-install.
-- [x] `manage-git --check`: report each installation against the baseline as JSON, which is what other managers call. Works on the review branch.
+- [x] `manage-git --check`: report each installation against the baseline as JSON, which is what other managers call, with each managed installation's `invocation`.
 - [x] Messages from a catalogue, en-ca and fr-ca first.
-- [ ] The four Windows questions, made and recorded for the conda-forge package: autocrlf (proposed `false` in the baseline), Git LFS (a git-lfs companion from conda-forge is the natural fix), inherited configuration, and aliases targeting `Library\cmd\git.exe` (recorded in 0001).
+- [ ] The four Windows questions, made and recorded for the conda-forge package: autocrlf (proposed `false` in the baseline), Git LFS (the Windows package ships `git-lfs.exe`; on Linux and macOS a git-lfs companion from conda-forge is the natural fix), inherited configuration (handled by `GIT_CONFIG_SYSTEM`, recorded in 0001; `%PROGRAMDATA%\Git\config` still to test on Windows), and aliases targeting `Library\cmd\git.exe` (recorded in 0001). The credential helper replacing `helper-selector` is still to name.
 - [ ] Gate: `tests/unit/` passes offline.
 
 ### Test on each platform
@@ -190,7 +190,9 @@ Latest version on conda-forge, as listed by the anaconda.org API on 2026-10-21. 
 - On Windows, conda-forge adds a link to the chain between Git for Windows and the user, can lag Git for Windows' own patch releases, and costs about 121 MB per archived version. Its 9,612 files also need a short install root, since long paths are not assumed.
 - A transitive dependency's build can change under the same version, so a lock is valid only for the exact builds it names. Refreshing it is a reviewed change.
 - conda-forge's git can lag upstream. A security fix reaches users only after the feedstock rebuilds and the lock is refreshed.
-- Perl comes with git on Linux and macOS as a sizeable extra dependency (its size was not measured). Dropping it would break `git send-email`, `git svn` and other Perl commands.
+- Perl comes with git on Linux and macOS as a sizeable extra dependency. With icu, krb5 and the rest, the Linux prefix is 255 MB from 55 MB of packages (measured through mise on 2026-10-21). Dropping perl would break `git send-email`, `git svn` and other Perl commands.
+- A managed git started without `GIT_CONFIG_SYSTEM`, by a program that finds the executable some other way, reads only the package's configuration, without the baseline.
+- `win-arm64` has no working reference implementation: mise's conda backend maps only `win-64`.
 - If conda-forge ends anonymous access to anaconda.org or changes the `.conda` format, the verified archive still restores installed versions offline, but new versions stop until the source changes.
 
 ## Finishing
@@ -204,7 +206,7 @@ Questions that come up while the project runs and need a lasting answer become n
 
 | Version | Date | Status | Changes |
 | --- | --- | --- | --- |
-| 0.2.0 | 2026-10-21 | Active | conda-forge on Windows as well (D5 decided), one source kind; Windows package facts; steps done in osat-manager-git's review branch checked off |
+| 0.2.0 | 2026-10-21 | Active | conda-forge on Windows as well (D5 decided), one source kind; Windows package facts; steps done in osat-manager-git checked off; D1 to D4 accepted with decision 0001; the radar entry updated; the system configuration kept and included by a manager-owned file, after mise showed the Linux package's file holds the certificate paths; Linux size measured; the `win-arm64` gap |
 | 0.1.0 | 2026-10-21 | Planned | First draft: conda-forge for Linux and macOS, MinGit for Windows, five decisions with recommendations, steps by process stage, later conda-forge candidates |
 
 ## Licence
