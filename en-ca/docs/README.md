@@ -75,6 +75,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Session: uc-automa Foundation](sessions/2026-10-09--uc-automa-foundation-v0.1.0.md) | 0.1.0 | Accepted |
 | [Moving Universal Cake Tools to GPL-2.0](sessions/2026-10-10--moving-universal-cake-tools-to-gpl-2-0-v0.1.0.md) | 0.1.0 | Accepted |
 | [Universal Cake Licensing Rationale](sessions/2026-10-10--universal-cake-licensing-rationale-v0.1.0.md) | 0.1.0 | Accepted |
+| [Session: osat-manager-git and the Manager Pattern](sessions/2026-10-21--osat-manager-git-and-the-manager-pattern-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## License
 
