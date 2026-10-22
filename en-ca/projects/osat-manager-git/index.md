@@ -37,7 +37,7 @@ project:
 
 # osat-manager-git
 
-This project builds `manage-git`, which installs git into a user's own account on Linux, macOS and Windows, keeps several versions side by side, and tells other managers whether git meets a baseline contract. It follows [Creating an OSAT Manager Repository](../../docs/guides/new-repository/creating-an-osat-manager-repository-v0.4.0.md), version 0.4.0, stage by stage. It is the second manager built that way, after osat-manager-restic.
+This project builds `manage-git`, which installs git into a user's own account on Linux, macOS and Windows, keeps several versions side by side, and tells other managers whether git meets a baseline contract. It follows [Creating an OSAT Manager Repository](../../docs/guides/new-repository/creating-an-osat-manager-repository-v0.5.0.md), version 0.5.0, stage by stage. It is the second manager built that way, after osat-manager-restic.
 
 Status: Active. Drafted with AI assistance (Claude Opus 5.5, Anthropic) on 2026-10-21 and provisional until Christopher Steel confirms it. Version 0.2.0 records his choice of the same day to use conda-forge's precompiled git on Windows as well.
 

@@ -5,20 +5,20 @@ dc:creator: "Christopher Steel"
 dc:contributor: "Claude Opus 5.5 (Anthropic), AI assistance"
 dc:subject: "OSAT managers, repository creation, uc-automa, offerings, cross-platform testing, release"
 dc:description: "The process for creating a new osat-manager repository with uc-automa, from radar assessment to first release, in ten stages with gates."
-dc:date: "2026-10-11"
+dc:date: "2026-10-21"
 dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:b18e2ed3-b364-4880-b3c7-5676961f0174"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/osat-manager--creating-a-new-repository-v0.1.0.md, not under version control"
 dc:language: "en-CA"
 dc:rights: "CC-BY-4.0"
-sat:version: "0.4.0"
+sat:version: "0.5.0"
 sat:status: "Accepted"
 ---
 
 # Creating an OSAT Manager Repository
 
-Version: 0.4.0
+Version: 0.5.0
 Status: Accepted
 
 ## Summary
@@ -39,6 +39,7 @@ An OSAT manager is a governed tool that installs another tool into user space an
 | Nothing left behind | Uninstalling removes everything the manager owns, and a parent directory such as `~/.local/bin` only if the manager created it and it is now empty; a directory that holds anything else is never removed |
 | Verified archive | Every download is verified before it is unpacked, and kept with the checksums and signature that verified it, so a version can be restored offline and re-checked |
 | Self-install | The manager installs itself, so it works from any directory |
+| Independent runtime | The manager runs on manage-python's manager runtime, never on a version it or another manager exposes to the user, so every user-facing version, including the last, can be removed (uc-automa 0033) |
 | Three platforms | Linux, macOS and Windows, with each platform's status stated honestly |
 
 ## Naming
@@ -195,6 +196,7 @@ versions:
   default_alias: "<tool>"
   versioned_alias: "<tool>-{major}.{minor}"
 sources:
+  kind: "<github-release or conda; a source kind of the shared package>"
   release_url: "<release URL pattern with {version}, {os} and {arch}>"
   checksums_url: "<checksums file URL pattern>"
   signature_url: "<signature URL pattern, if upstream signs>"
@@ -217,7 +219,9 @@ Gate: every source and verification field is filled from the radar entry, with n
 Implement the contract in `lib/osat_manager_<tool>/`, reading `manager.yaml` for everything tool-specific, and expose it as a console-script entry point, which gives a native launcher on Windows and a script on Linux and macOS from one definition <a id="cite-pypa-nd"></a>[(Python Packaging Authority, n.d.)](#ref-pypa-nd).
 
 - Standard library and `pathlib`, with no shell commands at runtime, so behaviour is the same on every platform. Tests may call other tools, such as `gpg`, to cross-check results.
-- Shared behaviour comes from the shared manager package (uc-automa 0024): reading `manager.yaml` without PyYAML, finding it in an install or a checkout, and verifying OpenPGP signatures. Until that package exists, a manager carries its own copies, listed as known debt.
+- Shared behaviour comes from the shared manager package (uc-automa 0024): reading `manager.yaml` without PyYAML, finding it in an install or a checkout, verifying OpenPGP signatures, and each source kind, such as `github-release` or `conda`, modelled on mise's backends (uc-automa 0034). Until that package exists, a manager carries its own copies, listed as known debt.
+- The manager's launcher runs it on the manager runtime, named by path, never on the first `python` on `PATH` (uc-automa 0033).
+- Release tooling, outside the runtime manager, may use more than the standard library. mise, rattler and micromamba are approved for producing and cross-checking lock files; a lock records each file's URL, SHA-256 and size, and the manager refuses an entry without a checksum (uc-automa 0034).
 - A signature verifier is reviewed independently, by a reviewer who did not see it written, before any manager relying on it is tagged.
 - Platform differences, such as install locations and alias launchers, are resolved in one module.
 - Every download is verified with SHA-256 before it is unpacked, and against upstream's signature if upstream signs its checksums. The verified archive is kept.
@@ -311,6 +315,7 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
+| 0.5.0 | 2026-10-21 | Accepted | The independent-runtime capability (uc-automa 0033); source kinds in the shared package and approved release-time tools for lock files (uc-automa 0034) |
 | 0.4.0 | 2026-10-11 | Accepted | Subscribe stage: installing uc-automa and uc-portage from their release tags, and removing blocks file-fairy managed, which uc-portage never takes over |
 | 0.3.0 | 2026-10-09 | Accepted | Findings from building osat-manager-restic: the decision drafted before the repository and placed in its first commit, nothing left behind, the shared manager package, pinned keys confirmed twice, independent review of a verifier, snapshot-based Linux runs and the Windows route, upstream names inside zips, the release tag rule, archiving after push |
 | 0.2.0 | 2026-10-09 | Accepted | Revised to the foundation brief: uc-automa init and offerings instead of .automa.yaml and the interim file-fairy route, en-ca, the osat-manager layout, the three licences, by-hand tagging until the release ceremony, D11 settled; relicensed CC-BY-SA-4.0 |

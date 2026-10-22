@@ -26,7 +26,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 
 | Document | Version | Status |
 | --- | --- | --- |
-| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.4.0.md) | 0.4.0 | Accepted |
+| [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.5.0.md) | 0.5.0 | Accepted |
 | [Directory Guide](guides/repository/directory-guide-v0.2.0.md) | 0.2.0 | Accepted |
 
 ## Decisions
@@ -65,12 +65,16 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: Where the Release Keys Are Published](decisions/0030--where-the-release-keys-are-published-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: A Test Platform Repository](decisions/0031--a-test-platform-repository-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: SSH Signatures Required With Wheels, and SSH-Signed Tags](decisions/0032--ssh-signatures-required-with-wheels-and-ssh-signed-tags-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Managers Run on a Runtime They Do Not Expose](decisions/0033--managers-run-on-a-runtime-they-do-not-expose-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: OSAT Managers and mise](decisions/0034--osat-managers-and-mise-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 
 | Document | Version | Status |
 | --- | --- | --- |
 | [Session: uc-automa Foundation](sessions/2026-10-09--uc-automa-foundation-v0.1.0.md) | 0.1.0 | Accepted |
+| [Moving Universal Cake Tools to GPL-2.0.md](sessions/Moving Universal Cake Tools to GPL-2.0.md) |  |  |
+| [Universal Cake Licensing Rationale.md](sessions/Universal Cake Licensing Rationale.md) |  |  |
 
 ## License
 
