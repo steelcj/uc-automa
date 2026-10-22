@@ -61,6 +61,8 @@ The session began with one task, bringing the uc-radar entry for Git on Windows 
 | uc-automa | #1 | The osat-manager-git plan 0.2.0, consistent with 0001 and the radar |
 | uc-automa | #2 | Decisions 0033 and 0034; the process guide 0.5.0 |
 | uc-automa | #3 | uc-automa's own check findings cleared: two licensing notes renamed and given front matter, the layout extended |
+| uc-automa | #4 | Decisions 0035 and 0036; the process guide 0.6.0 |
+| uc-automa | #5 | This session record |
 | uc-radar | #1 | *Git on Windows* 0.2.0 |
 | uc-radar | #2 | *mise-en-place* 0.1.1, with what running mise showed |
 | satx | #1 | *Ingress Verification Stamp* v0.0.1, under consideration |
@@ -70,7 +72,6 @@ The session began with one task, bringing the uc-radar entry for Git on Windows 
 | Repository | Pull request or issue | What |
 | --- | --- | --- |
 | osat-manager-git | #2 | Decision 0002, the field renames, the Windows credential helper |
-| uc-automa | #4 | Decisions 0035 and 0036; the process guide 0.6.0 |
 | osat-manager-python | issue #1 | The manager runtime, `--manager-runtime VERSION`, automatic migration, `--uninstall` with a self-deleting batch file on Windows, osat-manager-core installed into the runtime |
 
 ## Verification
@@ -87,7 +88,7 @@ The session began with one task, bringing the uc-radar entry for Git on Windows 
 ## Left open
 
 - [ ] Create the repository `steelcj/osat-manager-core`; this session could not create repositories.
-- [ ] Review and merge osat-manager-git#2 and uc-automa#4.
+- [ ] Review and merge osat-manager-git#2.
 - [ ] The release-time lock tool, and signed locks for git 2.56.0.
 - [ ] manage-git's install, switch, aliases, protection and uninstall, with the Windows launcher's ownership marker and `--check` resolving manage-git's own launchers.
 - [ ] End-to-end runs: Linux in an Incus container, then Windows x64 in the Windows 11 virtual machine, including whether `%PROGRAMDATA%\Git\config` is read when `GIT_CONFIG_SYSTEM` is set, and the junction with an editor. `win-arm64` has no working reference implementation.
