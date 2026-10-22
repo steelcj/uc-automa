@@ -62,6 +62,16 @@ paths:
     holds: "Skeleton for a new reference"
   "{language}/templates/session.md":
     holds: "Skeleton for a new session record"
+  "{language}/templates/project.md":
+    holds: "Skeleton for a new project plan"
+  "{language}/projects/":
+    holds: "Project plans and their working notes, one directory per project"
+  "{language}/policies/":
+    holds: "Policies uc-automa publishes, such as the trademark policy"
+  ".claude/":
+    holds: "Project settings for Claude Code, such as the hooks Entire uses"
+  ".entire/":
+    holds: "Project settings for Entire, which records agent sessions"
   ".pre-commit-hooks.yaml":
     holds: "Hooks uc-automa offers to other repositories; pre-commit requires this file at the root"
   "conf/":

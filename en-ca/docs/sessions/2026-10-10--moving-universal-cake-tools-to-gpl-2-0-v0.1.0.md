@@ -1,3 +1,19 @@
+---
+title: "Moving Universal Cake Tools to GPL-2.0"
+dc:title: "Moving Universal Cake Tools to GPL-2.0"
+dc:creator: "Christopher Steel"
+dc:subject: "Universal Cake, licensing, AGPL-3.0-or-later, GPL-2.0, GPL-3.0-or-later, CC BY-SA 4.0"
+dc:description: "Weighs moving the Universal Cake tools from AGPL-3.0-or-later to GPL-2.0, and reaches a provisional conclusion: keep AGPL-3.0-or-later for anything run as a service, and consider GPL-3.0-or-later, not GPL-2.0, for tools only distributed and run locally."
+dc:date: "2026-10-10"
+dc:type: "Text"
+dc:format: "text/markdown"
+dc:identifier: "urn:uuid:23530f44-00ea-4341-90bf-7f4dbdf6c8d5"
+dc:language: "en-CA"
+dc:rights: "CC-BY-4.0"
+sat:version: "0.1.0"
+sat:status: "Accepted"
+---
+
 # Moving Universal Cake Tools to GPL-2.0
 
 10 Oct 2026 · @sirhc
