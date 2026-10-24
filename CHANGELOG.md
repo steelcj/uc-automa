@@ -14,10 +14,14 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - Decision record 0031, a test platform repository: `uc-test-platform` holds the drivers, the network cut, the verification run and the instance recipes.
 - Decision record 0032, SSH signatures required with wheels, and SSH-signed tags; tag verification is documented for Linux and macOS only in 0.2.0.
 - The directive `release/readme-install-tag` and its check: `uc-automa check` fails when `README.md` installs the repository at any tag but `v` and its `VERSION`.
+- Decision record 0037 and the `eleventy-site` layout, extending `base`: an Eleventy website requires `eleventy.config.js`, `package.json`, `package-lock.json` and `src/`, and may hold `themes/` and, for a site deployed to Netlify, `netlify.toml`, with en-ca words for each path.
+- Decision record 0038 and `uc-automa metadata new-id`, which prints a fresh random UUID as a `urn:uuid:` value, replacing `uuidgen -r` run by hand. The templates and the directory guide now name it.
 - The README states what verifies Windows: the unit tests, `uc-automa check` on itself, and an install from wheels with `pip install --no-index` inside a network cut.
 
 ### Changed
 
+- `naming/lowercase-names`: its check now also accepts the names Eleventy requires by default as names a tool requires, as the directive's text already allows: `eleventy.config.js`, and in an eleventy-site repository `src/`'s `_data/` and `_includes/` and the `.11tydata.json` and `.11tydata.js` suffixes. The directive keeps its version (uc-automa 0029).
+- Directory guide 0.3.0: the eleventy-site layout in the chain and in its own section. The OSAT manager guide's reference to the guide's version 0.2.0 now points at that version by commit.
 - `release/readme-install-tag` 0.2.0: wherever the README installs a dependency from a git reference, the reference is a release tag the dependency's `pyproject.toml` range allows.
 - `release/annotated-version-tags` 0.2.0: the release commit may also update `README.md`'s install references to the new tag.
 - Decisions 0027 and 0028: the verification run serves the README's online install from local mirrors, so the release tag is pushed only after the run passes, and the cut rewrites the README's install tag.

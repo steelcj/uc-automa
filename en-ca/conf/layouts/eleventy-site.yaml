@@ -1,0 +1,22 @@
+language: "en-ca"
+translates: "conf/layouts/eleventy-site.yaml"
+title: "Eleventy site repository layout"
+purpose: >
+  An Eleventy site repository builds a static website with Eleventy. It holds
+  the Eleventy configuration, the npm manifest and lockfile that pin the build,
+  the site's input, and optionally the themes it draws on and the Netlify
+  configuration it deploys with. The built site is output, never committed.
+
+paths:
+  "eleventy.config.js":
+    holds: "The Eleventy configuration: input and output directories, collections, filters and plugins"
+  "package.json":
+    holds: "The npm manifest: Eleventy and the site's other build dependencies, and the build scripts"
+  "package-lock.json":
+    holds: "The npm lockfile, so every build installs the same dependency versions"
+  "src/":
+    holds: "The site's input: content, templates, data and assets"
+  "themes/":
+    holds: "Themes the site draws on, such as fonts, styles and images"
+  "netlify.toml":
+    holds: "The Netlify configuration, for a site deployed to Netlify: build settings, redirects and response headers"

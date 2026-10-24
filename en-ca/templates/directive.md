@@ -17,7 +17,7 @@ sat:directive: "<domain>/<slug>"
 sat:enforced_by: []
 ---
 
-<!-- Replace dc:identifier with a value from uuidgen -r, and name the file directives/<domain>/<slug>-v0.1.0.md. -->
+<!-- Replace dc:identifier with the value `uc-automa metadata new-id` prints, and name the file directives/<domain>/<slug>-v0.1.0.md. -->
 
 # <Domain>: <Rule Stated as a Name>
 

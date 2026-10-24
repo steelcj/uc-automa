@@ -140,5 +140,53 @@ class DocsIndex(Scratch):
             self.assertIn("pins uc-automa", err)
 
 
+class Metadata(unittest.TestCase):
+
+    def test_new_id_is_a_random_urn_uuid(self):
+        import uuid
+        code, out, _ = run("metadata", "new-id")
+        self.assertEqual(code, 0)
+        value = out.strip()
+        self.assertTrue(value.startswith("urn:uuid:"), value)
+        self.assertEqual(uuid.UUID(value[len("urn:uuid:"):]).version, 4)
+
+    def test_each_id_is_new(self):
+        first, second = run("metadata", "new-id")[1], run("metadata", "new-id")[1]
+        self.assertNotEqual(first, second)
+
+
+class EleventySite(Scratch):
+
+    def test_a_site_shaped_repository_initialises_and_conforms(self):
+        import subprocess
+        r = self.root
+        subprocess.run(["git", "init", "-q", "-b", "main", str(r)], check=True)
+        side = r / ".site.assets"
+        side.mkdir()
+        (side / "archive.yaml").write_text(
+            'sat:role: "archive"\ndc:identifier: "urn:uuid:'
+            '00000000-0000-4000-8000-000000000000"\ndc:title: "site"\n'
+            'dc:language: "en-CA"\ndc:rights: "CC-BY-4.0"\n')
+        (side / "dc.yaml").write_text(
+            'dc:creator: "Christopher Steel"\ndc:publisher: "Vishpala"\n'
+            'dc:rights: "CC-BY-4.0"\ndc:language: "en-CA"\n'
+            'dc:format: "text/markdown"\n')
+        for name in ("README.md", "ROADMAP.md", "CONTRIBUTING.md",
+                     "eleventy.config.js", "package.json",
+                     "package-lock.json", "src/index.md", "themes/site.css",
+                     "src/_data/site.json", "src/_includes/page.njk",
+                     "src/en/en.11tydata.json"):
+            (r / name).parent.mkdir(parents=True, exist_ok=True)
+            (r / name).write_text("x\n")
+        (r / ".gitignore").write_text("node_modules/\n_site/\n")
+        self.assertEqual(run("init", "--target", str(r), "--repository",
+                             "site", "--layout", "eleventy-site")[0], 0)
+        self.assertEqual(run("offerings", "apply", "--yes",
+                             "--target", str(r))[0], 0)
+        self.assertEqual(run("docs", "index", "--target", str(r))[0], 0)
+        code, out, err = run("check", "--target", str(r))
+        self.assertEqual(code, 0, out + err)
+
+
 if __name__ == "__main__":
     unittest.main()

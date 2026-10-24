@@ -5,6 +5,7 @@
     uc-automa translations
     uc-automa offerings {plan,status,apply,harvest} [--yes] [--force]
     uc-automa docs index
+    uc-automa metadata new-id
 
 Every command works on the repository at --target, the current
 directory by default.
@@ -29,6 +30,7 @@ from .paths import conf_dir, text_dirs, text_dirs_in
 from .docs import IndexError_, write_index
 from .errors import AutomaError
 from .init import init
+from .metadata import new_id
 
 
 def log(message: str) -> None:
@@ -106,6 +108,11 @@ def cmd_docs(args) -> int:
     return 0
 
 
+def cmd_metadata(args) -> int:
+    print(new_id())
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="uc-automa",
@@ -150,6 +157,10 @@ def build_parser() -> argparse.ArgumentParser:
                        help="Documentation tools.")
     p.add_argument("action", choices=["index"])
     p.set_defaults(func=cmd_docs)
+
+    p = sub.add_parser("metadata", help="Metadata tools.")
+    p.add_argument("action", choices=["new-id"])
+    p.set_defaults(func=cmd_metadata)
     return parser
 
 

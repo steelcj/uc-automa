@@ -142,7 +142,8 @@ class Extends(unittest.TestCase):
 class RealLayouts(unittest.TestCase):
 
     def test_every_layout_resolves(self):
-        for name in ("base", "python-tool", "uc-automa", "osat-manager"):
+        for name in ("base", "python-tool", "uc-automa", "osat-manager",
+                     "eleventy-site"):
             with self.subTest(layout=name):
                 load_layout(support.REPO / "conf", name)
 
@@ -150,6 +151,14 @@ class RealLayouts(unittest.TestCase):
         for name in ("uc-automa", "osat-manager"):
             layout = load_layout(support.REPO / "conf", name)
             self.assertEqual(layout.chain, ["base", "python-tool", name])
+
+    def test_eleventy_site_extends_base_directly(self):
+        layout = load_layout(support.REPO / "conf", "eleventy-site")
+        self.assertEqual(layout.chain, ["base", "eleventy-site"])
+
+    def test_eleventy_site_allows_netlify_toml(self):
+        layout = load_layout(support.REPO / "conf", "eleventy-site")
+        self.assertIn("netlify.toml", layout.own_paths["eleventy-site"])
 
 
 if __name__ == "__main__":

@@ -20,9 +20,18 @@ from . import Repository, check
 
 UPPERCASE_FILES = {"README.md", "LICENSE", "CHANGELOG.md", "VERSION",
                    "ROADMAP.md", "CONTRIBUTING.md", "CLAUDE.md"}
-TOOL_FILES = {"REUSE.toml"}      # named by the tool that reads it
+TOOL_FILES = {"REUSE.toml",      # named by the tool that reads it
+              "eleventy.config.js"}
 LICENCE_DIR = "LICENSES"
 COMPOUND_EXTENSIONS = (".schema.yaml",)
+
+# Names Eleventy requires by default inside an eleventy-site's input
+# directory, src/ (uc-automa 0037): its data and includes directories,
+# and the suffix of its directory and template data files.
+ELEVENTY_LAYOUT = "eleventy-site"
+ELEVENTY_INPUT = "src/"
+ELEVENTY_DIRS = {"_data", "_includes"}
+ELEVENTY_DATA_SUFFIXES = (".11tydata.json", ".11tydata.js")
 
 VERSION_SUFFIX = re.compile(r"-v(\d+)\.(\d+)\.(\d+)$")
 HYPHENATED_VERSION = re.compile(r"-v\d+-\d+-\d+(?=$|\.)")
@@ -59,6 +68,19 @@ def exempt(path: str, name: str) -> bool:
     return python_name(path, name)
 
 
+def is_eleventy_site(repo: Repository) -> bool:
+    return repo.layout is not None and ELEVENTY_LAYOUT in repo.layout.chain
+
+
+def strip_eleventy_suffix(name: str) -> str:
+    """page.11tydata.json is checked as page.json: Eleventy fixes the
+    .11tydata part, and the stem before it follows the rule."""
+    for suffix in ELEVENTY_DATA_SUFFIXES:
+        if name.endswith(suffix):
+            return name[: -len(suffix)] + suffix[suffix.rfind("."):]
+    return name
+
+
 def python_name(path: str, name: str) -> bool:
     """Python modules and packages take underscores, because Python
     cannot import hyphens. They live under lib/ and tests/."""
@@ -86,9 +108,14 @@ def split_name(name: str, is_dir: bool):
 @check("conformance.naming.lowercase_names", "naming/lowercase-names")
 def lowercase_names(repo: Repository):
     findings = []
+    eleventy = is_eleventy_site(repo)
     for path, name, is_dir in components(repo.checked_files()):
         if exempt(path, name):
             continue
+        if eleventy and path.startswith(ELEVENTY_INPUT):
+            if is_dir and name in ELEVENTY_DIRS:
+                continue
+            name = strip_eleventy_suffix(name)
         if not LOWERCASE.match(name.lstrip(".")):
             findings.append((path, "use lowercase letters, digits and "
                                    "hyphens only"))

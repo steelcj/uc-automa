@@ -5,20 +5,20 @@ dc:creator: "Christopher Steel"
 dc:contributor: "Claude Opus 5.5 (Anthropic), AI assistance"
 dc:subject: "uc-automa, layouts, repository layout, directories, offerings, directives"
 dc:description: "What each directory of a Vishpala repository holds, by layout type, with descriptions taken from the en-ca layout words."
-dc:date: "2026-10-09"
+dc:date: "2026-10-23"
 dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:c73e134d-11d2-44f9-a0ef-a0d446a896a3"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/automa--directory-guide-v0.1.0.md, not under version control"
 dc:language: "en-CA"
 dc:rights: "CC-BY-4.0"
-sat:version: "0.2.0"
+sat:version: "0.3.0"
 sat:status: "Accepted"
 ---
 
 # Directory Guide
 
-Version: 0.2.0
+Version: 0.3.0
 Status: Accepted
 
 ## How to read this guide
@@ -28,10 +28,11 @@ This guide explains what each directory of a Vishpala repository holds and why. 
 Every repository has a layout type, named by `layout:` in its `.uc-automa.yaml`. The types form a chain, each adding to its parent (uc-automa 0013):
 
 ```text
-base                 what every repository holds
-└── python-tool      a repository whose product is a Python tool
-    ├── uc-automa    the station itself
-    └── osat-manager a manager installing one tool into user space
+base                  what every repository holds
+├── python-tool       a repository whose product is a Python tool
+│   ├── uc-automa     the station itself
+│   └── osat-manager  a manager installing one tool into user space
+└── eleventy-site     a website built with Eleventy
 ```
 
 uc-automa holds three kinds of material, and each has one home (uc-automa 0014):
@@ -107,7 +108,7 @@ The SAT sidecar for the repository as an archive, named for the repository; prov
 ```yaml
 # .uc-automa.assets/archive.yaml
 sat:role: "archive"
-dc:identifier: "urn:uuid:<generated with uuidgen -r>"
+dc:identifier: "<printed by uc-automa metadata new-id>"
 dc:title: "uc-automa"
 dc:language: "en-CA"
 dc:rights: "CC-BY-4.0"
@@ -166,6 +167,19 @@ An osat-manager repository adds a declarative description of the managed tool an
 | `tests/e2e/linux/` | The scenario as run on Linux, in a fresh Incus container |
 | `tests/e2e/windows/` | The scenario as run on Windows |
 | `tests/e2e/macos/` | The scenario as run on macOS, on Apple hardware |
+
+## Eleventy sites
+
+An eleventy-site repository builds a static website with Eleventy. It extends base directly, since a website is not a Python tool, and holds what an Eleventy site holds when set up as Eleventy and npm expect by default (uc-automa 0037). `src/` and `themes/` are open, so their contents are the site's own. Under `src/`, the names Eleventy requires by default are accepted: the `_data/` and `_includes/` directories, and data files such as `guides.11tydata.json`. The built site and the installed dependencies, such as `_site/` and `node_modules/`, belong in `.gitignore` and are never committed.
+
+| Path | What it holds |
+| --- | --- |
+| `eleventy.config.js` | The Eleventy configuration: input and output directories, collections, filters and plugins |
+| `package.json` | The npm manifest: Eleventy and the site's other build dependencies, and the build scripts |
+| `package-lock.json` | The npm lockfile, so every build installs the same dependency versions |
+| `src/` | The site's input: content, templates, data and assets |
+| `themes/` | Themes the site draws on, such as fonts, styles and images |
+| `netlify.toml` | The Netlify configuration, for a site deployed to Netlify: build settings, redirects and response headers |
 
 ## uc-automa itself
 
@@ -235,6 +249,7 @@ Each directive names the check that enforces it in `sat:enforced_by`, and each c
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
+| 0.3.0 | 2026-10-23 | Accepted | Added the eleventy-site layout to the chain, with its own section; identifiers come from uc-automa metadata new-id |
 | 0.2.0 | 2026-10-09 | Accepted | Revised to the foundation brief: uc-automa names, en-ca, the layout chain, kinds and from_offering, the licences, init; descriptions taken from the layout words; relicensed CC-BY-SA-4.0 |
 | 0.1.0 | 2026-10-07 | Draft | Initial guide: one section per directory, with illustrations and YAML examples |
 
