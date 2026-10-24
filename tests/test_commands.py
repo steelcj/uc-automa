@@ -173,7 +173,9 @@ class EleventySite(Scratch):
             'dc:format: "text/markdown"\n')
         for name in ("README.md", "ROADMAP.md", "CONTRIBUTING.md",
                      "eleventy.config.js", "package.json",
-                     "package-lock.json", "src/index.md", "themes/site.css"):
+                     "package-lock.json", "src/index.md", "themes/site.css",
+                     "src/_data/site.json", "src/_includes/page.njk",
+                     "src/en/en.11tydata.json"):
             (r / name).parent.mkdir(parents=True, exist_ok=True)
             (r / name).write_text("x\n")
         (r / ".gitignore").write_text("node_modules/\n_site/\n")

@@ -20,7 +20,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ### Changed
 
-- `naming/lowercase-names`: its check now also accepts `eleventy.config.js` as a name a tool requires, as the directive's text already allows; the directive keeps its version (uc-automa 0029).
+- `naming/lowercase-names`: its check now also accepts the names Eleventy requires by default as names a tool requires, as the directive's text already allows: `eleventy.config.js`, and in an eleventy-site repository `src/`'s `_data/` and `_includes/` and the `.11tydata.json` and `.11tydata.js` suffixes. The directive keeps its version (uc-automa 0029).
 - Directory guide 0.3.0: the eleventy-site layout in the chain and in its own section. The OSAT manager guide's reference to the guide's version 0.2.0 now points at that version by commit.
 - `release/readme-install-tag` 0.2.0: wherever the README installs a dependency from a git reference, the reference is a release tag the dependency's `pyproject.toml` range allows.
 - `release/annotated-version-tags` 0.2.0: the release commit may also update `README.md`'s install references to the new tag.

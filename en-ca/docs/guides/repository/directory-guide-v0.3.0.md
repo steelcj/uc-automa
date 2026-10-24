@@ -170,7 +170,7 @@ An osat-manager repository adds a declarative description of the managed tool an
 
 ## Eleventy sites
 
-An eleventy-site repository builds a static website with Eleventy. It extends base directly, since a website is not a Python tool, and holds what an Eleventy site holds when set up as Eleventy and npm expect by default (uc-automa 0037). `src/` and `themes/` are open, so their contents are the site's own. The built site and the installed dependencies, such as `_site/` and `node_modules/`, belong in `.gitignore` and are never committed.
+An eleventy-site repository builds a static website with Eleventy. It extends base directly, since a website is not a Python tool, and holds what an Eleventy site holds when set up as Eleventy and npm expect by default (uc-automa 0037). `src/` and `themes/` are open, so their contents are the site's own. Under `src/`, the names Eleventy requires by default are accepted: the `_data/` and `_includes/` directories, and data files such as `guides.11tydata.json`. The built site and the installed dependencies, such as `_site/` and `node_modules/`, belong in `.gitignore` and are never committed.
 
 | Path | What it holds |
 | --- | --- |

@@ -9,12 +9,42 @@ from pathlib import Path
 import support  # noqa: F401
 
 from uc_automa.conformance import Repository
-from uc_automa.conformance.naming import (portable_names, spdx_slug,
-                                          versions_in_filenames)
+from uc_automa.conformance.layouts import load_layout
+from uc_automa.conformance.naming import (lowercase_names, portable_names,
+                                          spdx_slug, versions_in_filenames)
 
 
-def repo(files):
-    return Repository(Path(tempfile.gettempdir()), sorted(files))
+def repo(files, layout=None):
+    loaded = load_layout(support.REPO / "conf", layout) if layout else None
+    return Repository(Path(tempfile.gettempdir()), sorted(files),
+                      layout=loaded)
+
+
+class EleventyNames(unittest.TestCase):
+
+    SITE = ["src/_data/site.json", "src/_includes/layouts/page.njk",
+            "src/en/guides/guides.11tydata.json",
+            "src/en/index.11tydata.js", "src/en/index.md"]
+
+    def test_eleventy_names_pass_in_an_eleventy_site(self):
+        self.assertEqual(lowercase_names(repo(self.SITE, "eleventy-site")), [])
+
+    def test_eleventy_names_fail_elsewhere(self):
+        self.assertTrue(lowercase_names(repo(self.SITE, "python-tool")))
+        self.assertTrue(lowercase_names(repo(self.SITE)))
+
+    def test_only_under_src(self):
+        for name in ("_data/site.json", "docs/page.11tydata.json"):
+            with self.subTest(name=name):
+                self.assertTrue(lowercase_names(repo([name],
+                                                     "eleventy-site")))
+
+    def test_the_stem_still_follows_the_rule(self):
+        for name in ("src/en/Guides.11tydata.json",
+                     "src/en/a.b.11tydata.json", "src/_Data/site.json"):
+            with self.subTest(name=name):
+                self.assertTrue(lowercase_names(repo([name],
+                                                     "eleventy-site")))
 
 
 class Portable(unittest.TestCase):

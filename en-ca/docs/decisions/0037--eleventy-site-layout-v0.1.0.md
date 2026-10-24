@@ -4,7 +4,7 @@ dc:title: "Decision: An eleventy-site Layout"
 dc:creator: "Christopher Steel"
 dc:contributor: "Claude Opus 5.5 (Anthropic), AI assistance"
 dc:subject: "layouts, eleventy-site, Eleventy, websites, naming, tool-required names"
-dc:description: "Add an eleventy-site layout extending base, requiring eleventy.config.js, package.json, package-lock.json and src/ with themes/ optional, so an Eleventy website conforms out of the box; eleventy.config.js joins the names a tool requires."
+dc:description: "Add an eleventy-site layout extending base, requiring eleventy.config.js, package.json, package-lock.json and src/ with themes/ optional, so an Eleventy website conforms out of the box; the names Eleventy requires by default join the names a tool requires."
 dc:date: "2026-10-23"
 dc:type: "Text"
 dc:format: "text/markdown"
@@ -27,7 +27,7 @@ Status: Accepted
 
 eleventy-website-vishpala-com, the repository for vishpala.com, is the first Vishpala repository that is a website rather than a Python tool. It holds an Eleventy configuration, an npm manifest and lockfile, the site's input under `src/`, and a theme under `themes/`. The root is always closed and a path no layout describes is a finding about the layout, with no per-repository exception (uc-automa 0013), so under `base` alone every one of those paths is a finding.
 
-Eleventy looks for its configuration as `eleventy.config.js`. The directive `naming/lowercase-names` already exempts names a tool requires, such as `REUSE.toml`, but its check listed only `REUSE.toml`, so it reported the dot in `eleventy.config`.
+Eleventy fixes some names by default. It looks for its configuration as `eleventy.config.js`; inside its input directory it reads data from `_data/` and layouts and partials from `_includes/`; and it reads directory and template data from files named for their folder or template with `.11tydata.json` or `.11tydata.js`, such as `guides.11tydata.json`. The directive `naming/lowercase-names` already exempts names a tool requires, such as `REUSE.toml`, but its check listed only `REUSE.toml`, so it reported every one of these.
 
 ## Decision
 
@@ -35,7 +35,7 @@ Eleventy looks for its configuration as `eleventy.config.js`. The directive `nam
 - It requires `eleventy.config.js`, `package.json`, `package-lock.json` and `src/`, and allows `themes/`. These are what an Eleventy site holds when set up as Eleventy and npm expect by default, so a site conforms without configuring anything away from those defaults.
 - `src/` and `themes/` stay open: their contents are the site's own and change with it, and the layout does not describe them.
 - The built output and installed dependencies, such as `_site/` and `node_modules/`, are not described. They are ignored by `.gitignore`, so the layout check never sees them.
-- The check for `naming/lowercase-names` adds `eleventy.config.js` to the names a tool requires. The directive's text already covers it, so this is a check fixed without changing the rule (uc-automa 0029), and the directive keeps its version.
+- The check for `naming/lowercase-names` accepts the names Eleventy requires: `eleventy.config.js` everywhere; and, in a repository whose layout chain includes `eleventy-site`, the directories `_data/` and `_includes/` and the `.11tydata.json` and `.11tydata.js` suffixes under `src/`. The part of a data file's name before the suffix still follows the rule, so `Guides.11tydata.json` and `a.b.11tydata.json` are still reported. The directive's text already covers names a tool requires, so this is a check fixed without changing the rule (uc-automa 0029), and the directive keeps its version.
 
 ## Alternatives considered
 
