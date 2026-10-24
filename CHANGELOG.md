@@ -4,6 +4,8 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-24
+
 ### Added
 
 - Decision record 0026, the release ceremony: `uc-automa release bump`, `cut` and `publish`, to replace the copied scripts in 0.2.0.

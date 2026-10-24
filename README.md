@@ -24,7 +24,7 @@ Install a release from its tag, together with uc-portage, which uc-automa depend
 python -m venv .venv
 PYYAML_FORCE_LIBYAML=0 .venv/bin/python -m pip install --no-binary pyyaml \
     "git+https://github.com/steelcj/uc-portage@v0.1.0" \
-    "git+https://github.com/steelcj/uc-automa@v0.1.0"
+    "git+https://github.com/steelcj/uc-automa@v0.2.0"
 .venv/bin/uc-automa --version
 ```
 
@@ -33,7 +33,7 @@ On Windows, in Command Prompt, with Git on your `PATH`:
 ```bat
 python -m venv .venv
 set PYYAML_FORCE_LIBYAML=0
-.venv\Scripts\python -m pip install --no-binary pyyaml "git+https://github.com/steelcj/uc-portage@v0.1.0" "git+https://github.com/steelcj/uc-automa@v0.1.0"
+.venv\Scripts\python -m pip install --no-binary pyyaml "git+https://github.com/steelcj/uc-portage@v0.1.0" "git+https://github.com/steelcj/uc-automa@v0.2.0"
 .venv\Scripts\uc-automa --version
 ```
 
