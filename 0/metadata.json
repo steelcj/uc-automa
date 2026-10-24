@@ -1,0 +1,25 @@
+{
+  "cli_version": "0.12.0",
+  "checkpoint_id": "01M5NVCZXDEE3GCGQTBQ0DQ1QR",
+  "session_id": "9d1a7251-5a7a-4a89-96d6-ee6f0ab0a8bf",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-24T02:21:26.067793528Z",
+  "branch": "eleventy-site-layout",
+  "checkpoints_count": 2,
+  "save_step_count": 2,
+  "files_touched": [],
+  "agent": "Claude Code",
+  "model": "claude-opus-5-5",
+  "turn_id": "ae37b6415ad5",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 36,
+    "cache_creation_tokens": 29697,
+    "cache_read_tokens": 851015,
+    "output_tokens": 9537,
+    "api_call_count": 18
+  },
+  "session_metrics": {
+    "turn_count": 2
+  }
+}

@@ -1,0 +1,13 @@
+<pasted_content id="efef">
+Read CLAUDE.md. In this repository's root is uc-automa--eleventy-site-layout-files.zip, holding new and changed files at their repository paths, built against origin/main at 35e3a18. Before extracting, run `git status` and `git diff HEAD` on every path the zip lists (`unzip -l`), and stop and show me if any of them has local changes or differs from 35e3a18, since extracting would overwrite them. Leave my existing staged and unstaged work under en-ca/docs/overviews/ and en-ca/docs/sessions/ untouched and out of this change. If the paths are clean, extract the zip over the checkout, delete en-ca/docs/guides/repository/directory-guide-v0.2.0.md (replaced by the 0.3.0 file in the zip), and delete the zip. Then install editable with uc-portage beside it as ../uc-portage and run `python -m unittest discover -s tests`, `uc-automa check` and `uc-automa translations`. Show me the diff of this change only, and a proposed commit message. Do not commit, push or tag until I confirm.
+</pasted_content id="efef">
+
+---
+
+<pasted_content id="efef">
+Go ahead with the worktree option, in this order. Run `git am --abort` and confirm the staged renames under en-ca/docs/sessions/ are still staged and nothing else changed. Then create a worktree at ../uc-automa-eleventy-site-layout on a new branch eleventy-site-layout from origin/main, and check that origin/main is at or descends from 35e3a18. In the worktree, apply ../uc-automa/uc-automa--eleventy-site-layout.patch with `git am` (it was built against 35e3a18; if origin/main has moved past it and the patch does not apply, stop and tell me rather than using --3way). Create a venv in the worktree, install editable with ../uc-portage, and run `python -m unittest discover -s tests`, `uc-automa check` and `uc-automa translations` there. Report the results and the commit. Do not touch main, my staged work, or the remote; do not push. Separately, tell me what 447d724 contains so I can decide what to do with it later.
+</pasted_content id="efef">
+
+---
+
+In ../uc-automa-eleventy-site-layout, on branch eleventy-site-layout at 70a9682, extract uc-automa--eleventy-names-files.zip over the worktree. It holds six files changed on top of that commit; first confirm with `git status` that the worktree is clean so nothing local is overwritten. Delete the zip, then run `python -m unittest discover -s tests` (expect 44 tests, 2 skipped), `uc-automa check` and `uc-automa translations` in the worktree's .venv. If all pass, commit the six files as "Accept the names Eleventy requires under an eleventy-site's src/". Do not push.
