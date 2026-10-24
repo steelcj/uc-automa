@@ -156,6 +156,10 @@ class RealLayouts(unittest.TestCase):
         layout = load_layout(support.REPO / "conf", "eleventy-site")
         self.assertEqual(layout.chain, ["base", "eleventy-site"])
 
+    def test_eleventy_site_allows_netlify_toml(self):
+        layout = load_layout(support.REPO / "conf", "eleventy-site")
+        self.assertIn("netlify.toml", layout.own_paths["eleventy-site"])
+
 
 if __name__ == "__main__":
     unittest.main()

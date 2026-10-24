@@ -22,3 +22,6 @@ tree:
   - path: "themes/"
     type: directory
     required: false
+  - path: "netlify.toml"
+    type: file
+    required: false

@@ -14,7 +14,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - Decision record 0031, a test platform repository: `uc-test-platform` holds the drivers, the network cut, the verification run and the instance recipes.
 - Decision record 0032, SSH signatures required with wheels, and SSH-signed tags; tag verification is documented for Linux and macOS only in 0.2.0.
 - The directive `release/readme-install-tag` and its check: `uc-automa check` fails when `README.md` installs the repository at any tag but `v` and its `VERSION`.
-- Decision record 0037 and the `eleventy-site` layout, extending `base`: an Eleventy website requires `eleventy.config.js`, `package.json`, `package-lock.json` and `src/`, and may hold `themes/`, with en-ca words for each path.
+- Decision record 0037 and the `eleventy-site` layout, extending `base`: an Eleventy website requires `eleventy.config.js`, `package.json`, `package-lock.json` and `src/`, and may hold `themes/` and, for a site deployed to Netlify, `netlify.toml`, with en-ca words for each path.
 - Decision record 0038 and `uc-automa metadata new-id`, which prints a fresh random UUID as a `urn:uuid:` value, replacing `uuidgen -r` run by hand. The templates and the directory guide now name it.
 - The README states what verifies Windows: the unit tests, `uc-automa check` on itself, and an install from wheels with `pip install --no-index` inside a network cut.
 

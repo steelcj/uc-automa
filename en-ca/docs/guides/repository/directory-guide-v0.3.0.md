@@ -179,6 +179,7 @@ An eleventy-site repository builds a static website with Eleventy. It extends ba
 | `package-lock.json` | The npm lockfile, so every build installs the same dependency versions |
 | `src/` | The site's input: content, templates, data and assets |
 | `themes/` | Themes the site draws on, such as fonts, styles and images |
+| `netlify.toml` | The Netlify configuration, for a site deployed to Netlify: build settings, redirects and response headers |
 
 ## uc-automa itself
 
