@@ -6,7 +6,7 @@ lang: en-CA
 tags:
   - project
 dc:
-  identifier: "urn:uuid:<uuidgen -r>"
+  identifier: "<uc-automa metadata new-id>"
   title: "<Project title>"
   creator: "Christopher Steel"
   publisher: "Vishpala"

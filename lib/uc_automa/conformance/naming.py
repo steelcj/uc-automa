@@ -20,7 +20,8 @@ from . import Repository, check
 
 UPPERCASE_FILES = {"README.md", "LICENSE", "CHANGELOG.md", "VERSION",
                    "ROADMAP.md", "CONTRIBUTING.md", "CLAUDE.md"}
-TOOL_FILES = {"REUSE.toml"}      # named by the tool that reads it
+TOOL_FILES = {"REUSE.toml",      # named by the tool that reads it
+              "eleventy.config.js"}
 LICENCE_DIR = "LICENSES"
 COMPOUND_EXTENSIONS = (".schema.yaml",)
 

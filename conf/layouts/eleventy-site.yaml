@@ -1,0 +1,24 @@
+format: 1
+describes: "eleventy-site"
+extends: "base"
+source_language: "en-ca"
+text: "{language}/conf/layouts/eleventy-site.yaml"
+
+placeholders: {}
+
+tree:
+  - path: "eleventy.config.js"
+    type: file
+    required: true
+  - path: "package.json"
+    type: file
+    required: true
+  - path: "package-lock.json"
+    type: file
+    required: true
+  - path: "src/"
+    type: directory
+    required: true
+  - path: "themes/"
+    type: directory
+    required: false

@@ -306,7 +306,7 @@ Gate: a person starting from the radar entry, the OSAT list or the old repositor
 
 <a id="ref-pypa-nd"></a>Python Packaging Authority. (n.d.). *Entry points specification*. Python Packaging User Guide. Retrieved October 7, 2026, from https://packaging.python.org/en/latest/specifications/entry-points/ [↩](#cite-pypa-nd)
 
-<a id="ref-steel-2026a"></a>Steel, C. (2026a). *Directory guide* (Version 0.2.0) [Unpublished manuscript]. uc-automa. [directory-guide-v0.2.0.md](../repository/directory-guide-v0.2.0.md) [↩](#cite-steel-2026a)
+<a id="ref-steel-2026a"></a>Steel, C. (2026a). *Directory guide* (Version 0.2.0) [Unpublished manuscript]. uc-automa. [directory-guide-v0.2.0.md](https://github.com/steelcj/uc-automa/blob/35e3a182cb5f5981f11951c62476edc8b1e9739e/en-ca/docs/guides/repository/directory-guide-v0.2.0.md) [↩](#cite-steel-2026a)
 
 <a id="ref-steel-2026c"></a>Steel, C. (2026c). *osat-manager-python* [Computer software]. GitHub. https://github.com/steelcj/osat-manager-python [↩](#cite-steel-2026c)
 

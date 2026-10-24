@@ -12,7 +12,6 @@ Scope approved on 2026-10-11 for 0.2.0:
 - `release-keys/` with the SSH release key's allowed-signers line, and its entry in the `uc-automa` layout (uc-automa 0030). Releases and tags are signed with the SSH key only; there is no OpenPGP key for 0.2.0 (uc-automa 0032).
 - The verification runs use `uc-test-platform` at a recorded commit; it is released after uc-automa 0.2.0 (uc-automa 0031).
 - The `retire-copied-scripts` offering, with guarded retractions (uc-portage 0004) whose checksums come from sat-doc-automa's history; requires uc-portage 0.2.0.
-- `uc-automa metadata new-id`, replacing `uuidgen -r` run by hand.
 - Release order, approved on 2026-10-11: uc-portage 0.2.0 is cut and published first, with the ceremony of uc-automa's candidate commit installed editable; that candidate already depends on `uc-portage>=0.2.0,<0.3.0` and its README names `uc-portage@v0.2.0`. uc-automa 0.2.0's release commit is that candidate commit plus the cut, and nothing else. If it differs, uc-portage's release runs are repeated with the new uc-automa commit.
 - Before each tag is pushed, verification runs on Linux and Windows (uc-automa 0027), and the release wheels match their records (uc-automa 0028).
 

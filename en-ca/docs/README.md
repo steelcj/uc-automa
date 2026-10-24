@@ -27,7 +27,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | Document | Version | Status |
 | --- | --- | --- |
 | [Creating an OSAT Manager Repository](guides/new-repository/creating-an-osat-manager-repository-v0.6.0.md) | 0.6.0 | Accepted |
-| [Directory Guide](guides/repository/directory-guide-v0.2.0.md) | 0.2.0 | Accepted |
+| [Directory Guide](guides/repository/directory-guide-v0.3.0.md) | 0.3.0 | Accepted |
 
 ## Decisions
 
@@ -69,6 +69,8 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: OSAT Managers and mise](decisions/0034--osat-managers-and-mise-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: osat-manager-core, the Shared Manager Package](decisions/0035--osat-manager-core-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: A Check Exits 2 When Not Ready](decisions/0036--a-check-exits-2-when-not-ready-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: An eleventy-site Layout](decisions/0037--eleventy-site-layout-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: uc-automa metadata new-id](decisions/0038--metadata-new-id-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 

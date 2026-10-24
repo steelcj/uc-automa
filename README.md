@@ -72,7 +72,7 @@ uc-automa check
 | `uc-automa docs index` | Regenerates `en-ca/docs/README.md` |
 | `uc-automa translations` | Reports untranslated and stale layout words |
 
-The guides explain [the repository layouts](en-ca/docs/guides/repository/directory-guide-v0.2.0.md) and [creating an OSAT manager repository](en-ca/docs/guides/new-repository/creating-an-osat-manager-repository-v0.6.0.md).
+The guides explain [the repository layouts](en-ca/docs/guides/repository/directory-guide-v0.3.0.md) and [creating an OSAT manager repository](en-ca/docs/guides/new-repository/creating-an-osat-manager-repository-v0.6.0.md).
 
 ## Platform status
 

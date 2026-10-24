@@ -15,7 +15,7 @@ sat:version: "0.1.0"
 sat:status: "Accepted"
 ---
 
-<!-- Replace dc:identifier with a value from uuidgen -r, and name the file decisions/<number>--<slug>-v0.1.0.md. -->
+<!-- Replace dc:identifier with the value `uc-automa metadata new-id` prints, and name the file decisions/<number>--<slug>-v0.1.0.md. -->
 
 # Decision: <Title>
 
