@@ -71,6 +71,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: A Check Exits 2 When Not Ready](decisions/0036--a-check-exits-2-when-not-ready-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: An eleventy-site Layout](decisions/0037--eleventy-site-layout-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: uc-automa metadata new-id](decisions/0038--metadata-new-id-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Cut 0.2.0 by Hand](decisions/0039--hand-cut-0-2-0-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 

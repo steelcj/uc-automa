@@ -16,6 +16,7 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 - The directive `release/readme-install-tag` and its check: `uc-automa check` fails when `README.md` installs the repository at any tag but `v` and its `VERSION`.
 - Decision record 0037 and the `eleventy-site` layout, extending `base`: an Eleventy website requires `eleventy.config.js`, `package.json`, `package-lock.json` and `src/`, and may hold `themes/` and, for a site deployed to Netlify, `netlify.toml`, with en-ca words for each path.
 - Decision record 0038 and `uc-automa metadata new-id`, which prints a fresh random UUID as a `urn:uuid:` value, replacing `uuidgen -r` run by hand. The templates and the directory guide now name it.
+- Decision record 0039: 0.2.0 is cut by hand, as 0.1.0 was, so a repository can pin the `eleventy-site` layout; the release ceremony, wheels, signatures and verification runs promised for 0.2.0 move to 0.3.0.
 - The README states what verifies Windows: the unit tests, `uc-automa check` on itself, and an install from wheels with `pip install --no-index` inside a network cut.
 
 ### Changed
