@@ -1,0 +1,32 @@
+{
+  "cli_version": "0.12.0",
+  "checkpoint_id": "01M5Z2RRMKM2JM3RKRVJF82Z77",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "en-ca/docs/overviews/2026-10-07--sat-development-current-state-v0.1.0.md",
+    "en-ca/docs/overviews/overview--sat-development-current-state-v0.1.0.md",
+    "en-ca/docs/sessions/Moving Universal Cake Tools to GPL-2.0.md",
+    "en-ca/docs/sessions/Universal Cake Licensing Rationale.md",
+    "en-ca/docs/sessions/moving-universal-cake-tools-to-gpl-2-0.md",
+    "en-ca/docs/sessions/osat-manager-git where things stand after 2026-10-21.md",
+    "en-ca/docs/sessions/universal-cake-licensing-rationale.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": "/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 4,
+    "cache_creation_tokens": 6073,
+    "cache_read_tokens": 119096,
+    "output_tokens": 1044,
+    "api_call_count": 2
+  }
+}
