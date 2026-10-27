@@ -1,0 +1,119 @@
+<pasted_content id="efef">
+The house rule for versioned document filenames is a dotted version postfix: <title-slug>-v0.1.0.md, never <title-slug>-v0-1-0.md. Documents at 1.0.0 or later carry no postfix.
+
+First, survey the repositories you can see. Report where this rule is stated and whether each statement agrees with it. Report which filenames do not follow it. Report what refers to those files, including links, front matter such as dc:relation, README lists and inline paths. Also report any tooling that checks or generates filenames.
+
+Then propose the changes: rule documents to update, files to rename with git mv, and references to fix. Leave text that records history, such as changelogs and past commit listings, unchanged. Wait for my approval before changing anything, then make the changes on a branch for my review.
+</pasted_content id="efef">
+
+---
+
+You can git add and do a release ceremony for any repositories that are not up to date and then proceed with your changes
+
+---
+
+just do uc-automa
+
+---
+
+if you are satisfied with the work in these repositories then proceed
+
+---
+
+don't undo, commit and release
+
+---
+
+build and publish the uc-cboard release
+
+---
+
+how is the build going?
+
+---
+
+ok, let me know when it's published
+
+---
+
+is it published yet?
+
+---
+
+ok, let me know when it's published
+
+---
+
+<task-notification>
+<task-id>bxelthllg</task-id>
+<tool-use-id>toolu_01HiAno2fc4qdeJVwrqR3n4r</tool-use-id>
+<output-file>/tmp/claude-1000/-home-initial-areas-development-uc-automa/9d1a7251-5a7a-4a89-96d6-ee6f0ab0a8bf/tasks/bxelthllg.output</output-file>
+<status>completed</status>
+<summary>Background command "Build the Cboard 1.39.0 release artifact" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>bswxm1uza</task-id>
+<tool-use-id>toolu_014pBGivvrUPazdbhqxs8Fb5</tool-use-id>
+<output-file>/tmp/claude-1000/-home-initial-areas-development-uc-automa/9d1a7251-5a7a-4a89-96d6-ee6f0ab0a8bf/tasks/bswxm1uza.output</output-file>
+<status>completed</status>
+<summary>Background command "Rebuild Cboard 1.39.0 with Node 22.14.0" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+ok, let me know when it's published
+
+---
+
+<task-notification>
+<task-id>b2iuoict8</task-id>
+<tool-use-id>toolu_01JnrzYzJrcSz4eZfw8PUkAV</tool-use-id>
+<output-file>/tmp/claude-1000/-home-initial-areas-development-uc-automa/9d1a7251-5a7a-4a89-96d6-ee6f0ab0a8bf/tasks/b2iuoict8.output</output-file>
+<status>failed</status>
+<summary>Background command "Rebuild Cboard 1.39.0 with Node 22 and the fix" failed with exit code 1</summary>
+</task-notification>
+
+---
+
+I closed some apps, retry the build
+
+---
+
+ok, let me know when it's published
+
+---
+
+<task-notification>
+<task-id>btcvlv0qx</task-id>
+<tool-use-id>toolu_01AYCh4L8v3wVM1WfEZvrcsi</tool-use-id>
+<output-file>/tmp/claude-1000/-home-initial-areas-development-uc-automa/9d1a7251-5a7a-4a89-96d6-ee6f0ab0a8bf/tasks/btcvlv0qx.output</output-file>
+<status>completed</status>
+<summary>Background command "Retry the Cboard 1.39.0 build" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+is it published yet?
+
+---
+
+yes, push it
+
+---
+
+commit the README archive date in osat-fluent-restic-tool
+
+---
+
+fix the full stop and the last release version
+
+---
+
+unarchive it, push, and archive it again
+
+---
+
+add overviews/ to the uc-automa layout
