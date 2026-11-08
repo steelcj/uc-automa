@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:c73e134d-11d2-44f9-a0ef-a0d446a896a3"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/automa--directory-guide-v0.1.0.md, not under version control"
-dc:language: "en-CA"
+dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.3.0"
 sat:status: "Accepted"
@@ -110,7 +110,7 @@ The SAT sidecar for the repository as an archive, named for the repository; prov
 sat:role: "archive"
 dc:identifier: "<printed by uc-automa metadata new-id>"
 dc:title: "uc-automa"
-dc:language: "en-CA"
+dc:language: "en"
 dc:rights: "CC-BY-4.0"
 ```
 

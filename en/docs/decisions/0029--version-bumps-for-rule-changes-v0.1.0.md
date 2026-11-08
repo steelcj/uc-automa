@@ -11,7 +11,7 @@ dc:format: "text/markdown"
 dc:identifier: "urn:uuid:4ee74a63-4d4d-4b47-8229-ef5ecf7cf1ab"
 dc:relation:
   - "urn:uuid:b8b52dfa-7746-4ab9-93a7-03913e0b3a63"
-dc:language: "en-CA"
+dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "Accepted"

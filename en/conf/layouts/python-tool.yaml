@@ -1,4 +1,4 @@
-language: "en-ca"
+language: "en"
 translates: "conf/layouts/python-tool.yaml"
 title: "Python tool repository layout"
 purpose: >

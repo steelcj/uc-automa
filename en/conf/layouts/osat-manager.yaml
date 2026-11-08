@@ -1,4 +1,4 @@
-language: "en-ca"
+language: "en"
 translates: "conf/layouts/osat-manager.yaml"
 title: "OSAT manager repository layout"
 purpose: >

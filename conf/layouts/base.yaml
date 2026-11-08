@@ -1,6 +1,6 @@
 format: 1
 describes: "base"
-source_language: "en-ca"
+source_language: "en"
 text: "{language}/conf/layouts/base.yaml"
 
 placeholders:

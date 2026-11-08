@@ -1,4 +1,4 @@
-language: "en-ca"
+language: "en"
 translates: "conf/layouts/base.yaml"
 title: "Base repository layout"
 purpose: >
@@ -19,7 +19,7 @@ values:
     "any": "Arrives from the named uc-automa offering, so the repository must subscribe to it"
 
 placeholders:
-  language: "A lowercase language tag, such as en-ca or fr-ca"
+  language: "A lowercase language tag, such as en or fr-ca"
   repository: "The repository's name, as declared in .uc-automa.yaml"
   spdx-id: "An SPDX licence identifier, such as MIT"
   topic: "A guide topic, such as usage or release"

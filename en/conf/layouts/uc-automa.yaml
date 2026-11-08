@@ -1,4 +1,4 @@
-language: "en-ca"
+language: "en"
 translates: "conf/layouts/uc-automa.yaml"
 title: "uc-automa repository layout"
 purpose: >

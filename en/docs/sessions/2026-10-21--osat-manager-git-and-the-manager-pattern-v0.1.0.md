@@ -16,7 +16,7 @@ dc:relation:
   - "urn:uuid:7477a897-2518-4ad5-a6e2-1352818efd4d"
   - "urn:uuid:0114ad24-615b-4eb5-bee5-e70771d3fc32"
   - "urn:uuid:670760b6-2e8e-4dfd-9aa2-00b2369fcbb4"
-dc:language: "en-CA"
+dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "Accepted"

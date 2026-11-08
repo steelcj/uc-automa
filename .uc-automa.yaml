@@ -2,7 +2,7 @@ format: 1
 repository: uc-automa
 layout: uc-automa
 automa_version: self
-language: en-ca
+language: en
 subscribe:
 - license-mit
 - license-cc-by-4-0

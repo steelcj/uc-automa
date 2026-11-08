@@ -33,7 +33,7 @@ def front_matter_schema(repo: Repository) -> dict:
 
 
 def doc_type(rel: str):
-    """(language, type) for a path such as en-ca/docs/guides/x/y.md."""
+    """(language, type) for a path such as en/docs/guides/x/y.md."""
     parts = rel.split("/")
     if len(parts) >= 4 and parts[1] == "docs" and parts[2] in TYPES:
         return parts[0], TYPES[parts[2]]

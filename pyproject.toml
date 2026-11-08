@@ -22,7 +22,7 @@ packages = [
     "uc_automa",
     "uc_automa.conformance",
     "uc_automa.data.conf",
-    "uc_automa.data.text.en_ca",
+    "uc_automa.data.text.en",
     "uc_automa.data.schemas",
     "uc_automa.data.offerings",
 ]
@@ -30,13 +30,13 @@ packages = [
 [tool.setuptools.package-dir]
 "" = "lib"
 "uc_automa.data.conf" = "conf"
-"uc_automa.data.text.en_ca" = "en-ca/conf"
+"uc_automa.data.text.en" = "en/conf"
 "uc_automa.data.schemas" = "schemas"
 "uc_automa.data.offerings" = "offerings"
 
 [tool.setuptools.package-data]
 "uc_automa.data.conf" = ["**/*.yaml"]
-"uc_automa.data.text.en_ca" = ["**/*.yaml"]
+"uc_automa.data.text.en" = ["**/*.yaml"]
 "uc_automa.data.schemas" = ["*.yaml"]
 "uc_automa.data.offerings" = ["**/*", "**/.*"]
 

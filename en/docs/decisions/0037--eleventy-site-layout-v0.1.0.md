@@ -12,7 +12,7 @@ dc:identifier: "urn:uuid:bb2a6b93-ee71-43fa-9398-8ac9fa060318"
 dc:relation:
   - "urn:uuid:ac5f649a-9d64-476a-9ad8-5c37630b4f78"
   - "urn:uuid:66c97c8d-e1cb-4652-91a8-25279a1dacdd"
-dc:language: "en-CA"
+dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
 sat:status: "Accepted"

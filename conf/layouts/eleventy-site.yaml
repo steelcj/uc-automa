@@ -1,7 +1,7 @@
 format: 1
 describes: "eleventy-site"
 extends: "base"
-source_language: "en-ca"
+source_language: "en"
 text: "{language}/conf/layouts/eleventy-site.yaml"
 
 placeholders: {}

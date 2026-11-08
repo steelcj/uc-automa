@@ -1,4 +1,4 @@
-language: "en-ca"
+language: "en"
 translates: "conf/layouts/eleventy-site.yaml"
 title: "Eleventy site repository layout"
 purpose: >

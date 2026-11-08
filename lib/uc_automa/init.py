@@ -2,7 +2,7 @@
 
 The file that declares subscriptions cannot arrive by subscription
 (uc-automa 0023), so init writes it from its arguments: the repository's
-name and layout type, the installed uc-automa version as the pin, en-ca
+name and layout type, the installed uc-automa version as the pin, en
 as the language, and the subscriptions the layout chain needs, which are
 the offerings named by from_offering on paths the layout requires.
 """
@@ -21,7 +21,7 @@ from .conformance.layouts import Layout, load_layout
 from .paths import conf_dir
 from .errors import AutomaError
 
-DEFAULT_LANGUAGE = "en-ca"
+DEFAULT_LANGUAGE = "en"
 
 
 def required_offerings(layout: Layout) -> List[str]:

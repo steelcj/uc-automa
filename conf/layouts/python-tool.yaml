@@ -1,7 +1,7 @@
 format: 1
 describes: "python-tool"
 extends: "base"
-source_language: "en-ca"
+source_language: "en"
 text: "{language}/conf/layouts/python-tool.yaml"
 
 placeholders:

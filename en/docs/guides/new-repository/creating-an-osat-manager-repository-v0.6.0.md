@@ -10,7 +10,7 @@ dc:type: "Text"
 dc:format: "text/markdown"
 dc:identifier: "urn:uuid:b18e2ed3-b364-4880-b3c7-5676961f0174"
 dc:source: "Hand-off package 2026-10-09--uc-automa-foundation, inputs/revise/osat-manager--creating-a-new-repository-v0.1.0.md, not under version control"
-dc:language: "en-CA"
+dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.6.0"
 sat:status: "Accepted"
@@ -146,7 +146,7 @@ Create the repository fresh and empty, with no forge-generated files, so its fir
 sat:role: "archive"
 dc:identifier: "urn:uuid:<generated in step 2>"
 dc:title: "osat-manager-<tool>"
-dc:language: "en-CA"
+dc:language: "en"
 dc:rights: "CC-BY-4.0"
 ```
 

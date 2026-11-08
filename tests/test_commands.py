@@ -45,7 +45,7 @@ class Init(Scratch):
         self.assertEqual(code, 0, err)
         config = self.config()
         self.assertEqual(config["automa_version"], __version__)
-        self.assertEqual(config["language"], "en-ca")
+        self.assertEqual(config["language"], "en")
         self.assertIn("license-mit", config["subscribe"])
         self.assertIn("license-cc-by-4-0", config["subscribe"])
         code, out, err = run("init", "--target", str(self.root),
@@ -117,7 +117,7 @@ class UcAutoma(unittest.TestCase):
         self.assertIn("0 item(s) would be synced", out)
         self.assertIn("0 conflict(s)", out)
 
-    def test_translations_report_nothing_for_en_ca(self):
+    def test_translations_report_nothing_for_en(self):
         code, out, err = run("translations", "--target", str(support.REPO))
         self.assertEqual(code, 0, out + err)
         self.assertIn("0 error(s)", out)
