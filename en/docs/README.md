@@ -2,7 +2,7 @@
 
 # Documentation
 
-Every document under `en-ca/docs/`, with its version and status, taken from its front matter.
+Every document under `en/docs/`, with its version and status, taken from its front matter.
 
 ## Directives
 
@@ -10,10 +10,10 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | --- | --- | --- |
 | [Docs: Generated Index](directives/docs/generated-index-v0.1.0.md) | 0.1.0 | In force |
 | [Layout: Layout Translations](directives/layout/layout-translations-v0.1.0.md) | 0.1.0 | In force |
-| [Layout: Repository Layout](directives/layout/repository-layout-v0.1.0.md) | 0.1.0 | In force |
+| [Layout: Repository Layout](directives/layout/repository-layout-v0.2.0.md) | 0.2.0 | In force |
 | [Licensing: Rights Match REUSE](directives/licensing/rights-match-reuse-v0.1.0.md) | 0.1.0 | In force |
 | [Markdown: No Heading Numbers](directives/markdown/no-heading-numbers-v0.1.0.md) | 0.1.0 | In force |
-| [Metadata: Front Matter](directives/metadata/front-matter-v0.1.0.md) | 0.1.0 | In force |
+| [Metadata: Front Matter](directives/metadata/front-matter-v0.2.0.md) | 0.2.0 | In force |
 | [Naming: Lowercase Names](directives/naming/lowercase-names-v0.1.0.md) | 0.1.0 | In force |
 | [Naming: Part Separator](directives/naming/part-separator-v0.1.0.md) | 0.1.0 | In force |
 | [Naming: Portable Names](directives/naming/portable-names-v0.1.0.md) | 0.1.0 | In force |
@@ -36,10 +36,10 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: Licensing for Code, Documentation and Content](decisions/0001--licensing-for-code-documentation-and-content-v0.1.0.md) | 0.1.0 | Superseded |
 | [Decision: Versions in Filenames](decisions/0002--versions-in-filenames-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Names](decisions/0003--names-v0.1.0.md) | 0.1.0 | Accepted |
-| [Decision: Language Root en-ca](decisions/0004--language-root-en-ca-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Language Root en-ca](decisions/0004--language-root-en-ca-v0.1.0.md) | 0.1.0 | Superseded |
 | [Decision: Python Code under lib](decisions/0005--python-code-under-lib-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: uc-portage as a Separate Tool](decisions/0006--uc-portage-as-a-separate-tool-v0.1.0.md) | 0.1.0 | Accepted |
-| [Decision: Documentation under en-ca/docs](decisions/0007--documentation-under-en-ca-docs-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Documentation under en-ca/docs](decisions/0007--documentation-under-en-ca-docs-v0.1.0.md) | 0.1.0 | Superseded |
 | [Decision: Pull Model for Offerings](decisions/0008--pull-model-for-offerings-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Generated Documentation Index](decisions/0009--generated-documentation-index-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Part Separator](decisions/0010--part-separator-v0.1.0.md) | 0.1.0 | Accepted |
@@ -72,6 +72,7 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Decision: An eleventy-site Layout](decisions/0037--eleventy-site-layout-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: uc-automa metadata new-id](decisions/0038--metadata-new-id-v0.1.0.md) | 0.1.0 | Accepted |
 | [Decision: Cut 0.2.0 by Hand](decisions/0039--hand-cut-0-2-0-v0.1.0.md) | 0.1.0 | Accepted |
+| [Decision: Language Root as Per-Repository Configuration](decisions/0040--language-root-per-repository-configuration-v0.1.0.md) | 0.1.0 | Accepted |
 
 ## Sessions
 
@@ -81,6 +82,8 @@ Every document under `en-ca/docs/`, with its version and status, taken from its 
 | [Moving Universal Cake Tools to GPL-2.0](sessions/2026-10-10--moving-universal-cake-tools-to-gpl-2-0-v0.1.0.md) | 0.1.0 | Accepted |
 | [Universal Cake Licensing Rationale](sessions/2026-10-10--universal-cake-licensing-rationale-v0.1.0.md) | 0.1.0 | Accepted |
 | [Session: osat-manager-git and the Manager Pattern](sessions/2026-10-21--osat-manager-git-and-the-manager-pattern-v0.1.0.md) | 0.1.0 | Accepted |
+| [Session: The Metadata Language Check and the en/ Move](sessions/2026-11-07--metadata-language-check-v0.1.0.md) | 0.1.0 | Accepted |
+| [osat-manager-git-where-things-stand-after-2026-10-21.md](sessions/osat-manager-git-where-things-stand-after-2026-10-21.md) |  |  |
 
 ## License
 

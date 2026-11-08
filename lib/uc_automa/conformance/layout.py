@@ -3,7 +3,8 @@
 The root is always closed: every top-level entry must be described by
 the layout. Inside, a directory marked closed: true admits only entries
 matching a declared child; other directories are open. Required paths
-must be present, source-language paths in the source language's root,
+must be present, source-language paths in the root of the repository's
+language (its .uc-automa.yaml language),
 and required paths inside a language root in every language root that
 is present. A path marked from_offering: X, when present or required,
 needs the repository to subscribe to X. The sidecar must be named for
@@ -112,16 +113,16 @@ def walk(nodes: List[Node], entries: Tree, prefix: str, closed: bool,
             missing = not found
         elif node.required == "source-language":
             if node.path.startswith(LANGUAGE_ROOT) and node.parent is None:
-                missing = not any(g.get("language") == layout.source_language
+                missing = not any(g.get("language") == config.language
                                   for g in found)
             else:
-                missing = language == layout.source_language and not found
+                missing = language == config.language and not found
         else:
             missing = False
         if missing:
             shown = prefix + (node.name if node.is_literal else node.name)
             if node.required == "source-language" and node.parent is None:
                 shown = node.name.replace("{language}",
-                                          layout.source_language)
+                                          config.language)
             findings.add((shown, f"required by layout {layout.id!r} but "
                                  f"missing"))

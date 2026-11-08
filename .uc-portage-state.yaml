@@ -3,9 +3,9 @@ synced:
   CLAUDE.md::uc-automa-signpost:
     offering: claude-signpost
     source: '{language}/signpost.md'
-    source_sha256: 58b300f316ad900b1bf706d2ffa27835f74fe31bceafa6ce5e3be02a9310079c
-    synced_at: '2026-10-09T23:50:07Z'
-    dest_sha256: 58b300f316ad900b1bf706d2ffa27835f74fe31bceafa6ce5e3be02a9310079c
+    source_sha256: c82f8a473f2a0594a1ebf85b1575f3b840fb907e8e59a367658f809ec9cd686d
+    synced_at: '2026-11-08T04:43:54Z'
+    dest_sha256: c82f8a473f2a0594a1ebf85b1575f3b840fb907e8e59a367658f809ec9cd686d
     block: uc-automa-signpost
   LICENSES/MIT.txt:
     offering: license-mit

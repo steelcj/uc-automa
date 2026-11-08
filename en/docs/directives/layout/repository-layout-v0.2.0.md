@@ -11,7 +11,7 @@ dc:format: "text/markdown"
 dc:identifier: "urn:uuid:e3c45b3f-7f7a-4521-9cf8-cfc8c5a9f6f8"
 dc:language: "en"
 dc:rights: "CC-BY-4.0"
-sat:version: "0.1.0"
+sat:version: "0.2.0"
 sat:status: "In force"
 sat:directive: "layout/repository-layout"
 sat:enforced_by:
@@ -20,7 +20,7 @@ sat:enforced_by:
 
 # Layout: Repository Layout
 
-Version: 0.1.0
+Version: 0.2.0
 Status: In force
 
 ## Rule
@@ -29,7 +29,7 @@ A repository names its layout type with `layout:` in `.uc-automa.yaml`. The layo
 
 - **The root is closed.** Every top-level file and directory is described by the layout. A top-level path the layout does not describe is a finding about the layout, not a reason for an exception; there is no per-repository escape hatch.
 - **Closed directories.** A directory marked `closed: true` holds only entries matching a declared child. Other directories are open: entries matching a declared child are checked, others are left alone.
-- **Required paths.** `required: true` paths are present. `required: source-language` paths are present in the source language's root. Inside a language root, `required: true` means required in every language root that is present.
+- **Required paths.** `required: true` paths are present. `required: source-language` paths are present in the root of the repository's language, the `language` its `.uc-automa.yaml` declares (uc-automa 0040). Inside a language root, `required: true` means required in every language root that is present.
 - **The sidecar** is named `.<repository>.assets/`, for the name declared in `.uc-automa.yaml`, not the name of the folder the clone sits in.
 - **Offerings.** A path the layout marks `from_offering: X` that is present or required means the repository subscribes to `X`.
 
@@ -57,6 +57,7 @@ Paths say what a thing is (P2), and each kind of material has one home (P4). A l
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
 | 0.1.0 | 2026-10-09 | In force | Initial version |
+| 0.2.0 | 2026-11-07 | In force | `required: source-language` paths are checked in the repository's language root, not the layout's `source_language` (uc-automa 0040) |
 
 ## License
 

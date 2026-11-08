@@ -12,14 +12,16 @@ dc:identifier: "urn:uuid:d12ace49-1a49-4acb-b67e-6fe23d9e0bf2"
 dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
-sat:status: "Accepted"
+sat:status: "Superseded"
 sat:decision: "D3"
 ---
 
 # Decision: Language Root en-ca
 
 Version: 0.1.0
-Status: Accepted
+Status: Superseded
+
+Superseded by uc-automa 0040: the language root is a per-repository setting, and uc-automa's own is `en`. This record is kept as the earlier decision.
 
 ## Context
 
@@ -42,7 +44,7 @@ The language root is `en-ca/`, lowercase, matching Balise's `fr-ca/`. Metadata u
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
-| 0.1.0 | 2026-10-09 | Accepted | Initial version |
+| 0.1.0 | 2026-10-09 | Superseded | Initial version |
 
 ## License
 

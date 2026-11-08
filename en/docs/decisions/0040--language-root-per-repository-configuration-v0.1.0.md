@@ -18,13 +18,13 @@ dc:relation:
 dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
-sat:status: "Proposed"
+sat:status: "Accepted"
 ---
 
 # Decision: Language Root as Per-Repository Configuration
 
 Version: 0.1.0
-Status: Proposed
+Status: Accepted
 
 ## Context
 
@@ -102,7 +102,7 @@ A language root is recognised as now, by `paths.py`'s pattern. Widening that pat
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
-| 0.1.0 | 2026-11-07 | Proposed | Initial version |
+| 0.1.0 | 2026-11-07 | Accepted | Initial version, accepted by the owner on 2026-11-07 |
 
 ## License
 

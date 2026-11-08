@@ -47,7 +47,6 @@ $defs:
           type: string
       "dc:language":
         type: string
-        pattern: '^[a-z]{2}-[A-Z]{2}$'
       "dc:rights":
         type: string
         pattern: '^[A-Za-z0-9][A-Za-z0-9.+-]*$'

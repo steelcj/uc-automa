@@ -12,14 +12,16 @@ dc:identifier: "urn:uuid:e8cac7fd-1300-4b8e-bb35-a8cadc41c6a5"
 dc:language: "en"
 dc:rights: "CC-BY-4.0"
 sat:version: "0.1.0"
-sat:status: "Accepted"
+sat:status: "Superseded"
 sat:decision: "D7"
 ---
 
 # Decision: Documentation under en-ca/docs
 
 Version: 0.1.0
-Status: Accepted
+Status: Superseded
+
+Superseded by uc-automa 0040: uc-automa's documentation lives under `en/docs/`. This record is kept as the earlier decision.
 
 ## Context
 
@@ -42,7 +44,7 @@ Documentation lives at `{language}/docs/`, which is `en-ca/docs/` for the source
 
 | Version | Date | Status | Notes |
 | --- | --- | --- | --- |
-| 0.1.0 | 2026-10-09 | Accepted | Initial version |
+| 0.1.0 | 2026-10-09 | Superseded | Initial version |
 
 ## License
 

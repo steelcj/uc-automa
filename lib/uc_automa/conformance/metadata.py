@@ -2,7 +2,7 @@
 
 A document under {language}/docs/ is checked against the definition for
 its type in schemas/front-matter.schema.yaml, chosen by its directory.
-Its dc:language matches its language root. A directive's sat:directive
+A directive's sat:directive
 is its own path, {domain}/{slug}, and every check it names in
 sat:enforced_by exists. In uc-automa itself, every check is named by
 the directive it enforces.
@@ -40,12 +40,6 @@ def doc_type(rel: str):
     return None, None
 
 
-def language_tag(language: str) -> str:
-    """en-ca becomes en-CA."""
-    head, _, tail = language.partition("-")
-    return head + ("-" + tail.upper() if tail else "")
-
-
 @check("conformance.metadata.front_matter", "metadata/front-matter")
 def front_matter(repo: Repository):
     findings = []
@@ -70,11 +64,6 @@ def front_matter(repo: Repository):
         sub = dict(schema["$defs"][kind], **{"$defs": schema["$defs"]})
         for error in validate(data, sub):
             findings.append((rel, f"{kind} front matter: {error}"))
-        if data.get("dc:language") != language_tag(language):
-            findings.append((rel, f"dc:language is "
-                                  f"{data.get('dc:language')!r} in the "
-                                  f"{language}/ root, expected "
-                                  f"{language_tag(language)!r}"))
         if kind == "directive":
             parts = rel.split("/")
             stem = parts[-1][: -len(".md")]

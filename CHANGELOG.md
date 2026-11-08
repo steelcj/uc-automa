@@ -4,6 +4,20 @@ All notable changes to uc-automa are recorded here, in the form of [Keep a Chang
 
 ## [Unreleased]
 
+### Added
+
+- Decision record 0040, the language root as per-repository configuration: uc-automa's own root is `en`, superseding 0004 and 0007; `required: source-language` layout paths follow the repository's `language`; and `dc:language` stays required but is no longer checked.
+
+### Changed
+
+- uc-automa's documentation and layout text moved from `en-ca/` to `en/`. Its `.uc-automa.yaml`, its layouts' `source_language`, the layout texts, `uc-automa init`'s default language, the package data (`uc_automa.data.text.en`), the `claude-signpost` and `changelog` offerings' text, and both `REUSE.toml` files follow it. Repositories in `en-ca` still get the offerings' text through uc-portage's fallback to `source_language`.
+- `layout/repository-layout` 0.2.0: `required: source-language` paths are checked in the repository's language root, not the layout's `source_language`, so an `en-ca` repository still needs `en-ca/`, not `en/`.
+- `metadata/front-matter` 0.2.0: `dc:language` is no longer compared with the language root, and `schemas/front-matter.schema.yaml` no longer gives it a pattern.
+
+### Removed
+
+- The `metadata/front-matter` fixture `fail/language-differs-from-root`.
+
 ## [0.2.0] - 2026-10-24
 
 ### Added
